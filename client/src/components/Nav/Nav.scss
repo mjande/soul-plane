@@ -1,0 +1,32 @@
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px 25px;
+  padding-top: 20px;
+  padding-left: 25px;
+
+  .navLogo {
+    img {
+      height: 45px;
+    }
+  }
+  .navLogo:hover {
+    opacity: 0.85;
+  }
+
+  .miscNavButtons {
+    position: relative;
+    right: 35px;
+    display: flex;
+    gap: 25px;
+
+    a span {
+      cursor: pointer;
+    }
+    a span:hover {
+      text-decoration: underline;
+      opacity: 0.85;
+    }
+  }
+
+}
