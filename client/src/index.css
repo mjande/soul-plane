@@ -57,7 +57,10 @@ p {
 fieldset {
   display: flex;
   flex-direction: column;
+  flex-wrap: wrap;
+  align-content: space-around;
   align-items: start;
+  max-height: 29vh;
 }
 
 .short-text-input {
@@ -94,7 +97,7 @@ button:focus-visible {
 
 .buttons-container {
   display: flex;
-  justify-content: end;
+  justify-content: center;
   gap: 1em;
 }
 
