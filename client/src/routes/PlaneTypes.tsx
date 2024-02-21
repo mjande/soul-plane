@@ -73,8 +73,10 @@ function PlaneTypes() {
             <label>Range (hrs)</label>
             <input type="number" name="range_in_hrs" />
           </fieldset>
-          <input className="btn" type="submit" value="Add Plane Type" />
-          <input className="btn" type="button" value="Cancel" />
+          <div className="buttons-container">
+            <input className="btn" type="submit" value="Add Plane Type" />
+            <input className="btn" type="button" value="Cancel" />
+          </div>
         </form>
       </div>
 
@@ -84,7 +86,7 @@ function PlaneTypes() {
             <strong>Update Plane Type</strong>
           </legend>
           <fieldset className="fields">
-            <label>Plane Type ID:</label> 1
+            <span>Plane Type ID: 1</span>
             <label>Type Name</label>
             <input type="text" value="Airbus A320-200" name="type_name" />
             <label>Capacity</label>
@@ -92,8 +94,10 @@ function PlaneTypes() {
             <label>Range (hrs)</label>
             <input type="number" name="range_in_hrs" value="5" />
           </fieldset>
-          <input className="btn" type="submit" value="Save Update Plane Type" />
-          <input className="btn" type="button" value="Cancel" />
+          <div className="buttons-container">
+            <input className="btn" type="submit" value="Save Update Plane Type" />
+            <input className="btn" type="button" value="Cancel" />
+          </div>
         </form>
       </div>
 
@@ -104,11 +108,13 @@ function PlaneTypes() {
           </legend>
           <fieldset className="fields">
             <p>Are you sure you wish to delete the following?</p>
-            <label>Plane Type ID:</label> 1
-            <label>Type Name:</label> Airbus A320-200
+            <span>Plane Type ID: 1</span>
+            <span>Type Name: Airbus A320-200</span>
           </fieldset>
-          <input className="btn" type="submit" value="Delete Plane Type" />
-          <input className="btn" type="button" value="Cancel" />
+          <div className="buttons-container">
+            <input className="btn" type="submit" value="Delete Plane Type" />
+            <input className="btn" type="button" value="Cancel" />
+          </div>
         </form>
       </div>
     </div>
