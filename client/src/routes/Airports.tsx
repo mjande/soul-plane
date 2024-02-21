@@ -66,12 +66,14 @@ function Airports() {
             <strong>Add Airport</strong>
           </legend>
           <fieldset className="fields">
-            <label>Airport Name</label> <input type="text" name="airport_name" />
-            <label>Airport Code</label> <input type="text" name="airport_code" />
+            <label>Airport Name</label> <input type="text" name="airport_name" className="long-text-input" />
+            <label>Airport Code</label> <input type="text" name="airport_code" className="short-text-input"/>
             <label>Location</label> <input type="text" name="location" />
           </fieldset>
-          <input className="btn" type="submit" value="Add Airport" />
-          <input className="btn" type="button" value="Cancel" />
+          <div className="buttons-container">
+            <input className="btn" type="submit" value="Add Airport" />
+            <input className="btn" type="button" value="Cancel" />
+          </div>
         </form>
       </div>
 
@@ -81,12 +83,15 @@ function Airports() {
             <strong>Update Airport</strong>
           </legend>
           <fieldset className="fields">
-            <label>Airport Name</label> <input type="text" value="Portland International Airport" name="airport_name" />
-            <label>Airport Code</label> <input type="text" name="airport_code" value="PDX" />
+            <p>Airport ID: 1</p>
+            <label>Airport Name</label> <input type="text" value="Portland International Airport" name="airport_name" className="long-text-input"/>
+            <label>Airport Code</label> <input type="text" name="airport_code" value="PDX" className="short-text-input" />
             <label>Location</label> <input type="text" name="location" value="Portland, OR" />
           </fieldset>
-          <input className="btn" type="submit" value="Save Update Airport" />
-          <input className="btn" type="button" value="Cancel" />
+          <div className="buttons-container">
+            <input className="btn" type="submit" value="Save Update Airport" />
+            <input className="btn" type="button" value="Cancel" />
+          </div>
         </form>
       </div>
 
@@ -97,11 +102,13 @@ function Airports() {
           </legend>
           <fieldset className="fields">
             <p>Are you sure you wish to delete the following?</p>
-            <label>Airport ID:</label> 1
-            <label>Airport Name:</label> Portland International Airport
+            <p>Airport ID: 1</p>
+            <p>Airport Name: Portland International Airport</p>
           </fieldset>
-          <input className="btn" type="submit" value="Delete Airport" />
-          <input className="btn" type="button" value="Cancel" />
+          <div className="buttons-container">
+            <input className="btn" type="submit" value="Delete Airport" />
+            <input className="btn" type="button" value="Cancel" />
+          </div>
         </form>
       </div>
     </div>

@@ -50,6 +50,29 @@ h1 {
   line-height: 1.1;
 }
 
+p {
+  margin: 0;
+}
+
+fieldset {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+}
+
+.short-text-input {
+  width: 5em
+}
+
+.long-text-input {
+  width: 20em;
+}
+
+input {
+  border-radius: 5px;
+  border: solid #34454a 2px;
+}
+
 button {
   border-radius: 8px;
   border: 1px solid transparent;
@@ -67,6 +90,12 @@ button:hover {
 button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
+}
+
+.buttons-container {
+  display: flex;
+  justify-content: end;
+  gap: 1em;
 }
 
 @media (prefers-color-scheme: light) {
