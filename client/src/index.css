@@ -5,7 +5,6 @@
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
-  
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -39,6 +38,8 @@ main {
   overflow-y: auto;
   -ms-overflow-style: none;
   scrollbar-width: none;
+
+  font-size: 1.25em;
 }
 
 main::-webkit-scrollbar {
