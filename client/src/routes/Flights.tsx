@@ -96,8 +96,10 @@ function Flights() {
             <label>Departure Time</label> <input type="datetime-local" name="depart_time" />
             <label>Arrival Time</label> <input type="datetime-local" name="arrive_time" />
           </fieldset>
-          <input className="btn" type="submit" value="Add Flight" />
-          <input className="btn" type="button" value="Cancel" />
+          <div className="buttons-container">
+            <input className="btn" type="submit" value="Add Flight" />
+            <input className="btn" type="button" value="Cancel" />
+          </div>
         </form>
       </div>
 
@@ -107,7 +109,7 @@ function Flights() {
             <strong>Update Flight</strong>
           </legend>
           <fieldset className="fields">
-            <label>Flight ID:</label> 1
+            <span>Flight ID: 1</span>
             <label>Departure Airport</label>
             <select name="depart_airport_id">
               <option value="1">Portland International Airport</option>
@@ -129,8 +131,10 @@ function Flights() {
             <label>Departure Time</label> <input type="datetime-local" value="2024-02-05T14:30" name="depart_time" />
             <label>Arrival Time</label> <input type="datetime-local" value="2024-02-11T02:15" name="arrive_time" />
           </fieldset>
-          <input className="btn" type="submit" value="Save Update Flight" />
-          <input className="btn" type="button" value="Cancel" />
+          <div className="buttons-container">
+            <input className="btn" type="submit" value="Save Update Flight" />
+            <input className="btn" type="button" value="Cancel" />
+          </div>
         </form>
       </div>
 
@@ -140,16 +144,18 @@ function Flights() {
             <strong>Delete Flight</strong>
           </legend>
           <fieldset className="fields">
-            <p>Are you sure you wish to delete the following? </p>
-            <label>Flight ID:</label> 1
-            <label>Departure Airport:</label> 1
-            <label>Arrival Airport:</label> 2
-            <label>Plane:</label> Plane #3 (Embraer 135)
-            <label>Depart Time:</label> February 5, 2024, at 14:30:00
-            <label>Arrival Time:</label> February 11, 2024, at 02:15:00
+            <span>Are you sure you wish to delete the following? </span>
+            <span>Flight ID: 1</span>
+            <span>Departure Airport: Portland International Airport</span>
+            <span>Arrival Airport: Seattle-Tacoma International Airport</span>
+            <span>Plane: Plane #3 (Embraer 135)</span>
+            <span>Depart Time: February 5, 2024, at 14:30:00 </span>
+            <span>Arrival Time: February 11, 2024, at 02:15:00</span>
           </fieldset>
-          <input className="btn" type="submit" value="Delete Flight" />
-          <input className="btn" type="button" value="Cancel" />
+          <div className="buttons-container">
+            <input className="btn" type="submit" value="Delete Flight" />
+            <input className="btn" type="button" value="Cancel" />
+          </div>
         </form>
       </div>
     </div>

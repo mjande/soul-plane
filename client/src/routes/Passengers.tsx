@@ -109,8 +109,10 @@ function Passengers() {
             <label>Passport Number</label>
             <input type="text" name="passport_number" />
           </fieldset>
-          <input className="btn" type="submit" value="Add Passenger" />
-          <input className="btn" type="button" value="Cancel" />
+          <div className="buttons-container">
+            <input className="btn" type="submit" value="Add Passenger" />
+            <input className="btn" type="button" value="Cancel" />
+          </div>
         </form>
       </div>
 
@@ -120,7 +122,7 @@ function Passengers() {
             <strong>Update Passenger</strong>
           </legend>
           <fieldset className="fields">
-            <label>Passenger ID:</label> 1
+            <span>Passenger ID: 1</span>
             <label>First Name</label>
             <input type="text" value="Paul" name="first_name" />
             <label>Last Name</label>
@@ -140,8 +142,10 @@ function Passengers() {
             <label>Passport Number</label>
             <input type="text" value="A11222333" name="passport_number" />
           </fieldset>
-          <input className="btn" type="submit" value="Save Update Passenger" />
-          <input className="btn" type="button" value="Cancel" />
+          <div className="buttons-container">
+            <input className="btn" type="submit" value="Save Update Passenger" />
+            <input className="btn" type="button" value="Cancel" />
+          </div>
         </form>
       </div>
 
@@ -152,14 +156,16 @@ function Passengers() {
           </legend>
           <fieldset className="fields">
             <p>Are you sure you wish to delete the following?</p>
-            <label>Passenger ID:</label> 1
-            <label>First Name</label> Paul
-            <label>Last Name</label> Nguyen
-            <label>Phone</label> 111-222-3333
-            <label>Email</label> paul@oregonstate.edu
+            <span>Passenger ID: 1</span>
+            <span>First Name: Paul</span>
+            <span>Last Name: Nguyen</span>
+            <span>Phone: 111-222-3333</span>
+            <span>Email: paul@oregonstate.edu</span>
           </fieldset>
-          <input className="btn" type="submit" value="Delete Passenger" />
-          <input className="btn" type="button" value="Cancel" />
+          <div className="buttons-container">
+            <input className="btn" type="submit" value="Delete Passenger" />
+            <input className="btn" type="button" value="Cancel" />
+          </div>
         </form>
       </div>
     </div>

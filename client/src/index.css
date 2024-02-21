@@ -5,7 +5,6 @@
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -24,15 +23,58 @@ a:hover {
 
 body {
   margin: 0;
-  display: flex;
-  place-items: center;
+  padding: 0;
+  background-color: #242424;
   min-width: 320px;
-  min-height: 100vh;
+  position: fixed;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  place-items: center;
+  height: 100vh;
+  min-width: 320px;
+  overflow-y: auto;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+
+  font-size: 1.25em;
+}
+
+main::-webkit-scrollbar {
+  display: none;
 }
 
 h1 {
   font-size: 3.2em;
   line-height: 1.1;
+}
+
+p {
+  margin: 0;
+}
+
+fieldset {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-content: space-around;
+  align-items: start;
+  max-height: 29vh;
+}
+
+.short-text-input {
+  width: 5em
+}
+
+.long-text-input {
+  width: 20em;
+}
+
+input {
+  border-radius: 5px;
+  border: solid #34454a 2px;
 }
 
 button {
@@ -52,6 +94,18 @@ button:hover {
 button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
+}
+
+.buttons-container {
+  display: flex;
+  justify-content: center;
+  gap: 1em;
+  margin-top: 0.5em;
+  margin-bottom: 1em;
+}
+
+.footer-content {
+  margin-top: 2em;
 }
 
 @media (prefers-color-scheme: light) {

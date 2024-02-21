@@ -11,11 +11,11 @@ function Root() {
   return (
     <>
       {isLoading ? <Preloader /> : (
-        <div>
+        <main>
           <Nav />
           <Outlet />
           <Footer />
-        </div>
+        </main>
       )}
     </>
   );
