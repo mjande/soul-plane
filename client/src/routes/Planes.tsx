@@ -64,7 +64,6 @@ function Planes() {
           <fieldset className="fields">
             <label>Current Airport</label>
             <select name="current_airport_id">
-              <option value=""></option>
               <option value="1">Portland International Airport</option>
               <option value="2">Seattle-Tacoma International Airport</option>
               <option value="3">Spokane International Airport</option>
@@ -91,7 +90,6 @@ function Planes() {
             <label>Plane ID:</label> 1
             <label htmlFor="current_airport_id">Current Airport</label>
             <select name="current_airport_id">
-              <option value=""></option>
               <option value="1">Portland International Airport</option>
               <option value="2">Seattle-Tacoma International Airport</option>
               <option value="3">Spokane International Airport</option>
