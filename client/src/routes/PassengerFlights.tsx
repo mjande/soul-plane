@@ -66,13 +66,15 @@ function PassengerFlights() {
             </select>
             <label htmlFor="passenger_id">Passenger</label>
             <select name="passenger_id" id="passenger_id">
-              <option value="1">Paul</option>
-              <option value="2">Matt</option>
-              <option value="3">Steve</option>
+              <option value="1">Paul Nguyen</option>
+              <option value="2">Matt Anderson</option>
+              <option value="3">Steve Rogers</option>
             </select>
           </fieldset>
-          <input className="btn" type="submit" value="Add Passenger_Flight" />
-          <input className="btn" type="button" value="Cancel" />
+          <div className="buttons-container">
+            <input className="btn" type="submit" value="Add Passenger_Flight" />
+            <input className="btn" type="button" value="Cancel" />
+          </div>
         </form>
       </div>
 
@@ -90,13 +92,15 @@ function PassengerFlights() {
             </select>
             <label htmlFor="passenger_id">Passenger</label>
             <select name="passenger_id" id="passenger_id">
-              <option value="1">Paul</option>
-              <option value="2">Matt</option>
-              <option value="3">Steve</option>
+              <option value="1">Paul Nguyen</option>
+              <option value="2">Matt Anderson</option>
+              <option value="3">Steve Rogers</option>
             </select>
           </fieldset>
-          <input className="btn" type="submit" value="Save Update Passenger_Flight" />
-          <input className="btn" type="button" value="Cancel" />
+          <div className="buttons-container">
+            <input className="btn" type="submit" value="Save Update Passenger_Flight" />
+            <input className="btn" type="button" value="Cancel" />
+          </div>
         </form>
       </div>
 
@@ -107,11 +111,13 @@ function PassengerFlights() {
           </legend>
           <fieldset className="fields">
             <p>Are you sure you wish to delete the following?</p>
-            <label>Flight:</label> Spokane International Airport
-            <label>Passenger:</label> Matt Anderson
+            <span>Flight: Spokane International Airport</span>
+            <span>Passenger: Matt Anderson</span>
           </fieldset>
-          <input className="btn" type="submit" value="Delete Passenger_Flight" />
-          <input className="btn" type="button" value="Cancel" />
+          <div className="buttons-container">
+            <input className="btn" type="submit" value="Delete Passenger_Flight" />
+            <input className="btn" type="button" value="Cancel" />
+          </div>
         </form>
       </div>
     </div>
