@@ -68,6 +68,7 @@ function Planes() {
               <option value="1">Portland International Airport</option>
               <option value="2">Seattle-Tacoma International Airport</option>
               <option value="3">Spokane International Airport</option>
+              <option value="4">Currently Unavailable</option>
             </select>
             <label>Plane Type</label>
             <select name="plane_type_id">
@@ -94,6 +95,7 @@ function Planes() {
               <option value="1">Portland International Airport</option>
               <option value="2">Seattle-Tacoma International Airport</option>
               <option value="3">Spokane International Airport</option>
+              <option value="4">Currently Unavailable</option>
             </select>
 
             <label htmlFor="plane_type_id">Plane Type</label>
