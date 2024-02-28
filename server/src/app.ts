@@ -124,7 +124,9 @@ app.delete('/Airports/:airportId', async (req, res) => {
 app.get("/plane-types", async (req: Request, res: Response) => {
   try {
     const selectQuery = 'SELECT * FROM Plane_types'
+
     const [rows] = await db.pool.query(selectQuery)
+
     res.json(rows)
   } catch (err) {
     console.log(err)
@@ -135,7 +137,9 @@ app.get("/plane-types", async (req: Request, res: Response) => {
 app.get("/plane-types/:id", async (req: Request, res: Response) => {
   try {
     const selectQuery = `SELECT * FROM Plane_types WHERE plane_type_id = ${req.params.id}`
+
     const [rows] = await db.pool.query(selectQuery)
+
     res.json(rows)
   } catch(err) {
     console.log(err)
@@ -145,13 +149,53 @@ app.get("/plane-types/:id", async (req: Request, res: Response) => {
 
 app.post("/plane-types/", async (req: Request, res: Response) => {
   try {
-    const data = req.body
+    const typeName = req.body.type_name
+    const capacity = parseInt(req.body.capacity)
+    const rangeInHours = parseInt(req.body.range_in_hrs)
     const insertQuery = `INSERT INTO Plane_types (type_name, capacity, range_in_hrs)
-    VALUES (${data.type_name}, ${data.capacity}, ${data.range_in_hrs});`
+    VALUES (${typeName}, ${capacity}, ${rangeInHours});`
 
     db.pool.query(insertQuery)
+
     res.redirect("/plane-types")
   } catch (err) {
+    console.log(err)
+    res.sendStatus(400)
+  }
+})
+
+app.delete("/plane-types", async (req: Request, res: Response) => {
+  try {
+    const planeTypeID = parseInt(req.body.id)
+    const deleteQuery = `DELETE FROM Plane_types WHERE plane_type_id = ${planeTypeID}`
+
+    db.pool.query(deleteQuery)
+
+    res.sendStatus(204)
+  } catch {
+    res.sendStatus(400)
+  }
+})
+
+app.put("/plane-types/:id", async (req: Request, res: Response) => {
+  try {
+    const planeTypeId = req.params.id
+    
+    const typeName = req.body.type_name
+    const capacity = parseInt(req.body.capacity)
+    const rangeInHours = parseInt(req.body.range_in_hrs)
+    const updateQuery = `
+      UPDATE Plane_types
+        SET type_name = ${typeName},
+        capacity = ${capacity},
+        range_in_hrs = ${rangeInHours}
+        WHERE plane_type_id = ${planeTypeId}
+    `
+
+    db.pool.query(updateQuery)
+
+    res.redirect("/plane-types")
+  } catch(err) {
     console.log(err)
     res.sendStatus(400)
   }
