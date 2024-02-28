@@ -183,7 +183,7 @@ UPDATE Airports
     airport_code = :airport_code_input,
     location = :location_input
 
--- Delete airport by name
+-- Delete airport 
 DELETE FROM Airports 
     WHERE airport_id = :selected_airport_id;
 
