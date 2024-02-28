@@ -153,20 +153,20 @@ app.post("/plane-types/", async (req: Request, res: Response) => {
     const capacity = parseInt(req.body.capacity)
     const rangeInHours = parseInt(req.body.range_in_hrs)
     const insertQuery = `INSERT INTO Plane_types (type_name, capacity, range_in_hrs)
-    VALUES (${typeName}, ${capacity}, ${rangeInHours});`
+    VALUES ("${typeName}", ${capacity}, ${rangeInHours});`
 
     db.pool.query(insertQuery)
 
-    res.redirect("/plane-types")
+    res.sendStatus(201)
   } catch (err) {
     console.log(err)
     res.sendStatus(400)
   }
 })
 
-app.delete("/plane-types", async (req: Request, res: Response) => {
+app.delete("/plane-types/:id", async (req: Request, res: Response) => {
   try {
-    const planeTypeID = parseInt(req.body.id)
+    const planeTypeID = parseInt(req.params.id)
     const deleteQuery = `DELETE FROM Plane_types WHERE plane_type_id = ${planeTypeID}`
 
     db.pool.query(deleteQuery)
@@ -184,17 +184,16 @@ app.put("/plane-types/:id", async (req: Request, res: Response) => {
     const typeName = req.body.type_name
     const capacity = parseInt(req.body.capacity)
     const rangeInHours = parseInt(req.body.range_in_hrs)
-    const updateQuery = `
-      UPDATE Plane_types
-        SET type_name = ${typeName},
-        capacity = ${capacity},
-        range_in_hrs = ${rangeInHours}
-        WHERE plane_type_id = ${planeTypeId}
+    const updateQuery = `UPDATE Plane_types\
+      SET type_name = "${typeName}",\
+      capacity = ${capacity},\
+      range_in_hrs = ${rangeInHours}\
+      WHERE plane_type_id = ${planeTypeId}\
     `
 
     db.pool.query(updateQuery)
 
-    res.redirect("/plane-types")
+    res.sendStatus(204)
   } catch(err) {
     console.log(err)
     res.sendStatus(400)
