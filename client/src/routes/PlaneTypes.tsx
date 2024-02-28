@@ -1,5 +1,16 @@
+import { useEffect, useState } from "react";
+import Axios from 'axios';
 
 function PlaneTypes() {
+  const [planeTypes, setPlaneTypes] = useState([]);  
+  
+  // receive data from get request
+    useEffect(() => {
+      Axios.get(`http://localhost:55767/plane-types`).then((response) => {
+        setPlaneTypes(response.data)
+      });
+  }, []);
+
   return (
     <div>
       <h1>Plane Types</h1>
@@ -19,42 +30,20 @@ function PlaneTypes() {
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>
-                <a href="#">Edit</a>
-              </td>
-              <td>
-                <a href="#">Delete</a>
-              </td>
-              <td>1</td>
-              <td>Airbus A320-200</td>
-              <td>180</td>
-              <td>5</td>
-            </tr>
-            <tr>
-              <td>
-                <a href="#">Edit</a>
-              </td>
-              <td>
-                <a href="#">Delete</a>
-              </td>
-              <td>2</td>
-              <td>Boeing B737-800</td>
-              <td>190</td>
-              <td>5</td>
-            </tr>
-            <tr>
-              <td>
-                <a href="#">Edit</a>
-              </td>
-              <td>
-                <a href="#">Delete</a>
-              </td>
-              <td>3</td>
-              <td>Embraer 135</td>
-              <td>37</td>
-              <td>3</td>
-            </tr>
+            {planeTypes.map((planeType) => (
+              <tr>
+                <td>
+                  <a href="#">Edit</a>
+                </td>
+                <td>
+                  <a href="#">Delete</a>
+                </td>
+                <td>{planeType.plane_type_id}</td>
+                <td>{planeType.type_name}</td>
+                <td>{planeType.capacity}</td>
+                <td>{planeType.range_in_hrs}</td>
+              </tr>
+            ))}
           </tbody>
         </table>
         <p>&nbsp;</p>
