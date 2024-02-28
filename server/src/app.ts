@@ -10,7 +10,7 @@
 import 'dotenv/config'
 import express, { Express, Request, Response } from "express";
 const app: Express = express();
-const port = 9124;
+const port = 55767;
 
 app.use(express.json())
 app.use(express.urlencoded({extended: true}))
