@@ -1,10 +1,10 @@
 /* SETUP */
-const express = require("express");
-const app = express();
+import express, { Express, Request, Response } from "express";
+const app: Express = express();
 const port = 9124;
 
 /* Routes */
-app.get("/", (req, res) => {
+app.get("/", (req: Request, res: Response) => {
   res.send("Root route");
 });
 
