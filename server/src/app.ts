@@ -122,9 +122,39 @@ app.delete('/Airports/:airportId', async (req, res) => {
 });
 
 app.get("/plane-types", async (req: Request, res: Response) => {
-  const getQuery = 'SELECT * FROM Plane_types'
-  const [results] = await db.pool.query(getQuery)
-  res.send(JSON.stringify(results))
+  try {
+    const selectQuery = 'SELECT * FROM Plane_types'
+    const [rows] = await db.pool.query(selectQuery)
+    res.json(rows)
+  } catch (err) {
+    console.log(err)
+    res.sendStatus(500)
+  }
+})
+
+app.get("/plane-types/:id", async (req: Request, res: Response) => {
+  try {
+    const selectQuery = `SELECT * FROM Plane_types WHERE plane_type_id = ${req.params.id}`
+    const [rows] = await db.pool.query(selectQuery)
+    res.json(rows)
+  } catch(err) {
+    console.log(err)
+    res.sendStatus(400)
+  }
+})
+
+app.post("/plane-types/", async (req: Request, res: Response) => {
+  try {
+    const data = req.body
+    const insertQuery = `INSERT INTO Plane_types (type_name, capacity, range_in_hrs)
+    VALUES (${data.type_name}, ${data.capacity}, ${data.range_in_hrs});`
+
+    db.pool.query(insertQuery)
+    res.redirect("/plane-types")
+  } catch (err) {
+    console.log(err)
+    res.sendStatus(400)
+  }
 })
 
 /* LISTENER */
