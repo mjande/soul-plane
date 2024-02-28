@@ -1,9 +1,20 @@
+import { useEffect } from "react";
+import Axios from 'axios';
 
 function PassengerFlights() {
+
+  // receive data from get request
+  useEffect(() => {
+    Axios.get('http://flip3.engr.oregonstate.edu:55767/').then((response) => {
+      console.log({ data: response.data })
+    });
+  }, []);
+
+
   return (
     <div>
       <h1>Passenger_Flights</h1>
-      <div id="browse" >
+      <div id="browse">
         <p>
           <strong>Browse Passenger_Flights</strong>
         </p>
@@ -24,7 +35,10 @@ function PassengerFlights() {
               <td>
                 <a href="#">Delete</a>
               </td>
-              <td>Spokane International Airport &#8594; Seattle-Tacoma International Airport</td>
+              <td>
+                Spokane International Airport &#8594; Seattle-Tacoma
+                International Airport
+              </td>
               <td>Matt Anderson</td>
             </tr>
             <tr>
@@ -34,7 +48,10 @@ function PassengerFlights() {
               <td>
                 <a href="#">Delete</a>
               </td>
-              <td>Seattle-Tacoma International Airport &#8594; Spokane International Airport</td>
+              <td>
+                Seattle-Tacoma International Airport &#8594; Spokane
+                International Airport
+              </td>
               <td>Paul Nguyen</td>
             </tr>
             <tr>
@@ -44,7 +61,10 @@ function PassengerFlights() {
               <td>
                 <a href="#">Delete</a>
               </td>
-              <td>Portland International Airport &#8594; Seattle-Tacoma International Airport</td>
+              <td>
+                Portland International Airport &#8594; Seattle-Tacoma
+                International Airport
+              </td>
               <td>Steve Rogers</td>
             </tr>
           </tbody>
@@ -60,9 +80,18 @@ function PassengerFlights() {
           <fieldset className="fields">
             <label htmlFor="flight_id">Flight</label>
             <select name="flight_id" id="flight_id">
-              <option value="1">Portland International Airport &#8594; Seattle-Tacoma International Airport</option>
-              <option value="2">Seattle-Tacoma International &#8594; Spokane International Airport</option>
-              <option value="3">Spokane International Airport &#8594; Seattle-Tacoma International Airport</option>
+              <option value="1">
+                Portland International Airport &#8594; Seattle-Tacoma
+                International Airport
+              </option>
+              <option value="2">
+                Seattle-Tacoma International &#8594; Spokane International
+                Airport
+              </option>
+              <option value="3">
+                Spokane International Airport &#8594; Seattle-Tacoma
+                International Airport
+              </option>
             </select>
             <label htmlFor="passenger_id">Passenger</label>
             <select name="passenger_id" id="passenger_id">
@@ -86,9 +115,18 @@ function PassengerFlights() {
           <fieldset className="fields">
             <label htmlFor="flight_id">Flight</label>
             <select name="flight_id" id="flight_id">
-              <option value="1">Portland International Airport &#8594; Seattle-Tacoma International Airport</option>
-              <option value="2">Seattle-Tacoma International &#8594; Spokane International Airport</option>
-              <option value="3">Spokane International Airport &#8594; Seattle-Tacoma International Airport</option>
+              <option value="1">
+                Portland International Airport &#8594; Seattle-Tacoma
+                International Airport
+              </option>
+              <option value="2">
+                Seattle-Tacoma International &#8594; Spokane International
+                Airport
+              </option>
+              <option value="3">
+                Spokane International Airport &#8594; Seattle-Tacoma
+                International Airport
+              </option>
             </select>
             <label htmlFor="passenger_id">Passenger</label>
             <select name="passenger_id" id="passenger_id">
@@ -98,7 +136,11 @@ function PassengerFlights() {
             </select>
           </fieldset>
           <div className="buttons-container">
-            <input className="btn" type="submit" value="Save Update Passenger_Flight" />
+            <input
+              className="btn"
+              type="submit"
+              value="Save Update Passenger_Flight"
+            />
             <input className="btn" type="button" value="Cancel" />
           </div>
         </form>
@@ -115,7 +157,11 @@ function PassengerFlights() {
             <span>Passenger: Matt Anderson</span>
           </fieldset>
           <div className="buttons-container">
-            <input className="btn" type="submit" value="Delete Passenger_Flight" />
+            <input
+              className="btn"
+              type="submit"
+              value="Delete Passenger_Flight"
+            />
             <input className="btn" type="button" value="Cancel" />
           </div>
         </form>

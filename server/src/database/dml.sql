@@ -172,3 +172,19 @@ UPDATE Passengers_flights
 DELETE FROM Passengers_flights 
     WHERE passenger_id = :passenger_id_selected_from_browse_passengers_flights_page
     AND flight_id = :flight_id_selected_from_browse_passengers_flights_page
+
+-- Add airport attributes
+INSERT INTO Airports (airport_name, airport_code, location)
+    VALUES (:airport_name_input, :airport_code_input, :location_input);
+
+-- Update/edit airport attributes
+UPDATE Airports
+    SET airport_name = :airport_name_input,
+    airport_code = :airport_code_input,
+    location = :location_input
+
+-- Delete airport by name
+DELETE FROM Airports 
+    WHERE airport_id = :selected_airport_id;
+
+

@@ -1,5 +1,15 @@
+import { useEffect } from "react";
+import Axios from 'axios';
 
 function Airports() {
+
+   // receive data from get request
+   useEffect(() => {
+    Axios.get('http://flip3.engr.oregonstate.edu:55767/').then((response) => {
+      console.log({ data: response.data })
+    });
+  }, []);
+
   return (
     <div>
       <h1>Airports</h1>
