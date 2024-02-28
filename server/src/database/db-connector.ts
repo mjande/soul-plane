@@ -1,4 +1,4 @@
-// Get an instance of mysql we can use in the app
+// Get mysql instance
 import mysql from "mysql2/promise"
 
 // Create a connection pool using the provided credentials

@@ -1,3 +1,11 @@
+// Date: 2/27/2024
+// Express code adapted from
+// Source URL: https://github.com/osu-cs340-ecampus/nodejs-starter-app
+
+// Date: 2/27.2024
+// MySQL code adapted from 
+// https://sidorares.github.io/node-mysql2/docs
+
 /* SETUP */
 import 'dotenv/config'
 import express, { Express, Request, Response } from "express";
