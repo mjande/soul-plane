@@ -121,12 +121,15 @@ app.delete('/Airports/:airportId', async (req, res) => {
   }
 });
 
+app.get("/plane-types", async (req: Request, res: Response) => {
+  const getQuery = 'SELECT * FROM Plane_types'
+  const [results] = await db.pool.query(getQuery)
+  res.send(JSON.stringify(results))
+})
 
 /* LISTENER */
 app.listen(port, () => {
   console.log(
-    "Express started on http://localhost:" +
-      port +
-      "; press Ctrl-C to terminate."
+    `Express started on http://${process.env.DBHOST}:${port}; press Ctrl-C to terminate.`
   );
 });
