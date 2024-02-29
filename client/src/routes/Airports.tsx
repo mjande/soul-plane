@@ -7,11 +7,21 @@ interface FormData {
   location: string;
 }
 
+interface Airport {
+  airport_id: number;
+  airport_name: string;
+  airport_code: string;
+  location: string;
+}
+
 function Airports() {
-   // receive data from get request
-   useEffect(() => {
-    Axios.get('http://flip3.engr.oregonstate.edu:55767/Airports').then((response) => {
-      console.log({ data: response.data })
+  const [airports, setAirports] = useState<Airport[]>([]);
+
+  // receive data from get request
+  useEffect(() => {
+    // Axios.get('http://flip3.engr.oregonstate.edu:55767/Airports').then((response) => {
+    Axios.get('http://localhost:55767/Airports').then((response) => {
+      setAirports(response.data);
     });
   }, []);
 
@@ -31,8 +41,10 @@ function Airports() {
   // Insert new Airport
   const handleAddAirport = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    console.log('formData Airport Add',formData)
     try {
-      const response = await Axios.post('http://flip3.engr.oregonstate.edu:55767/Airports', formData);
+      // const response = await Axios.post('http://flip3.engr.oregonstate.edu:55767/Airports', formData);
+      const response = await Axios.post('http://localhost:55767/Airports', formData);
       console.log({ data: response.data });
     } catch (error) {
       console.error(error);
@@ -62,42 +74,20 @@ function Airports() {
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>
-                <a href="#">Edit</a>
-              </td>
-              <td>
-                <a href="#">Delete</a>
-              </td>
-              <td>1</td>
-              <td>Portland International Airport</td>
-              <td>PDX</td>
-              <td>Portland, OR</td>
-            </tr>
-            <tr>
-              <td>
-                <a href="#">Edit</a>
-              </td>
-              <td>
-                <a href="#">Delete</a>
-              </td>
-              <td>2</td>
-              <td>Seattle-Tacoma International Airport</td>
-              <td>SEA</td>
-              <td>SeaTac, WA</td>
-            </tr>
-            <tr>
-              <td>
-                <a href="#">Edit</a>
-              </td>
-              <td>
-                <a href="#">Delete</a>
-              </td>
-              <td>3</td>
-              <td>Spokane International Airport</td>
-              <td>GEG</td>
-              <td>Spokane, WA</td>
-            </tr>
+            {airports.map((airport) => (
+              <tr key={airport.airport_id}>
+                <td>
+                  <a href="#">Edit</a>
+                </td>
+                <td>
+                  <a href="#">Delete</a>
+                </td>
+                <td>{airport.airport_id}</td>
+                <td>{airport.airport_name}</td>
+                <td>{airport.airport_code}</td>
+                <td>{airport.location}</td>
+              </tr>
+            ))}
           </tbody>
         </table>
         <p>&nbsp;</p>

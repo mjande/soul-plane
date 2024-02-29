@@ -60,6 +60,24 @@ app.get("/test", (req: Request, res: Response) => {
   res.send("Does this work?")
 })
 
+app.post('/Airports', async (req, res) => {
+  try {
+    // Capture the incoming data and parse it back to a JS object
+    let data = req.body;
+    let location = data.location || 'NULL';
+
+    let query = `INSERT INTO Airports (airport_name, airport_code, location) VALUES ('${data.airport_name}', '${data.airport_code}', '${location}')`;
+
+    const [result] = await db.pool.query(query);
+    res.json({ success: true, message: 'Airport added successfully', data });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ success: false, message: 'Internal Server Error' });
+  }
+});
+
+
+
 
 /* LISTENER */
 app.listen(port, () => {
