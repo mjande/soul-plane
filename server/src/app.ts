@@ -76,7 +76,22 @@ app.post('/Airports', async (req, res) => {
   }
 });
 
+// Update existing Airport
+app.put('/Airports/:airportId', async (req, res) => {
+  try {
+    const airportId = req.params.airportId;
+    let data = req.body;
+    let location = data.location || 'NULL';
 
+    let query = `UPDATE Airports SET airport_name = '${data.airport_name}', airport_code = '${data.airport_code}', location = '${location}' WHERE airport_id = ${airportId}`;
+
+    const [result] = await db.pool.query(query);
+    res.json({ success: true, message: 'Airport updated successfully', data });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ success: false, message: 'Internal Server Error' });
+  }
+});
 
 
 /* LISTENER */

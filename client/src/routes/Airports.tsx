@@ -23,35 +23,69 @@ function Airports() {
     Axios.get('http://localhost:55767/Airports').then((response) => {
       setAirports(response.data);
     });
-  }, []);
+  }, [airports]);
 
 
-  // set up data for post request
-  const [formData, setFormData] = useState<FormData>({
+  const [insertFormData, setInsertFormData] = useState<FormData>({
     airport_name: "",
     airport_code: "",
     location: "",
   });
 
-  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
+  const [updateFormData, setUpdateFormData] = useState<FormData>({
+    airport_name: "",
+    airport_code: "",
+    location: "",
+  });
+
+  const handleInsertInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    setFormData((prevData: FormData) => ({ ...prevData, [name]: value }));
+    setInsertFormData((prevData: FormData) => ({ ...prevData, [name]: value }));
+  };
+
+  const handleUpdateInputChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+    const { name, value } = e.target;
+    setUpdateFormData((prevData: FormData) => ({ ...prevData, [name]: value }));
   };
 
   // Insert new Airport
   const handleAddAirport = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log('formData Airport Add',formData)
+    console.log('formData Airport Add',insertFormData)
     try {
       // const response = await Axios.post('http://flip3.engr.oregonstate.edu:55767/Airports', formData);
-      const response = await Axios.post('http://localhost:55767/Airports', formData);
+      const response = await Axios.post('http://localhost:55767/Airports', insertFormData);
       console.log({ data: response.data });
     } catch (error) {
       console.error(error);
     }
   };
 
+
   // Update Airport
+  const handleUpdateAirport = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    console.log('formData Airport Update', updateFormData);
+    
+    try {
+      const updatedAirport = updateFormData.airport_name;
+      const response = await Axios.put(`http://localhost:55767/Airports/${updatedAirport}`, updateFormData);
+      console.log({ data: response.data });
+  
+      const updatedAirports = await Axios.get('http://localhost:55767/Airports');
+      setAirports(updatedAirports.data);
+  
+      setUpdateFormData({
+        airport_name: "",
+        airport_code: "",
+        location: "",
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  
+  
 
   // Delete Airport
 
@@ -75,7 +109,7 @@ function Airports() {
           </thead>
           <tbody>
             {airports.map((airport) => (
-              <tr key={airport.airport_id}>
+              <tr key={airport.airport_code}>
                 <td>
                   <a href="#">Edit</a>
                 </td>
@@ -99,9 +133,9 @@ function Airports() {
             <strong>Add Airport</strong>
           </legend>
         <fieldset className="fields">
-          <label>Airport Name</label> <input type="text" name="airport_name" value={formData.airport_name} onChange={handleInputChange} className="long-text-input" />
-          <label>Airport Code</label> <input type="text" name="airport_code" value={formData.airport_code} onChange={handleInputChange} className="short-text-input"/>
-          <label>Location</label> <input type="text" name="location" value={formData.location} onChange={handleInputChange} />
+          <label>Airport Name</label> <input type="text" name="airport_name" value={insertFormData.airport_name} onChange={handleInsertInputChange} className="long-text-input" />
+          <label>Airport Code</label> <input type="text" name="airport_code" value={insertFormData.airport_code} onChange={handleInsertInputChange} className="short-text-input"/>
+          <label>Location</label> <input type="text" name="location" value={insertFormData.location} onChange={handleInsertInputChange} />
         </fieldset>
         <div className="buttons-container">
           <input className="btn" type="submit" value="Add Airport" />
@@ -111,15 +145,21 @@ function Airports() {
     </div>
 
       <div id="update">
-        <form id="updateAirport" method="post">
+        <form id="updateAirport" onSubmit={handleUpdateAirport} method="post">
           <legend>
             <strong>Update Airport</strong>
           </legend>
           <fieldset className="fields">
-            <p>Airport ID: 1</p>
-            <label>Airport Name</label> <input type="text" value="Portland International Airport" name="airport_name" className="long-text-input"/>
-            <label>Airport Code</label> <input type="text" name="airport_code" value="PDX" className="short-text-input" />
-            <label>Location</label> <input type="text" name="location" value="Portland, OR" />
+              <select name="airport_name" onChange={handleUpdateInputChange} className="dropdown-input">
+              <option value="">Select an airport</option>
+              {airports.map((airport) => (
+                <option key={airport.airport_id} value={airport.airport_id}>
+                  {airport.airport_name}
+                </option>
+              ))}
+              </select>
+            <label>Airport Code</label> <input type="text" name="airport_code" value={updateFormData.airport_code} className="short-text-input" onChange={handleUpdateInputChange}/>
+            <label>Location</label> <input type="text" name="location" value={updateFormData.location} onChange={handleUpdateInputChange}/>
           </fieldset>
           <div className="buttons-container">
             <input className="btn" type="submit" value="Save Update Airport" />
