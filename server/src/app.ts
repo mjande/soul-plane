@@ -125,42 +125,31 @@ app.get("/plane-types", async (req: Request, res: Response) => {
   try {
     const selectQuery = 'SELECT * FROM Plane_types'
 
-    const [rows] = await db.pool.query(selectQuery)
+    const [results] = await db.pool.query(selectQuery)
 
-    res.json(rows)
-  } catch (err) {
-    console.log(err)
-    res.sendStatus(500)
-  }
-})
-
-app.get("/plane-types/:id", async (req: Request, res: Response) => {
-  try {
-    const selectQuery = `SELECT * FROM Plane_types WHERE plane_type_id = ${req.params.id}`
-
-    const [rows] = await db.pool.query(selectQuery)
-
-    res.json(rows)
-  } catch(err) {
-    console.log(err)
-    res.sendStatus(400)
+    res.json(results)
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ success: false, message: 'Internal Server Error' });
   }
 })
 
 app.post("/plane-types/", async (req: Request, res: Response) => {
   try {
-    const typeName = req.body.type_name
-    const capacity = parseInt(req.body.capacity)
-    const rangeInHours = parseInt(req.body.range_in_hrs)
+    const data = req.body
+    const typeName = data.type_name
+    const capacity = parseInt(data.capacity)
+    const rangeInHours = parseInt(data.range_in_hrs)
+
     const insertQuery = `INSERT INTO Plane_types (type_name, capacity, range_in_hrs)
     VALUES ("${typeName}", ${capacity}, ${rangeInHours});`
 
     db.pool.query(insertQuery)
 
-    res.sendStatus(201)
-  } catch (err) {
-    console.log(err)
-    res.sendStatus(400)
+    res.json({ success: true, message: 'Plane Type added successfully', data });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ success: false, message: 'Internal Server Error' });
   }
 })
 
@@ -171,19 +160,21 @@ app.delete("/plane-types/:id", async (req: Request, res: Response) => {
 
     db.pool.query(deleteQuery)
 
-    res.sendStatus(204)
-  } catch {
-    res.sendStatus(400)
+    res.json({ success: true, message: 'Plane Type deleted successfully' });
+  } catch(error) {
+    console.error(error);
+    res.status(500).json({ success: false, message: 'Internal Server Error' });
   }
 })
 
 app.put("/plane-types/:id", async (req: Request, res: Response) => {
   try {
     const planeTypeId = req.params.id
+    const data = req.body
     
-    const typeName = req.body.type_name
-    const capacity = parseInt(req.body.capacity)
-    const rangeInHours = parseInt(req.body.range_in_hrs)
+    const typeName = data.type_name
+    const capacity = parseInt(data.capacity)
+    const rangeInHours = parseInt(data.range_in_hrs)
     const updateQuery = `UPDATE Plane_types\
       SET type_name = "${typeName}",\
       capacity = ${capacity},\
@@ -193,10 +184,10 @@ app.put("/plane-types/:id", async (req: Request, res: Response) => {
 
     db.pool.query(updateQuery)
 
-    res.sendStatus(204)
-  } catch(err) {
-    console.log(err)
-    res.sendStatus(400)
+    res.json({ success: true, message: 'Plane Type updated successfully', data });
+  } catch(error) {
+    console.error(error);
+    res.status(500).json({ success: false, message: 'Internal Server Error' });
   }
 })
 
