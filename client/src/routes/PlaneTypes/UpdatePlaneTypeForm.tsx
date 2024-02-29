@@ -74,7 +74,7 @@ export default function UpdatePlaneTypeForm() {
                 </fieldset>
                 <div className="buttons-container">
                 <input className="btn" type="submit" value="Update Plane Type" />
-                <input className="btn" type="button" value="Cancel" onClick={() => navigate("/PlaneTypes")}/>
+                <input className="btn" type="button" value="Cancel" onClick={() => navigate(-1)}/>
                 </div>
             </form>
             </div>    
