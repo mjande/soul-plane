@@ -1,6 +1,6 @@
 # Soul Plane (Back-end) - Step 4 Draft
 
-This is the back-end for the Soul Plane project. It is a server implemented using Express, and sends data to a React front-end. The server can be accessed directly at `http://flip3.engr.oregonstate.edu/55767`, or queried through the front-end.
+This is the back-end for the Soul Plane project. It is a server implemented using Express, and sends data to a React front-end. The server can be accessed directly at `http://flip3.engr.oregonstate.edu:55767/`, or queried through the front-end.
 
 # Finding Relevant Files
 

@@ -1,6 +1,6 @@
 # Soul Plane (Front-End) - Step 4 Draft
 
-This is the front-end of our project Soul Plane. It is built using React, and connects to an Express back-end to interact with the database. The front-end can be accessed at `http://flip2.engr.oregonstate.edu/2275`.
+This is the front-end of our project Soul Plane. It is built using React, and connects to an Express back-end to interact with the database. The front-end can be accessed at `http://flip2.engr.oregonstate.edu:2275/`.
 
 # Finding Relevant Files
 
