@@ -55,7 +55,7 @@ export default function NewPlaneTypeForm() {
                 </fieldset>
                 <div className="buttons-container">
                 <input className="btn" type="submit" value="Add Plane Type" />
-                <input className="btn" type="button" value="Cancel" />
+                <input className="btn" type="button" value="Cancel" onClick={() => navigate("/PlaneTypes")}/>
                 </div>
             </form>
             </div>    
