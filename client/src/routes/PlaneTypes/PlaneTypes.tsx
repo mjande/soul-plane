@@ -43,7 +43,7 @@ function PlaneTypes() {
                   <a href={`/PlaneTypes/update/${planeType.plane_type_id}`}>Edit</a>
                 </td>
                 <td>
-                  <a href="#">Delete</a>
+                  <a href={`/PlaneTypes/delete/${planeType.plane_type_id}`}>Delete</a>
                 </td>
                 <td>{planeType.plane_type_id}</td>
                 <td>{planeType.type_name}</td>
@@ -54,23 +54,6 @@ function PlaneTypes() {
           </tbody>
         </table>
         <p>&nbsp;</p>
-      </div>
-
-      <div id="delete">
-        <form id="deletePlaneType" method="post">
-          <legend>
-            <strong>Delete Plane Type</strong>
-          </legend>
-          <fieldset className="fields">
-            <p>Are you sure you wish to delete the following?</p>
-            <span>Plane Type ID: 1</span>
-            <span>Type Name: Airbus A320-200</span>
-          </fieldset>
-          <div className="buttons-container">
-            <input className="btn" type="submit" value="Delete Plane Type" />
-            <input className="btn" type="button" value="Cancel" />
-          </div>
-        </form>
       </div>
     </div>
   );

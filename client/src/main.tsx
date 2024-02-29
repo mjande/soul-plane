@@ -13,6 +13,7 @@ import Planes from './routes/Planes.tsx';
 import PlaneTypes from './routes/PlaneTypes/PlaneTypes.tsx';
 import NewPlaneTypeForm from './routes/PlaneTypes/NewPlaneTypeForm.tsx'
 import UpdatePlaneTypeForm from './routes/PlaneTypes/UpdatePlaneTypeForm.tsx';
+import DeletePlaneTypeForm from './routes/PlaneTypes/DeletePlaneTypeForm.tsx';
 
 const router = createBrowserRouter([
   {
@@ -56,6 +57,10 @@ const router = createBrowserRouter([
       {
         path: "/PlaneTypes/update/:id",
         element: <UpdatePlaneTypeForm />
+      },
+      {
+        path: "/PlaneTypes/delete/:id",
+        element: <DeletePlaneTypeForm />
       }
     ],
   },

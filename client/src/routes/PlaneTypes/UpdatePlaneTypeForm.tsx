@@ -27,7 +27,6 @@ export default function UpdatePlaneTypeForm() {
                 capacity: data.capacity,
                 range_in_hrs: data.range_in_hrs
             })
-
         }
 
         getPlaneType()
