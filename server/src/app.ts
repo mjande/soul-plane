@@ -3,20 +3,25 @@
 // Source URL: https://github.com/osu-cs340-ecampus/nodejs-starter-app
 
 // Date: 2/27/2024
-// MySQL code adapted from 
-// https://sidorares.github.io/node-mysql2/docs
+// Code for interacting with MySQL database adapted from 
+// Source URL: https://sidorares.github.io/node-mysql2/docs
 
 /* SETUP */
 import 'dotenv/config'
 import express, { Express, Request, Response } from "express";
-import cors from 'cors'
+
 
 const app: Express = express();
 const port = 55767;
 
-app.use(cors());
 app.use(express.json())
 app.use(express.urlencoded({extended: true}))
+
+// Date: 2/28/2024
+// Code for allowing Cross-Origin Requests (CORS) adapted from
+// Source URL: https://www.twilio.com/en-us/blog/add-cors-support-express-typescript-api
+import cors from 'cors'
+app.use(cors());
 
 const allowedOrigins = [
   'http://flip3.engr.oregonstate.edu',
