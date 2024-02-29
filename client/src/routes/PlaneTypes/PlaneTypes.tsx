@@ -40,7 +40,7 @@ function PlaneTypes() {
             {planeTypes.map((planeType) => (
               <tr>
                 <td>
-                  <a href="#">Edit</a>
+                  <a href={`/PlaneTypes/update/${planeType.plane_type_id}`}>Edit</a>
                 </td>
                 <td>
                   <a href="#">Delete</a>
@@ -54,27 +54,6 @@ function PlaneTypes() {
           </tbody>
         </table>
         <p>&nbsp;</p>
-      </div>
-
-      <div id="update">
-        <form id="updatePlaneType" method="post">
-          <legend>
-            <strong>Update Plane Type</strong>
-          </legend>
-          <fieldset className="fields">
-            <span>Plane Type ID: 1</span>
-            <label>Type Name</label>
-            <input type="text" value="Airbus A320-200" name="type_name" />
-            <label>Capacity</label>
-            <input type="number" name="capacity" value="180" />
-            <label>Range (hrs)</label>
-            <input type="number" name="range_in_hrs" value="5" />
-          </fieldset>
-          <div className="buttons-container">
-            <input className="btn" type="submit" value="Save Update Plane Type" />
-            <input className="btn" type="button" value="Cancel" />
-          </div>
-        </form>
       </div>
 
       <div id="delete">

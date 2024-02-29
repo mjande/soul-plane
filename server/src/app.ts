@@ -134,6 +134,19 @@ app.get("/plane-types", async (req: Request, res: Response) => {
   }
 })
 
+app.get("/plane-types/:id", async (req: Request, res: Response) => {
+  try {
+    const selectQuery = `SELECT * FROM Plane_types WHERE plane_type_id = ${req.params.id}`
+
+    const [results] = await db.pool.query(selectQuery)
+
+    res.json(results)
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ success: false, message: 'Internal Server Error' });
+  }
+})
+
 app.post("/plane-types/", async (req: Request, res: Response) => {
   try {
     const data = req.body
