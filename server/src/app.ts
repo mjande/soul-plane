@@ -44,6 +44,18 @@ app.get("/Airports", async (req: Request, res: Response) => {
   res.send(JSON.stringify(results));
 });
 
+
+app.get("/PassengerFlights", async (req: Request, res: Response) => {
+  // Define queries
+  const query = 'SELECT * FROM Passengers_flights;';
+
+  // Get results from database
+  const [results] = await db.pool.query(query);
+
+  // Send JSON back to client
+  res.send(JSON.stringify(results));
+});
+
 app.get("/test", (req: Request, res: Response) => {
   res.send("Does this work?")
 })
