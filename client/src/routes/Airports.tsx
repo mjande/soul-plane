@@ -17,6 +17,7 @@ interface Airport {
 function Airports() {
   const [airports, setAirports] = useState<Airport[]>([]);
   const [selectedAirportId, setSelectedAirportId] = useState<string | undefined>("");
+  const [selectedAirportIdDelete, setSelectedAirportIdDelete] = useState<string | undefined>("");
 
   // receive data from get request
   useEffect(() => {
@@ -34,6 +35,12 @@ function Airports() {
   });
 
   const [updateFormData, setUpdateFormData] = useState<FormData>({
+    airport_name: "",
+    airport_code: "",
+    location: "",
+  });
+
+  const [deleteFormData, setDeleteFormData] = useState<FormData>({
     airport_name: "",
     airport_code: "",
     location: "",
@@ -72,6 +79,17 @@ function Airports() {
     });
   };
 
+  const handleAirportSelectionDelete = (e: ChangeEvent<HTMLSelectElement>) => {
+    const selectedOption = e.target.value;
+    setSelectedAirportIdDelete(selectedOption);
+    const selectedAirport = airports.find((airport) => airport.airport_id === Number(selectedOption));
+
+    setDeleteFormData({
+      ...deleteFormData,
+      airport_name: selectedAirport?.airport_name || "",
+    });
+  };
+
   // Update Airport
   const handleUpdateAirport = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -101,6 +119,33 @@ function Airports() {
   };
 
   // Delete Airport
+  const handleDeleteAirport = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    try {
+      if (!selectedAirportIdDelete) {
+        console.error("No airport selected for deletion.");
+        return;
+      }
+
+      // const response = await Axios.delete(`http://flip3.engr.oregonstate.edu:55767/Airports/${selectedAirportIdDelete}`);
+      const response = await Axios.delete(`http://localhost:55767/Airports/${selectedAirportIdDelete}`);
+      console.log({ data: response.data });
+
+      // Update the list of airports after deletion
+      const updatedAirports = await Axios.get('http://localhost:55767/Airports');
+      setAirports(updatedAirports.data);
+
+      setUpdateFormData({
+        airport_name: "",
+        airport_code: "",
+        location: "",
+      });
+      setSelectedAirportIdDelete("");
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
 
   return (
     <div>
@@ -147,7 +192,7 @@ function Airports() {
           </legend>
         <fieldset className="fields">
           <label>Airport Name</label> <input type="text" name="airport_name" value={insertFormData.airport_name} onChange={handleInsertInputChange} className="long-text-input" />
-          <label>Airport Code</label> <input type="text" name="airport_code" value={insertFormData.airport_code} onChange={handleInsertInputChange} className="short-text-input"/>
+          <label>Airport Code</label> <input type="text" name="airport_code" value={insertFormData.airport_code} onChange={handleInsertInputChange} className="short-text-input" maxLength={3}/>
           <label>Location</label> <input type="text" name="location" value={insertFormData.location} onChange={handleInsertInputChange} />
         </fieldset>
         <div className="buttons-container">
@@ -171,7 +216,7 @@ function Airports() {
                 </option>
               ))}
               </select>
-            <label>Airport Code</label> <input type="text" name="airport_code" value={updateFormData.airport_code} className="short-text-input" onChange={handleUpdateInputChange}/>
+            <label>Airport Code</label> <input type="text" name="airport_code" value={updateFormData.airport_code} className="short-text-input" onChange={handleUpdateInputChange} maxLength={3}/>
             <label>Location</label> <input type="text" name="location" value={updateFormData.location} onChange={handleUpdateInputChange}/>
           </fieldset>
           <div className="buttons-container">
@@ -182,22 +227,32 @@ function Airports() {
       </div>
 
       <div id="delete">
-        <form id="deleteAirport" method="post">
-          <legend>
-            <strong>Delete Airport</strong>
-          </legend>
-          <fieldset className="fields">
-            <p>Are you sure you wish to delete the following?</p>
-            <p>Airport ID: 1</p>
-            <p>Airport Name: Portland International Airport</p>
-          </fieldset>
-          <div className="buttons-container">
-            <input className="btn" type="submit" value="Delete Airport" />
-            <input className="btn" type="button" value="Cancel" />
-          </div>
-        </form>
-      </div>
+      <form id="deleteAirport" onSubmit={handleDeleteAirport} method="post">
+        <legend>
+          <strong>Delete Airport</strong>
+        </legend>
+        <fieldset className="fields">
+          <select
+            name="delete_airport_name"
+            onChange={handleAirportSelectionDelete}
+            className="dropdown-input"
+            value={selectedAirportIdDelete}
+          >
+            <option value="">Select an airport</option>
+            {airports.map((airport) => (
+              <option key={airport.airport_id} value={airport.airport_id}>
+                {airport.airport_name}
+              </option>
+            ))}
+          </select>
+        </fieldset>
+        <div className="buttons-container">
+          <input className="btn" type="submit" value="Delete Airport" />
+          <input className="btn" type="button" value="Cancel" />
+        </div>
+      </form>
     </div>
+  </div>
   );
 }
 

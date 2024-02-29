@@ -92,6 +92,20 @@ app.put('/Airports/:airportId', async (req, res) => {
   }
 });
 
+// Delete existing Airport
+app.delete('/Airports/:airportId', async (req, res) => {
+  try {
+    const airportId = req.params.airportId;
+    const deleteQuery = `DELETE FROM Airports WHERE airport_id = ${airportId}`;
+    const [result] = await db.pool.query(deleteQuery);
+
+    res.json({ success: true, message: 'Airport deleted successfully' });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ success: false, message: 'Internal Server Error' });
+  }
+});
+
 
 /* LISTENER */
 app.listen(port, () => {
