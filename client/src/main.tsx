@@ -10,7 +10,8 @@ import Flights from './routes/Flights.tsx';
 import PassengerFlights from './routes/PassengerFlights.tsx';
 import Passengers from './routes/Passengers.tsx';
 import Planes from './routes/Planes.tsx';
-import PlaneTypes from './routes/PlaneTypes.tsx';
+import PlaneTypes from './routes/PlaneTypes/PlaneTypes.tsx';
+import NewPlaneTypeForm from './routes/PlaneTypes/NewPlaneTypeForm.tsx'
 
 const router = createBrowserRouter([
   {
@@ -47,6 +48,10 @@ const router = createBrowserRouter([
         path: "/PlaneTypes",
         element: <PlaneTypes />,
       },
+      {
+        path: "/PlaneTypes/new",
+        element: <NewPlaneTypeForm />
+      }
     ],
   },
 ]);

@@ -21,7 +21,7 @@ function PlaneTypes() {
         <table>
           <thead>
             <tr>
-              <th>New</th>
+              <th><a href="/PlaneTypes/new">New</a></th>
               <th></th>
               <th>Plane Type ID</th>
               <th>Type Name</th>
@@ -47,26 +47,6 @@ function PlaneTypes() {
           </tbody>
         </table>
         <p>&nbsp;</p>
-      </div>
-
-      <div id="insert">
-        <form id="addPlaneType" method="post">
-          <legend>
-            <strong>Add Plane Type</strong>
-          </legend>
-          <fieldset className="fields">
-            <label>Type Name</label>
-            <input type="text" name="type_name" />
-            <label>Capacity</label>
-            <input type="number" name="capacity" />
-            <label>Range (hrs)</label>
-            <input type="number" name="range_in_hrs" />
-          </fieldset>
-          <div className="buttons-container">
-            <input className="btn" type="submit" value="Add Plane Type" />
-            <input className="btn" type="button" value="Cancel" />
-          </div>
-        </form>
       </div>
 
       <div id="update">
