@@ -16,6 +16,7 @@ interface Airport {
 
 function Airports() {
   const [airports, setAirports] = useState<Airport[]>([]);
+  const [selectedAirportId, setSelectedAirportId] = useState<string | undefined>("");
 
   // receive data from get request
   useEffect(() => {
@@ -51,9 +52,8 @@ function Airports() {
   // Insert new Airport
   const handleAddAirport = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log('formData Airport Add',insertFormData)
-    try {
-      // const response = await Axios.post('http://flip3.engr.oregonstate.edu:55767/Airports', formData);
+    try { 
+      // const response = await Axios.post('http://flip3.engr.oregonstate.edu:55767/Airports', insertFormData);
       const response = await Axios.post('http://localhost:55767/Airports', insertFormData);
       console.log({ data: response.data });
     } catch (error) {
@@ -61,31 +61,44 @@ function Airports() {
     }
   };
 
+  const handleAirportSelection = (e: ChangeEvent<HTMLSelectElement>) => {
+    const selectedOption = e.target.value;
+    setSelectedAirportId(selectedOption);
+    const selectedAirport = airports.find((airport) => airport.airport_id === Number(selectedOption));
+
+    setUpdateFormData({
+      ...updateFormData,
+      airport_name: selectedAirport?.airport_name || "",
+    });
+  };
 
   // Update Airport
   const handleUpdateAirport = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log('formData Airport Update', updateFormData);
-    
     try {
-      const updatedAirport = updateFormData.airport_name;
-      const response = await Axios.put(`http://localhost:55767/Airports/${updatedAirport}`, updateFormData);
+      if (!selectedAirportId) {
+        console.error("No airport selected for update.");
+        return;
+      }
+
+      // const response = await Axios.put(`http://flip3.engr.oregonstate.edu:55767/Airports/${selectedAirportId}`, updateFormData);
+      const response = await Axios.put(`http://localhost:55767/Airports/${selectedAirportId}`, updateFormData);
       console.log({ data: response.data });
-  
+
+      // const updatedAirports = await Axios.get('http://flip3.engr.oregonstate.edu:55767/Airports');
       const updatedAirports = await Axios.get('http://localhost:55767/Airports');
       setAirports(updatedAirports.data);
-  
+
       setUpdateFormData({
         airport_name: "",
         airport_code: "",
         location: "",
       });
+      setSelectedAirportId("");
     } catch (error) {
       console.error(error);
     }
   };
-  
-  
 
   // Delete Airport
 
@@ -150,7 +163,7 @@ function Airports() {
             <strong>Update Airport</strong>
           </legend>
           <fieldset className="fields">
-              <select name="airport_name" onChange={handleUpdateInputChange} className="dropdown-input">
+              <select name="airport_name" onChange={handleAirportSelection} className="dropdown-input" value={selectedAirportId}>
               <option value="">Select an airport</option>
               {airports.map((airport) => (
                 <option key={airport.airport_id} value={airport.airport_id}>

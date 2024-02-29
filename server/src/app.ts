@@ -62,7 +62,6 @@ app.get("/test", (req: Request, res: Response) => {
 
 app.post('/Airports', async (req, res) => {
   try {
-    // Capture the incoming data and parse it back to a JS object
     let data = req.body;
     let location = data.location || 'NULL';
 
