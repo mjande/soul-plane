@@ -33,6 +33,7 @@ app.use(cors(options))
 import db from "./database/db-connector"
 
 /* ROUTES */
+// Get all airports
 app.get("/Airports", async (req: Request, res: Response) => {
   // Define queries
   const query = 'SELECT * FROM Airports;';
@@ -44,7 +45,7 @@ app.get("/Airports", async (req: Request, res: Response) => {
   res.send(JSON.stringify(results));
 });
 
-
+// Get passenger flights
 app.get("/PassengerFlights", async (req: Request, res: Response) => {
   // Define queries
   const query = 'SELECT * FROM Passengers_flights;';
@@ -56,18 +57,19 @@ app.get("/PassengerFlights", async (req: Request, res: Response) => {
   res.send(JSON.stringify(results));
 });
 
-app.get("/test", (req: Request, res: Response) => {
-  res.send("Does this work?")
-})
-
+// Create new airport
 app.post('/Airports', async (req, res) => {
   try {
+    // Define query
     let data = req.body;
     let location = data.location || 'NULL';
 
     let query = `INSERT INTO Airports (airport_name, airport_code, location) VALUES ('${data.airport_name}', '${data.airport_code}', '${location}')`;
 
+    // Get results from database
     const [result] = await db.pool.query(query);
+
+    // Send JSON back to client
     res.json({ success: true, message: 'Airport added successfully', data });
   } catch (error) {
     console.error(error);
@@ -78,13 +80,17 @@ app.post('/Airports', async (req, res) => {
 // Update existing Airport
 app.put('/Airports/:airportId', async (req, res) => {
   try {
+    // Define query
     const airportId = req.params.airportId;
     let data = req.body;
     let location = data.location || 'NULL';
 
     let query = `UPDATE Airports SET airport_name = '${data.airport_name}', airport_code = '${data.airport_code}', location = '${location}' WHERE airport_id = ${airportId}`;
 
+    // Get results from database
     const [result] = await db.pool.query(query);
+
+    // Send JSON back to client
     res.json({ success: true, message: 'Airport updated successfully', data });
   } catch (error) {
     console.error(error);
@@ -95,10 +101,14 @@ app.put('/Airports/:airportId', async (req, res) => {
 // Delete existing Airport
 app.delete('/Airports/:airportId', async (req, res) => {
   try {
+    // Define query
     const airportId = req.params.airportId;
     const deleteQuery = `DELETE FROM Airports WHERE airport_id = ${airportId}`;
+
+    // Get result from database
     const [result] = await db.pool.query(deleteQuery);
 
+    // Send JSON back to client
     res.json({ success: true, message: 'Airport deleted successfully' });
   } catch (error) {
     console.error(error);
