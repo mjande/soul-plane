@@ -1,13 +1,22 @@
-import { useState } from "react"
+import { FormEvent, ChangeEvent, useState } from "react"
+import Axios from "axios"
+import { useNavigate } from "react-router-dom"
+
+interface FormData {
+    type_name: string,
+    capacity: number,
+    range_in_hrs: number
+}
 
 export default function NewPlaneTypeForm() {
-    const [formData, setFormData] = useState({
+    const [formData, setFormData] = useState<FormData>({
         type_name: '',
-        capacity: 0,
+        capacity: 0,   
         range_in_hrs: 0,
     })
+    const navigate = useNavigate();
 
-    async function handleInputChange(event) {
+    async function handleInputChange(event: ChangeEvent<HTMLInputElement>) {
         const { name, value } = event.target
         setFormData((prevFormData) => ({
             ...prevFormData,
@@ -15,14 +24,16 @@ export default function NewPlaneTypeForm() {
         }))
     }
     
-    async function handleSubmit(event) {
+    async function handleSubmit(event: FormEvent<HTMLFormElement>) {
         event.preventDefault()
-        const postData = new FormData()
-        postData.append("type_name", formData.type_name)
-        postData.append("capacity", formData.capacity)
-        postData.append("range_in_hrs", formData.range_in_hrs)
 
-        console.log(postData)
+        try {
+            const response = await Axios.post("http://localhost:55767/plane-types", formData)
+            console.log(response)
+            navigate("/PlaneTypes")
+        } catch(error) {
+            console.log(error)
+        }
     }
     
     return (

@@ -1,8 +1,15 @@
 import { useEffect, useState } from "react";
 import Axios from 'axios';
 
+interface PlaneType {
+  plane_type_id: number,
+  type_name: string,
+  capacity: number,
+  range_in_hrs: number
+}
+
 function PlaneTypes() {
-  const [planeTypes, setPlaneTypes] = useState([]);  
+  const [planeTypes, setPlaneTypes] = useState<PlaneType[]>([]);  
   
   // receive data from get request
     useEffect(() => {
