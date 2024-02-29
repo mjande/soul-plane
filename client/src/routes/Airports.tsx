@@ -1,14 +1,47 @@
-import { useEffect } from "react";
+import { FormEvent, ChangeEvent, useEffect, useState } from "react";
 import Axios from 'axios';
 
-function Airports() {
+interface FormData {
+  airport_name: string;
+  airport_code: string;
+  location: string;
+}
 
+function Airports() {
    // receive data from get request
    useEffect(() => {
     Axios.get('http://flip3.engr.oregonstate.edu:55767/Airports').then((response) => {
       console.log({ data: response.data })
     });
   }, []);
+
+
+  // set up data for post request
+  const [formData, setFormData] = useState<FormData>({
+    airport_name: "",
+    airport_code: "",
+    location: "",
+  });
+
+  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setFormData((prevData: FormData) => ({ ...prevData, [name]: value }));
+  };
+
+  // Insert new Airport
+  const handleAddAirport = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    try {
+      const response = await Axios.post('http://flip3.engr.oregonstate.edu:55767/Airports', formData);
+      console.log({ data: response.data });
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  // Update Airport
+
+  // Delete Airport
 
   return (
     <div>
@@ -71,21 +104,21 @@ function Airports() {
       </div>
 
       <div id="insert">
-        <form id="addAirport" method="post">
+      <form id="addAirport" onSubmit={handleAddAirport} method="post">
           <legend>
             <strong>Add Airport</strong>
           </legend>
-          <fieldset className="fields">
-            <label>Airport Name</label> <input type="text" name="airport_name" className="long-text-input" />
-            <label>Airport Code</label> <input type="text" name="airport_code" className="short-text-input"/>
-            <label>Location</label> <input type="text" name="location" />
-          </fieldset>
-          <div className="buttons-container">
-            <input className="btn" type="submit" value="Add Airport" />
-            <input className="btn" type="button" value="Cancel" />
-          </div>
-        </form>
-      </div>
+        <fieldset className="fields">
+          <label>Airport Name</label> <input type="text" name="airport_name" value={formData.airport_name} onChange={handleInputChange} className="long-text-input" />
+          <label>Airport Code</label> <input type="text" name="airport_code" value={formData.airport_code} onChange={handleInputChange} className="short-text-input"/>
+          <label>Location</label> <input type="text" name="location" value={formData.location} onChange={handleInputChange} />
+        </fieldset>
+        <div className="buttons-container">
+          <input className="btn" type="submit" value="Add Airport" />
+          <input className="btn" type="button" value="Cancel" />
+        </div>
+      </form>
+    </div>
 
       <div id="update">
         <form id="updateAirport" method="post">
