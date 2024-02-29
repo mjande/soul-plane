@@ -33,7 +33,7 @@ app.use(cors(options))
 import db from "./database/db-connector"
 
 /* ROUTES */
-app.get("/", async (req: Request, res: Response) => {
+app.get("/Airports", async (req: Request, res: Response) => {
   // Define queries
   const query = 'SELECT * FROM Airports;';
 
@@ -47,6 +47,7 @@ app.get("/", async (req: Request, res: Response) => {
 app.get("/test", (req: Request, res: Response) => {
   res.send("Does this work?")
 })
+
 
 /* LISTENER */
 app.listen(port, () => {

@@ -5,7 +5,7 @@ function Airports() {
 
    // receive data from get request
    useEffect(() => {
-    Axios.get('http://flip3.engr.oregonstate.edu:55767/').then((response) => {
+    Axios.get('http://flip3.engr.oregonstate.edu:55767/Airports').then((response) => {
       console.log({ data: response.data })
     });
   }, []);
