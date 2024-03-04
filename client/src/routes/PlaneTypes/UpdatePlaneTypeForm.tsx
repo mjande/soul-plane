@@ -46,7 +46,7 @@ export default function UpdatePlaneTypeForm() {
         event.preventDefault()
 
         try {
-            const response = await Axios.put(`http://localhost:55767/plane-types/${id}`, formData)
+            const response = await Axios.put(`http://${import.meta.env.VITE_HOST_NAME}:55767/plane-types/${id}`, formData)
             console.log(response)
             navigate("/PlaneTypes")
         } catch(error) {

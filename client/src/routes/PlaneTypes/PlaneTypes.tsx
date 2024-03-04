@@ -13,7 +13,7 @@ function PlaneTypes() {
   
   // receive data from get request
     useEffect(() => {
-      Axios.get(`http://localhost:55767/plane-types`).then((response) => {
+      Axios.get(`http://${import.meta.env.VITE_HOST_NAME}:55767/plane-types`).then((response) => {
         setPlaneTypes(response.data)
       });
   }, []);
