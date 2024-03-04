@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import Axios from 'axios';
 
 interface PlaneType {
@@ -28,8 +29,7 @@ function PlaneTypes() {
         <table>
           <thead>
             <tr>
-              <th><a href="/PlaneTypes/new">New</a></th>
-              <th></th>
+              <th colSpan={2}>Actions</th>
               <th>Plane Type ID</th>
               <th>Type Name</th>
               <th>Capacity</th>
@@ -40,10 +40,10 @@ function PlaneTypes() {
             {planeTypes.map((planeType) => (
               <tr>
                 <td>
-                  <a href={`/PlaneTypes/update/${planeType.plane_type_id}`}>Edit</a>
+                  <Link to={`/PlaneTypes/update/${planeType.plane_type_id}`}>Edit</Link>
                 </td>
                 <td>
-                  <a href={`/PlaneTypes/delete/${planeType.plane_type_id}`}>Delete</a>
+                  <Link to={`/PlaneTypes/delete/${planeType.plane_type_id}`}>Delete</Link>
                 </td>
                 <td>{planeType.plane_type_id}</td>
                 <td>{planeType.type_name}</td>
@@ -53,6 +53,7 @@ function PlaneTypes() {
             ))}
           </tbody>
         </table>
+        <Link to="/PlaneTypes/new">Add Plane Type</Link>
         <p>&nbsp;</p>
       </div>
     </div>
