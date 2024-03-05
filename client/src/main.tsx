@@ -8,12 +8,13 @@ import ErrorPage from './static/ErrorPage.tsx';
 import Airports from './routes/Airports.tsx';
 import Flights from './routes/Flights.tsx';
 import PassengerFlights from './routes/PassengerFlights.tsx';
-import Passengers from './routes/Passengers.tsx';
+import Passengers from './routes/Passengers/Passengers.tsx';
 import Planes from './routes/Planes.tsx';
 import PlaneTypes from './routes/PlaneTypes/PlaneTypes.tsx';
 import NewPlaneTypeForm from './routes/PlaneTypes/NewPlaneTypeForm.tsx'
 import UpdatePlaneTypeForm from './routes/PlaneTypes/UpdatePlaneTypeForm.tsx';
 import DeletePlaneTypeForm from './routes/PlaneTypes/DeletePlaneTypeForm.tsx';
+import NewPassengersForm from './routes/Passengers/NewPassengersForm.tsx';
 
 const router = createBrowserRouter([
   {
@@ -41,6 +42,10 @@ const router = createBrowserRouter([
       {
         path: "/Passengers",
         element: <Passengers />,
+      },
+      {
+        path: "/Passengers/new",
+        element: <NewPassengersForm />,
       },
       {
         path: "/Planes",

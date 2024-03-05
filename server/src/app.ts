@@ -204,6 +204,67 @@ app.put("/plane-types/:id", async (req: Request, res: Response) => {
   }
 })
 
+app.get("/passengers", async (req: Request, res: Response) => {
+  try {
+    const selectQuery = 'SELECT * FROM Passengers'
+
+    const [results] = await db.pool.query(selectQuery)
+
+    res.json(results)
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ success: false, message: 'Internal Server Error' });
+  }
+})
+
+app.post("/passengers/", async (req: Request, res: Response) => {
+  try {
+    const data = req.body;
+    const first_name = data.first_name;
+    const last_name = data.last_name;
+    const phone = data.phone;
+    const email = data.email;
+    const address = data.address;
+    const city = data.city;
+    const state_abbr = data.state_abbr;
+    const zip_code = data.zip_code;
+    const passport_number = data.passport_number;
+
+    const insertQuery = `
+    INSERT INTO Passengers (
+      first_name, 
+      last_name, 
+      phone, 
+      email, 
+      address, 
+      city, 
+      state_abbr, 
+      zip_code, 
+      passport_number
+    ) VALUES ("${first_name}", "${last_name}", "${phone}", "${email}","${address}", "${city}","${state_abbr}","${zip_code}","${passport_number}");
+  `;
+
+  db.pool.query(
+    insertQuery,
+    [
+      first_name,
+      last_name,
+      phone,
+      email,
+      address,
+      city,
+      state_abbr,
+      zip_code,
+      passport_number,
+    ])
+
+    res.json({ success: true, message: 'Passengers added successfully', data });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ success: false, message: 'Internal Server Error' });
+  }
+})
+
 /* LISTENER */
 app.listen(port, () => {
   console.log(
