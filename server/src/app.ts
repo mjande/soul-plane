@@ -121,12 +121,92 @@ app.delete('/Airports/:airportId', async (req, res) => {
   }
 });
 
+app.get("/plane-types", async (req: Request, res: Response) => {
+  try {
+    const selectQuery = 'SELECT * FROM Plane_types'
+
+    const [results] = await db.pool.query(selectQuery)
+
+    res.json(results)
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ success: false, message: 'Internal Server Error' });
+  }
+})
+
+app.get("/plane-types/:id", async (req: Request, res: Response) => {
+  try {
+    const selectQuery = `SELECT * FROM Plane_types WHERE plane_type_id = ${req.params.id}`
+
+    const [results] = await db.pool.query(selectQuery)
+
+    res.json(results)
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ success: false, message: 'Internal Server Error' });
+  }
+})
+
+app.post("/plane-types/", async (req: Request, res: Response) => {
+  try {
+    const data = req.body
+    const typeName = data.type_name
+    const capacity = parseInt(data.capacity)
+    const rangeInHours = parseInt(data.range_in_hrs)
+
+    const insertQuery = `INSERT INTO Plane_types (type_name, capacity, range_in_hrs)
+    VALUES ("${typeName}", ${capacity}, ${rangeInHours});`
+
+    db.pool.query(insertQuery)
+
+    res.json({ success: true, message: 'Plane Type added successfully', data });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ success: false, message: 'Internal Server Error' });
+  }
+})
+
+app.delete("/plane-types/:id", async (req: Request, res: Response) => {
+  try {
+    const planeTypeID = parseInt(req.params.id)
+    const deleteQuery = `DELETE FROM Plane_types WHERE plane_type_id = ${planeTypeID}`
+
+    db.pool.query(deleteQuery)
+
+    res.json({ success: true, message: 'Plane Type deleted successfully' });
+  } catch(error) {
+    console.error(error);
+    res.status(500).json({ success: false, message: 'Internal Server Error' });
+  }
+})
+
+app.put("/plane-types/:id", async (req: Request, res: Response) => {
+  try {
+    const planeTypeId = req.params.id
+    const data = req.body
+    
+    const typeName = data.type_name
+    const capacity = parseInt(data.capacity)
+    const rangeInHours = parseInt(data.range_in_hrs)
+    const updateQuery = `UPDATE Plane_types\
+      SET type_name = "${typeName}",\
+      capacity = ${capacity},\
+      range_in_hrs = ${rangeInHours}\
+      WHERE plane_type_id = ${planeTypeId}\
+    `
+
+    db.pool.query(updateQuery)
+
+    res.json({ success: true, message: 'Plane Type updated successfully', data });
+  } catch(error) {
+    console.error(error);
+    res.status(500).json({ success: false, message: 'Internal Server Error' });
+  }
+})
 
 /* LISTENER */
 app.listen(port, () => {
   console.log(
-    "Express started on http://localhost:" +
-      port +
-      "; press Ctrl-C to terminate."
+    `Express started on http://${process.env.DBHOST}:${port}; press Ctrl-C to terminate.`
   );
 });

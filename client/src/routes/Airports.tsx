@@ -21,11 +21,7 @@ function Airports() {
 
   // receive data from get request
   useEffect(() => {
-    // Comment this line out if running locally
-    Axios.get('http://flip3.engr.oregonstate.edu:55767/Airports').then((response) => {
-
-    // Uncomment this line if running locally
-    // Axios.get('http://localhost:55767/Airports').then((response) => {
+    Axios.get(`http://${import.meta.env.VITE_HOST_NAME}:55767/Airports`).then((response) => {
       setAirports(response.data);
     });
   }, [airports]);
@@ -63,11 +59,7 @@ function Airports() {
   const handleAddAirport = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try { 
-      // Comment this line out if running locally
-      const response = await Axios.post('http://flip3.engr.oregonstate.edu:55767/Airports', insertFormData);
-
-      // Uncomment this line if running locally
-      // const response = await Axios.post('http://localhost:55767/Airports', insertFormData);
+      const response = await Axios.post(`http://${import.meta.env.VITE_HOST_NAME}:55767/Airports`, insertFormData);
       console.log({ data: response.data });
     } catch (error) {
       console.error(error);
@@ -106,17 +98,10 @@ function Airports() {
         console.error("No airport selected for update.");
         return;
       }
-      // Comment this line out if running locally
-      const response = await Axios.put(`http://flip3.engr.oregonstate.edu:55767/Airports/${selectedAirportId}`, updateFormData);
-
-      // Uncomment this line if running locally
-      // const response = await Axios.put(`http://localhost:55767/Airports/${selectedAirportId}`, updateFormData);
+      const response = await Axios.put(`http://${import.meta.env.VITE_HOST_NAME}:55767/Airports/${selectedAirportId}`, updateFormData);
       console.log({ data: response.data });
-      // Comment this line out if running locally
-      const updatedAirports = await Axios.get('http://flip3.engr.oregonstate.edu:55767/Airports');
-
-      // Uncomment this line if running locally
-      // const updatedAirports = await Axios.get('http://localhost:55767/Airports');
+      
+      const updatedAirports = await Axios.get(`http://${import.meta.env.VITE_HOST_NAME}:55767/Airports`);
       setAirports(updatedAirports.data);
 
       setUpdateFormData({
@@ -138,19 +123,10 @@ function Airports() {
         console.error("No airport selected for deletion.");
         return;
       }
-      // Comment this line out if running locally
-      const response = await Axios.delete(`http://flip3.engr.oregonstate.edu:55767/Airports/${selectedAirportIdDelete}`);
-
-      // Uncomment this line if running locally
-      // const response = await Axios.delete(`http://localhost:55767/Airports/${selectedAirportIdDelete}`);
+      const response = await Axios.delete(`http://${import.meta.env.VITE_HOST_NAME}:55767/Airports/${selectedAirportIdDelete}`);
       console.log({ data: response.data });
 
-      // Update the list of airports after deletion
-      // Comment this line out if running locally
-      const updatedAirports = await Axios.get('http://flip3.engr.oregonstate.edu:55767/Airports');
-
-      // Uncomment this line if running locally
-      // const updatedAirports = await Axios.get('http://localhost:55767/Airports');
+      const updatedAirports = await Axios.get(`http://${import.meta.env.VITE_HOST_NAME}:55767/Airports`);
       setAirports(updatedAirports.data);
 
       setUpdateFormData({
@@ -166,19 +142,10 @@ function Airports() {
 
   const handleDeleteAirportById = async (airportId: number) => {
     try {
-      // Comment this line out if running locally
-      const response = await Axios.delete(`http://flip3.engr.oregonstate.edu:55767/Airports/${airportId}`);
-
-      // Uncomment this line if running locally
-      // const response = await Axios.delete(`http://localhost:55767/Airports/${airportId}`);
+      const response = await Axios.delete(`http://${import.meta.env.VITE_HOST_NAME}:55767/Airports/${airportId}`);
       console.log({ data: response.data });
 
-      // Update the list of airports after deletion
-      // Comment this line out if running locally
-      const updatedAirports = await Axios.get('http://flip3.engr.oregonstate.edu:55767/Airports');
-
-      // Uncomment this line if running locally
-      // const updatedAirports = await Axios.get('http://localhost:55767/Airports');
+      const updatedAirports = await Axios.get(`http://${import.meta.env.VITE_HOST_NAME}:55767/Airports`);
       setAirports(updatedAirports.data);
     } catch (error) {
       console.error(error);
