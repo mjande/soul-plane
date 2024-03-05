@@ -265,6 +265,56 @@ app.post("/passengers/", async (req: Request, res: Response) => {
   }
 })
 
+app.get("/passengers/:id", async (req: Request, res: Response) => {
+  try {
+    const selectQuery = `SELECT * FROM Passengers WHERE passenger_id = ${req.params.id}`
+
+    const [results] = await db.pool.query(selectQuery)
+
+    res.json(results)
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ success: false, message: 'Internal Server Error' });
+  }
+})
+
+app.put("/passengers/:id", async (req: Request, res: Response) => {
+  try {
+    const passenger_id = req.params.id
+    const data = req.body;
+    
+    const first_name = data.first_name;
+    const last_name = data.last_name;
+    const phone = data.phone;
+    const email = data.email;
+    const address = data.address;
+    const city = data.city;
+    const state_abbr = data.state_abbr;
+    const zip_code = data.zip_code;
+    const passport_number = data.passport_number;
+
+    const updateQuery = `UPDATE Passengers\
+    SET first_name = "${first_name}",\
+    last_name = "${last_name}",\
+    phone = "${phone}",\
+    email = "${email}",\
+    address = "${address}",\
+    city = "${city}",\
+    state_abbr = "${state_abbr}",\
+    zip_code = "${zip_code}",\
+    passport_number = "${passport_number}"\
+    WHERE passenger_id= ${passenger_id}
+  `  
+
+    db.pool.query(updateQuery)
+
+    res.json({ success: true, message: 'Plane Type updated successfully', data });
+  } catch(error) {
+    console.error(error);
+    res.status(500).json({ success: false, message: 'Internal Server Error' });
+  }
+})
+
 /* LISTENER */
 app.listen(port, () => {
   console.log(

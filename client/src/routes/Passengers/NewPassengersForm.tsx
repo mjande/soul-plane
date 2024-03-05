@@ -3,7 +3,6 @@ import Axios from "axios"
 import { useNavigate } from "react-router-dom"
 
 interface FormData {
-    passengerId: string,
     first_name: string,
     last_name: string,
     phone: string,
@@ -17,7 +16,6 @@ interface FormData {
 
 export default function NewPassengersForm() {
     const [formData, setFormData] = useState<FormData>({
-        passengerId: '',
         first_name: '',
         last_name: '',
         phone: '',
@@ -25,7 +23,7 @@ export default function NewPassengersForm() {
         address: '',
         city: '',
         state_abbr: '',
-        zip_code: 12345,
+        zip_code: 0,
         passport_number: '',
     })
     const navigate = useNavigate();
