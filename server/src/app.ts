@@ -258,7 +258,7 @@ app.post("/passengers/", async (req: Request, res: Response) => {
       passport_number,
     ])
 
-    res.json({ success: true, message: 'Passengers added successfully', data });
+    res.json({ success: true, message: 'Passenger added successfully', data });
   } catch (error) {
     console.error(error);
     res.status(500).json({ success: false, message: 'Internal Server Error' });
@@ -308,7 +308,21 @@ app.put("/passengers/:id", async (req: Request, res: Response) => {
 
     db.pool.query(updateQuery)
 
-    res.json({ success: true, message: 'Plane Type updated successfully', data });
+    res.json({ success: true, message: 'Passenger updated successfully', data });
+  } catch(error) {
+    console.error(error);
+    res.status(500).json({ success: false, message: 'Internal Server Error' });
+  }
+})
+
+app.delete("/passengers/:id", async (req: Request, res: Response) => {
+  try {
+    const passenger_id = parseInt(req.params.id)
+    const deleteQuery = `DELETE FROM Passengers WHERE passenger_id = ${passenger_id}`
+
+    db.pool.query(deleteQuery)
+
+    res.json({ success: true, message: 'Passenger deleted successfully' });
   } catch(error) {
     console.error(error);
     res.status(500).json({ success: false, message: 'Internal Server Error' });
