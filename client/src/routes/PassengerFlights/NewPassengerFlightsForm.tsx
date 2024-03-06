@@ -110,7 +110,7 @@ export default function NewPassengerFlights() {
             </select>
           </fieldset>
           <div className="buttons-container">
-            <input className="btn" type="submit" value="Add Passenger" />
+            <input className="btn" type="submit" value="Add Passengers Flight" />
             <input
               className="btn"
               type="button"
