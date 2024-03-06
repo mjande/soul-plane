@@ -350,6 +350,46 @@ app.get("/PassengerFlights", async (req: Request, res: Response) => {
   }
 });
 
+app.post("/PassengerFlights", async (req: Request, res: Response) => {
+  try {
+    const data = req.body;
+    const flight_id = data.flight_id;
+    const passenger_id = data.passenger_id;
+  
+    const insertQuery = `
+    INSERT INTO Passengers_flights (
+      flight_id, 
+      passenger_id
+    ) VALUES ("${flight_id}", "${passenger_id}");
+  `;
+
+  db.pool.query(
+    insertQuery,
+    [
+      flight_id,
+      passenger_id,
+    ])
+
+    res.json({ success: true, message: 'Passenger added successfully', data });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ success: false, message: 'Internal Server Error' });
+  }
+})
+
+app.get("/flights", async (req: Request, res: Response) => {
+  try {
+    const selectQuery = 'SELECT * FROM Flights'
+
+    const [results] = await db.pool.query(selectQuery)
+
+    res.json(results)
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ success: false, message: 'Internal Server Error' });
+  }
+})
+
 
 /* LISTENER */
 app.listen(port, () => {
