@@ -478,8 +478,50 @@ app.post("/flights", async (req: Request, res: Response) => {
 
     await db.pool.query(insertQuery)
 
-    res.json({ success: true, message: 'Plane added successfully', data });
+    res.json({ success: true, message: 'Flight added successfully', data });
   } catch (error) {
+    console.error(error);
+    res.status(500).json({ success: false, message: 'Internal Server Error' });
+  }
+})
+
+app.delete("/flights/:id", async (req: Request, res: Response) => {
+  try {
+    const id = parseInt(req.params.id)
+    const deleteQuery = `DELETE FROM Flights WHERE flight_id = ${id}`
+
+    await db.pool.query(deleteQuery)
+
+    res.json({ success: true, message: 'Flight deleted successfully' });
+  } catch(error) {
+    console.error(error);
+    res.status(500).json({ success: false, message: 'Internal Server Error' });
+  }
+})
+
+app.put("/flights/:id", async (req: Request, res: Response) => {
+  try {
+    const flightID = req.params.id
+    const data = req.body
+
+    const planeID = parseInt(data.plane_id)
+    const departAirportID = parseInt(data.depart_airport_id)
+    const arriveAirportID = parseInt(data.arrive_airport_id)
+    const departTime = data.depart_time
+    const arriveTime = data.arrive_time
+
+    const updateQuery = `UPDATE Flights\
+                          SET plane_id = ${planeID},\ 
+                          depart_airport_id = ${departAirportID},\ 
+                          arrive_airport_id = ${arriveAirportID},\ 
+                          depart_time = ${departTime},\
+                          arrive_time = ${arriveTime}\
+                         );`
+  
+    await db.pool.query(updateQuery)
+
+    res.json({ success: true, message: 'Flight updated successfully', data });
+  } catch(error) {
     console.error(error);
     res.status(500).json({ success: false, message: 'Internal Server Error' });
   }
