@@ -9,7 +9,7 @@ import Airports from './routes/Airports.tsx';
 import Flights from './routes/Flights.tsx';
 import PassengerFlights from './routes/PassengerFlights/PassengerFlights.tsx';
 import Passengers from './routes/Passengers/Passengers.tsx';
-import Planes from './routes/Planes.tsx';
+import Planes from './routes/Planes/Planes.tsx';
 import PlaneTypes from './routes/PlaneTypes/PlaneTypes.tsx';
 import NewPlaneTypeForm from './routes/PlaneTypes/NewPlaneTypeForm.tsx'
 import UpdatePlaneTypeForm from './routes/PlaneTypes/UpdatePlaneTypeForm.tsx';
