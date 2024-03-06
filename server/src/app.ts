@@ -197,7 +197,7 @@ app.put("/plane-types/:id", async (req: Request, res: Response) => {
       SET type_name = "${typeName}",\
       capacity = ${capacity},\
       range_in_hrs = ${rangeInHours}\
-      WHERE plane_type_id = ${planeTypeId}\
+      WHERE plane_type_id = ${planeTypeId};\
     `
 
     db.pool.query(updateQuery)
@@ -460,7 +460,7 @@ app.get("/planes", async (req: Request, res: Response) => {
                           Plane_types.type_name AS "Plane Type",\
                           Airports.airport_name AS "Current Airport" FROM Planes\
                           JOIN Plane_types ON Planes.plane_type_id = Plane_types.plane_type_id\
-                          JOIN Airports ON Planes.current_airport_id = Airports.airport_id;'
+                          LEFT JOIN Airports ON Planes.current_airport_id = Airports.airport_id;'
 
     const [results] = await db.pool.query(selectQuery)
 
@@ -477,7 +477,7 @@ app.get("/planes/:id", async (req: Request, res: Response) => {
                           Plane_types.type_name AS "Plane Type",\
                           Airports.airport_name AS "Current Airport" FROM Planes\
                           JOIN Plane_types ON Planes.plane_type_id = Plane_types.plane_type_id\
-                          JOIN Airports ON Planes.current_airport_id = Airports.airport_id\
+                          LEFT JOIN Airports ON Planes.current_airport_id = Airports.airport_id\
                           WHERE plane_id = ${req.params.id};`
 
     const [results] = await db.pool.query(selectQuery)
@@ -519,6 +519,33 @@ app.delete("/planes/:id", async (req: Request, res: Response) => {
     await db.pool.query(deleteQuery)
 
     res.json({ success: true, message: 'Plane deleted successfully' });
+  } catch(error) {
+    console.error(error);
+    res.status(500).json({ success: false, message: 'Internal Server Error' });
+  }
+})
+
+app.put("/planes/:id", async (req: Request, res: Response) => {
+  try {
+    const planeID = req.params.id
+    const data = req.body
+    
+    const planeTypeID = parseInt(data.planeTypeID)
+    let currentAirportID = data.currentAirportID
+
+    if (currentAirportID == undefined) {
+      currentAirportID = "NULL"
+    }
+
+    const updateQuery = `UPDATE Planes\
+      SET plane_type_id = ${planeTypeID},\
+      current_airport_id = ${currentAirportID}\
+      WHERE plane_id = ${planeID};\
+    `
+
+    await db.pool.query(updateQuery)
+
+    res.json({ success: true, message: 'Plane updated successfully', data });
   } catch(error) {
     console.error(error);
     res.status(500).json({ success: false, message: 'Internal Server Error' });

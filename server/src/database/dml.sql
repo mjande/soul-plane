@@ -110,12 +110,12 @@ DELETE FROM Passengers WHERE passenger_id = :passenger_id_selected_from_browse_p
 -- Get all planes
 SELECT plane_id, Plane_types.type_name AS "Plane Type", Airports.airport_name AS "Current Airport" FROM Planes
     JOIN Plane_types ON Planes.plane_type_id = Plane_types.plane_type_id
-    JOIN Airports ON Planes.current_airport_id = Airports.airport_id;
+    LEFT JOIN Airports ON Planes.current_airport_id = Airports.airport_id;
 
 -- Get a plane by ID
 SELECT plane_id, Plane_types.type_name AS "Plane Type", Airports.airport_name AS "Current Airport" FROM Planes
     JOIN Plane_types ON Planes.plane_type_id = Plane_types.plane_type_id
-    JOIN Airports ON Planes.current_airport_id = Airports.airport_id
+    LEFT JOIN Airports ON Planes.current_airport_id = Airports.airport_id
     WHERE plane_id = :plane_id_from_form;
 
 -- Create a new plane
