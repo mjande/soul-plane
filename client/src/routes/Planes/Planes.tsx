@@ -44,7 +44,7 @@ function Planes() {
             {planes.map((plane) => (
               <tr key={plane.plane_id}>
                 <td>
-                  <a href="#">Edit</a>
+                  <Link to={`/planes/update/${plane.plane_id}`}>Edit</Link>
                 </td>
                 <td>
                   <Link to={`/planes/delete/${plane.plane_id}`}>Delete</Link>
@@ -58,35 +58,6 @@ function Planes() {
         </table>
         <Link to="/planes/new">Add Plane Type</Link>
         <p>&nbsp;</p>
-      </div>
-
-      <div id="update">
-        <form id="updatePlane" method="post">
-          <legend>
-            <strong>Update Plane</strong>
-          </legend>
-          <fieldset className="fields">
-            <span>Plane ID: 1</span>
-            <label htmlFor="current_airport_id">Current Airport</label>
-            <select name="current_airport_id">
-              <option value="1">Portland International Airport</option>
-              <option value="2">Seattle-Tacoma International Airport</option>
-              <option value="3">Spokane International Airport</option>
-              <option value="4">Currently Unavailable</option>
-            </select>
-
-            <label htmlFor="plane_type_id">Plane Type</label>
-            <select name="plane_type_id">
-              <option value="1">Airbus A320-200</option>
-              <option value="2">Boeing B737-800</option>
-              <option value="3">Embraer 135</option>
-            </select>
-          </fieldset>
-          <div className="buttons-container">
-            <input className="btn" type="submit" value="Save Update Plane" />
-            <input className="btn" type="button" value="Cancel" />
-          </div>
-        </form>
       </div>
     </div>
   );

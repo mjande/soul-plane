@@ -474,7 +474,9 @@ app.get("/planes", async (req: Request, res: Response) => {
 app.get("/planes/:id", async (req: Request, res: Response) => {
   try {
     const selectQuery =  `SELECT plane_id,\
+                          Planes.plane_type_id AS plane_type_id,\
                           Plane_types.type_name AS plane_type,\
+                          Planes.current_airport_id AS current_airport_id,\
                           Airports.airport_name AS current_airport FROM Planes\
                           JOIN Plane_types ON Planes.plane_type_id = Plane_types.plane_type_id\
                           LEFT JOIN Airports ON Planes.current_airport_id = Airports.airport_id\
@@ -515,12 +517,8 @@ app.post("/planes/", async (req: Request, res: Response) => {
 
 app.delete("/planes/:id", async (req: Request, res: Response) => {
   try {
-    console.log("Working")
-    
     const planeID = parseInt(req.params.id)
     const deleteQuery = `DELETE FROM Planes WHERE plane_id = ${planeID}`
-
-    console.log(deleteQuery)
 
     await db.pool.query(deleteQuery)
 
@@ -537,9 +535,9 @@ app.put("/planes/:id", async (req: Request, res: Response) => {
     const data = req.body
     
     const planeTypeID = parseInt(data.plane_type_id)
-    let currentAirportID = data.current_airport_id
+    let currentAirportID: number | string = parseInt(data.current_airport_id)
 
-    if (currentAirportID == undefined) {
+    if (isNaN(currentAirportID)) {
       currentAirportID = "NULL"
     }
 
