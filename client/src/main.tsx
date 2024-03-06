@@ -6,7 +6,7 @@ import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import Home from './routes/Home.tsx';
 import ErrorPage from './static/ErrorPage.tsx';
 import Airports from './routes/Airports.tsx';
-import Flights from './routes/Flights.tsx';
+import Flights from './routes/Flights/Flights.tsx';
 import PassengerFlights from './routes/PassengerFlights/PassengerFlights.tsx';
 import Passengers from './routes/Passengers/Passengers.tsx';
 import Planes from './routes/Planes/Planes.tsx';
