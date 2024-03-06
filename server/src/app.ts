@@ -425,6 +425,7 @@ app.put("/passengerFlights/:fid/:pid", async (req: Request, res: Response) => {
   }
 });
 
+/* Flights */
 
 app.get("/flights", async (req: Request, res: Response) => {
   try {
@@ -446,6 +447,38 @@ app.get("/flights/:id", async (req: Request, res: Response) => {
     const [results] = await db.pool.query(selectQuery)
 
     res.json(results)
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ success: false, message: 'Internal Server Error' });
+  }
+})
+
+app.post("/flights", async (req: Request, res: Response) => {
+  try {
+    const data = req.body
+    const planeID = parseInt(data.plane_id)
+    const departAirportID = parseInt(data.depart_airport_id)
+    const arriveAirportID = parseInt(data.arrive_airport_id)
+    const departTime = data.depart_time
+    const arriveTime = data.arrive_time
+
+    const insertQuery = `INSERT INTO Flights (
+                          plane_id,\ 
+                          depart_airport_id,\ 
+                          arrive_airport_id,\ 
+                          depart_time,\ 
+                          arrive_time\
+                         ) VALUES (\
+                          ${planeID},\ 
+                          ${departAirportID},\ 
+                          ${arriveAirportID},\ 
+                          ${departTime},\
+                          ${arriveTime}\
+                         );`
+
+    await db.pool.query(insertQuery)
+
+    res.json({ success: true, message: 'Plane added successfully', data });
   } catch (error) {
     console.error(error);
     res.status(500).json({ success: false, message: 'Internal Server Error' });
@@ -491,7 +524,7 @@ app.get("/planes/:id", async (req: Request, res: Response) => {
   }
 })
 
-app.post("/planes/", async (req: Request, res: Response) => {
+app.post("/planes", async (req: Request, res: Response) => {
   try {
     const data = req.body
     const planeTypeID = parseInt(data.plane_type_id)
@@ -503,8 +536,6 @@ app.post("/planes/", async (req: Request, res: Response) => {
 
     const insertQuery = `INSERT INTO Planes (plane_type_id, current_airport_id)\
     VALUES (${planeTypeID}, ${currentAirportID});`
-
-    console.log(insertQuery)
 
     await db.pool.query(insertQuery)
 
