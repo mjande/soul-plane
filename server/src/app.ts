@@ -38,6 +38,9 @@ app.use(cors(options))
 import db from "./database/db-connector"
 
 /* ROUTES */
+
+/* Airports */
+
 // Get all airports
 app.get("/Airports", async (req: Request, res: Response) => {
   // Define queries
@@ -121,6 +124,8 @@ app.delete('/Airports/:airportId', async (req, res) => {
   }
 });
 
+/* Plane Types */
+
 app.get("/plane-types", async (req: Request, res: Response) => {
   try {
     const selectQuery = 'SELECT * FROM Plane_types'
@@ -203,6 +208,8 @@ app.put("/plane-types/:id", async (req: Request, res: Response) => {
     res.status(500).json({ success: false, message: 'Internal Server Error' });
   }
 })
+
+/* Passengers */
 
 app.get("/passengers", async (req: Request, res: Response) => {
   try {
@@ -329,6 +336,8 @@ app.delete("/passengers/:id", async (req: Request, res: Response) => {
   }
 })
 
+/* PassengerFlights */
+
 app.get("/PassengerFlights", async (req: Request, res: Response) => {
   try {
     const query = `
@@ -433,6 +442,43 @@ app.get("/flights", async (req: Request, res: Response) => {
 app.get("/flights/:id", async (req: Request, res: Response) => {
   try {
     const selectQuery = `SELECT * FROM Flights WHERE flight_id = ${req.params.id}`
+
+    const [results] = await db.pool.query(selectQuery)
+
+    res.json(results)
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ success: false, message: 'Internal Server Error' });
+  }
+})
+
+/* Planes */
+
+app.get("/planes", async (req: Request, res: Response) => {
+  try {
+    const selectQuery =  'SELECT plane_id, \
+                          Plane_types.type_name AS "Plane Type",\
+                          Airports.airport_name AS "Current Airport" FROM Planes\
+                          JOIN Plane_types ON Planes.plane_type_id = Plane_types.plane_type_id\
+                          JOIN Airports ON Planes.current_airport_id = Airports.airport_id;'
+
+    const [results] = await db.pool.query(selectQuery)
+
+    res.json(results)
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ success: false, message: 'Internal Server Error' });
+  }
+})
+
+app.get("/planes/:id", async (req: Request, res: Response) => {
+  try {
+    const selectQuery =  `SELECT plane_id,\
+                          Plane_types.type_name AS "Plane Type",\
+                          Airports.airport_name AS "Current Airport" FROM Planes\
+                          JOIN Plane_types ON Planes.plane_type_id = Plane_types.plane_type_id\
+                          JOIN Airports ON Planes.current_airport_id = Airports.airport_id\
+                          WHERE plane_id = ${req.params.id};`
 
     const [results] = await db.pool.query(selectQuery)
 

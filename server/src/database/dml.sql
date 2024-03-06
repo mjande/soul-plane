@@ -112,6 +112,12 @@ SELECT plane_id, Plane_types.type_name AS "Plane Type", Airports.airport_name AS
     JOIN Plane_types ON Planes.plane_type_id = Plane_types.plane_type_id
     JOIN Airports ON Planes.current_airport_id = Airports.airport_id;
 
+-- Get a plane by ID
+SELECT plane_id, Plane_types.type_name AS "Plane Type", Airports.airport_name AS "Current Airport" FROM Planes
+    JOIN Plane_types ON Planes.plane_type_id = Plane_types.plane_type_id
+    JOIN Airports ON Planes.current_airport_id = Airports.airport_id
+    WHERE plane_id = :plane_id_from_form;
+
 -- Create a new plane
 INSERT INTO Planes (plane_type_id, current_airport_id)
     VALUES (:plane_type_dropdown_input, :current_airport_dropdown_input);
