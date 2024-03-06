@@ -457,8 +457,8 @@ app.get("/flights/:id", async (req: Request, res: Response) => {
 app.get("/planes", async (req: Request, res: Response) => {
   try {
     const selectQuery =  'SELECT plane_id, \
-                          Plane_types.type_name AS "Plane Type",\
-                          Airports.airport_name AS "Current Airport" FROM Planes\
+                          Plane_types.type_name AS type_name,\
+                          Airports.airport_name AS current_airport FROM Planes\
                           JOIN Plane_types ON Planes.plane_type_id = Plane_types.plane_type_id\
                           LEFT JOIN Airports ON Planes.current_airport_id = Airports.airport_id;'
 
@@ -474,8 +474,8 @@ app.get("/planes", async (req: Request, res: Response) => {
 app.get("/planes/:id", async (req: Request, res: Response) => {
   try {
     const selectQuery =  `SELECT plane_id,\
-                          Plane_types.type_name AS "Plane Type",\
-                          Airports.airport_name AS "Current Airport" FROM Planes\
+                          Plane_types.type_name AS planeType,\
+                          Airports.airport_name AS currentAirport" FROM Planes\
                           JOIN Plane_types ON Planes.plane_type_id = Plane_types.plane_type_id\
                           LEFT JOIN Airports ON Planes.current_airport_id = Airports.airport_id\
                           WHERE plane_id = ${req.params.id};`
@@ -492,8 +492,8 @@ app.get("/planes/:id", async (req: Request, res: Response) => {
 app.post("/planes/", async (req: Request, res: Response) => {
   try {
     const data = req.body
-    const planeTypeID = parseInt(data.planeTypeID)
-    let currentAirportID: number | string = parseInt(data.currentAirportID)
+    const planeTypeID = parseInt(data.plane_type_id)
+    let currentAirportID: number | string = parseInt(data.current_airport_id)
 
     if (isNaN(currentAirportID)) {
       currentAirportID = "NULL"
@@ -530,8 +530,8 @@ app.put("/planes/:id", async (req: Request, res: Response) => {
     const planeID = req.params.id
     const data = req.body
     
-    const planeTypeID = parseInt(data.planeTypeID)
-    let currentAirportID = data.currentAirportID
+    const planeTypeID = parseInt(data.plane_type_id)
+    let currentAirportID = data.current_airport_id
 
     if (currentAirportID == undefined) {
       currentAirportID = "NULL"

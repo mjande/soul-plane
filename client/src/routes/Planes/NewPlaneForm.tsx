@@ -17,8 +17,8 @@ interface Airport {
 }
 
 interface FormData {
-    planeTypeID: number,
-    currentAirportID?: number
+    plane_type_id: number,
+    current_airport_id?: number
 }
 
 export default function NewPlaneForm() {
@@ -45,8 +45,8 @@ export default function NewPlaneForm() {
     
     // Establish initial dropdown values
     const [formData, setFormData] = useState<FormData>({
-        planeTypeID: 1,
-        currentAirportID: 1
+        plane_type_id: 1,
+        current_airport_id: 1
     })
 
     const navigate = useNavigate();

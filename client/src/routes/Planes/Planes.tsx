@@ -1,7 +1,31 @@
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom"
+import Axios from "axios"
 
+interface Plane {
+  plane_id: number,
+  type_name: string,
+  current_airport: string
+}
 
 function Planes() {
+  const [planes, setPlanes] = useState<Plane[]>([])
+
+  useEffect(() => {
+    async function getPlanes() {
+      const response = await Axios.get(`http://${import.meta.env.VITE_HOST_NAME}:55767/planes`)
+      const planesArray = response.data
+      planesArray.sort((a: Plane, b: Plane) => a.plane_id - b.plane_id)
+
+      setPlanes(response.data)
+    }
+
+    getPlanes()
+  }, [])
+  
+  
+  
+  
   return (
     <div>
       <h1>Planes</h1>
@@ -20,39 +44,19 @@ function Planes() {
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>
-                <a href="#">Edit</a>
-              </td>
-              <td>
-                <a href="#">Delete</a>
-              </td>
-              <td>1</td>
-              <td>Spokane International Airport</td>
-              <td>Airbus A320-200</td>
-            </tr>
-            <tr>
-              <td>
-                <a href="#">Edit</a>
-              </td>
-              <td>
-                <a href="#">Delete</a>
-              </td>
-              <td>2</td>
-              <td>Seattle-Tacoma International Airport</td>
-              <td>Boeing B737-800</td>
-            </tr>
-            <tr>
-              <td>
-                <a href="#">Edit</a>
-              </td>
-              <td>
-                <a href="#">Delete</a>
-              </td>
-              <td>3</td>
-              <td>Portland International Airport</td>
-              <td>Embraer 135</td>
-            </tr>
+            {planes.map((plane) => (
+              <tr key={plane.plane_id}>
+                <td>
+                  <a href="#">Edit</a>
+                </td>
+                <td>
+                  <a href="#">Delete</a>
+                </td>
+                <td>{plane.plane_id}</td>
+                <td>{plane.type_name}</td>
+                <td>{plane.current_airport ? plane.current_airport : "NULL"}</td>
+              </tr>
+            ))}
           </tbody>
         </table>
         <Link to="/planes/new">Add Plane Type</Link>
