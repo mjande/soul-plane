@@ -162,7 +162,7 @@ app.post("/plane-types/", async (req: Request, res: Response) => {
     const insertQuery = `INSERT INTO Plane_types (type_name, capacity, range_in_hrs)
     VALUES ("${typeName}", ${capacity}, ${rangeInHours});`
 
-    db.pool.query(insertQuery)
+    await db.pool.query(insertQuery)
 
     res.json({ success: true, message: 'Plane Type added successfully', data });
   } catch (error) {
@@ -176,7 +176,7 @@ app.delete("/plane-types/:id", async (req: Request, res: Response) => {
     const planeTypeID = parseInt(req.params.id)
     const deleteQuery = `DELETE FROM Plane_types WHERE plane_type_id = ${planeTypeID}`
 
-    db.pool.query(deleteQuery)
+    await db.pool.query(deleteQuery)
 
     res.json({ success: true, message: 'Plane Type deleted successfully' });
   } catch(error) {
@@ -488,6 +488,29 @@ app.get("/planes/:id", async (req: Request, res: Response) => {
     res.status(500).json({ success: false, message: 'Internal Server Error' });
   }
 })
+
+app.post("/planes/", async (req: Request, res: Response) => {
+  try {
+    const data = req.body
+    const planeTypeID = data.planeTypeID
+    let currentAirportID = data.currentAirportID
+
+    if (currentAirportID == undefined) {
+      currentAirportID = "NULL"
+    }
+
+    const insertQuery = `INSERT INTO Planes (plane_type_id, current_airport_id)
+    VALUES ("${planeTypeID}", ${currentAirportID});`
+
+    await db.pool.query(insertQuery)
+
+    res.json({ success: true, message: 'Plane added successfully', data });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ success: false, message: 'Internal Server Error' });
+  }
+})
+
 
 /* LISTENER */
 app.listen(port, () => {
