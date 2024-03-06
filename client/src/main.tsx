@@ -7,7 +7,7 @@ import Home from './routes/Home.tsx';
 import ErrorPage from './static/ErrorPage.tsx';
 import Airports from './routes/Airports.tsx';
 import Flights from './routes/Flights.tsx';
-import PassengerFlights from './routes/PassengerFlights.tsx';
+import PassengerFlights from './routes/PassengerFlights/PassengerFlights.tsx';
 import Passengers from './routes/Passengers/Passengers.tsx';
 import Planes from './routes/Planes.tsx';
 import PlaneTypes from './routes/PlaneTypes/PlaneTypes.tsx';

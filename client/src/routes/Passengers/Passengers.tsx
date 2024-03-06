@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Axios from 'axios';
 
-interface Passenger {
+export interface Passenger {
   passenger_id: string,
   first_name: string,
   last_name: string,
