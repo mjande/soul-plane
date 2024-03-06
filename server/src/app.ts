@@ -329,6 +329,28 @@ app.delete("/passengers/:id", async (req: Request, res: Response) => {
   }
 })
 
+app.get("/PassengerFlights", async (req: Request, res: Response) => {
+  try {
+    const query = `
+    SELECT Passengers.first_name, Passengers.last_name, DepartAirport.airport_name, ArriveAirport.airport_name, Flights.depart_time, Flights.arrive_time FROM Passengers_flights
+    JOIN Passengers ON Passengers_flights.passenger_id = Passengers.passenger_id
+    JOIN Flights ON Passengers_flights.flight_id = Flights.flight_id
+    JOIN Airports AS DepartAirport ON Flights.depart_airport_id = DepartAirport.airport_id
+    JOIN Airports AS ArriveAirport ON Flights.arrive_airport_id = ArriveAirport.airport_id;
+    `;
+
+    // Get results from the database
+    const [results] = await db.pool.query(query);
+
+    // Send JSON back to the client
+    res.send(JSON.stringify(results));
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ success: false, message: 'Internal Server Error' });
+  }
+});
+
+
 /* LISTENER */
 app.listen(port, () => {
   console.log(
