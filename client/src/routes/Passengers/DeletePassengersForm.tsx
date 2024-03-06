@@ -82,7 +82,7 @@ export default function DeletePassengersForm() {
             <span>Passport Number: {formData.passport_number}</span>
           </fieldset>
           <div className="buttons-container">
-            <input className="btn" type="submit" value="Delete Plane Type" />
+            <input className="btn" type="submit" value="Delete Passenger" />
             <input className="btn" type="button" value="Cancel" onClick={() => navigate(-1)}/>
           </div>
         </form>
