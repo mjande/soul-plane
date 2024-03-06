@@ -393,6 +393,30 @@ app.delete("/passengerFlights/:fid/:pid", async (req: Request, res: Response) =>
   }
 })
 
+app.put("/passengerFlights/:fid/:pid", async (req: Request, res: Response) => {
+  try {
+    const fid = req.params.fid;
+    const pid = req.params.pid;
+    const data = req.body;
+    const flight_id = data.flight_id
+    const passenger_id = data.passenger_id
+
+    let updateQuery = `
+      UPDATE Passengers_flights 
+      SET flight_id='${flight_id}', passenger_id='${passenger_id}' 
+      WHERE flight_id = '${fid}' AND passenger_id = '${pid}'
+    `;
+
+    db.pool.query(updateQuery)
+
+    res.json({ success: true, message: 'Passenger Flights updated successfully', data });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ success: false, message: 'Internal Server Error' });
+  }
+});
+
+
 app.get("/flights", async (req: Request, res: Response) => {
   try {
     const selectQuery = 'SELECT * FROM Flights'
