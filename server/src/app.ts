@@ -350,6 +350,98 @@ app.get("/PassengerFlights", async (req: Request, res: Response) => {
   }
 });
 
+app.post("/PassengerFlights", async (req: Request, res: Response) => {
+  try {
+    const data = req.body;
+    const flight_id = data.flight_id;
+    const passenger_id = data.passenger_id;
+  
+    const insertQuery = `
+    INSERT INTO Passengers_flights (
+      flight_id, 
+      passenger_id
+    ) VALUES ("${flight_id}", "${passenger_id}");
+  `;
+
+  db.pool.query(
+    insertQuery,
+    [
+      flight_id,
+      passenger_id,
+    ])
+
+    res.json({ success: true, message: 'Passenger added successfully', data });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ success: false, message: 'Internal Server Error' });
+  }
+})
+
+app.delete("/passengerFlights/:fid/:pid", async (req: Request, res: Response) => {
+  try {
+    const data = req.body;
+    const flight_id = data.flight_id;
+    const passenger_id = data.passenger_id;
+    const deleteQuery = `DELETE FROM Passengers_flights WHERE flight_id = ${flight_id} AND passenger_id = ${passenger_id}`
+
+    db.pool.query(deleteQuery)
+
+    res.json({ success: true, message: 'Plane Type deleted successfully' });
+  } catch(error) {
+    console.error(error);
+    res.status(500).json({ success: false, message: 'Internal Server Error' });
+  }
+})
+
+app.put("/passengerFlights/:fid/:pid", async (req: Request, res: Response) => {
+  try {
+    const fid = req.params.fid;
+    const pid = req.params.pid;
+    const data = req.body;
+    const flight_id = data.flight_id
+    const passenger_id = data.passenger_id
+
+    let updateQuery = `
+      UPDATE Passengers_flights 
+      SET flight_id='${flight_id}', passenger_id='${passenger_id}' 
+      WHERE flight_id = '${fid}' AND passenger_id = '${pid}'
+    `;
+
+    db.pool.query(updateQuery)
+
+    res.json({ success: true, message: 'Passenger Flights updated successfully', data });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ success: false, message: 'Internal Server Error' });
+  }
+});
+
+
+app.get("/flights", async (req: Request, res: Response) => {
+  try {
+    const selectQuery = 'SELECT * FROM Flights'
+
+    const [results] = await db.pool.query(selectQuery)
+
+    res.json(results)
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ success: false, message: 'Internal Server Error' });
+  }
+})
+
+app.get("/flights/:id", async (req: Request, res: Response) => {
+  try {
+    const selectQuery = `SELECT * FROM Flights WHERE flight_id = ${req.params.id}`
+
+    const [results] = await db.pool.query(selectQuery)
+
+    res.json(results)
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ success: false, message: 'Internal Server Error' });
+  }
+})
 
 /* LISTENER */
 app.listen(port, () => {
