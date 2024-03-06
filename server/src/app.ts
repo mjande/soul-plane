@@ -492,7 +492,7 @@ app.get("/planes/:id", async (req: Request, res: Response) => {
 app.post("/planes/", async (req: Request, res: Response) => {
   try {
     const data = req.body
-    const planeTypeID = data.planeTypeID
+    const planeTypeID = parseInt(data.planeTypeID)
     let currentAirportID = data.currentAirportID
 
     if (currentAirportID == undefined) {
@@ -506,6 +506,20 @@ app.post("/planes/", async (req: Request, res: Response) => {
 
     res.json({ success: true, message: 'Plane added successfully', data });
   } catch (error) {
+    console.error(error);
+    res.status(500).json({ success: false, message: 'Internal Server Error' });
+  }
+})
+
+app.delete("/planes/:id", async (req: Request, res: Response) => {
+  try {
+    const planeID = parseInt(req.params.id)
+    const deleteQuery = `DELETE FROM Planes WHERE plane_id = ${planeID}`
+
+    await db.pool.query(deleteQuery)
+
+    res.json({ success: true, message: 'Plane deleted successfully' });
+  } catch(error) {
     console.error(error);
     res.status(500).json({ success: false, message: 'Internal Server Error' });
   }
