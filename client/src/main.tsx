@@ -9,7 +9,7 @@ import Airports from './routes/Airports.tsx';
 import Flights from './routes/Flights.tsx';
 import PassengerFlights from './routes/PassengerFlights/PassengerFlights.tsx';
 import Passengers from './routes/Passengers/Passengers.tsx';
-import Planes from './routes/Planes.tsx';
+import Planes from './routes/Planes/Planes.tsx';
 import PlaneTypes from './routes/PlaneTypes/PlaneTypes.tsx';
 import NewPlaneTypeForm from './routes/PlaneTypes/NewPlaneTypeForm.tsx'
 import UpdatePlaneTypeForm from './routes/PlaneTypes/UpdatePlaneTypeForm.tsx';
@@ -20,6 +20,9 @@ import DeletePassengersForm from './routes/Passengers/DeletePassengersForm.tsx';
 import NewPassengerFlights from './routes/PassengerFlights/NewPassengerFlightsForm.tsx';
 import DeletePassengerFlightsForm from './routes/PassengerFlights/DeletePassengerFlightsForm.tsx';
 import UpdatePassengerFlightsForm from './routes/PassengerFlights/UpdatePassengerFlightsForm.tsx';
+import NewPlaneForm from './routes/Planes/NewPlaneForm.tsx';
+import DeletePlaneForm from './routes/Planes/DeletePlaneForm.tsx';
+import UpdatePlaneForm from './routes/Planes/UpdatePlaneForm.tsx';
 
 const router = createBrowserRouter([
   {
@@ -75,6 +78,18 @@ const router = createBrowserRouter([
       {
         path: "/Planes",
         element: <Planes />,
+      },
+      {
+        path: "/Planes/new",
+        element: <NewPlaneForm />
+      },
+      {
+        path: "/Planes/update/:id",
+        element: <UpdatePlaneForm />
+      },
+      {
+        path: "/Planes/delete/:id",
+        element: <DeletePlaneForm />
       },
       {
         path: "/PlaneTypes",
