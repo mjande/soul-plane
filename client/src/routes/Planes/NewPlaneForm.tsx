@@ -82,13 +82,13 @@ export default function NewPlaneForm() {
                 </legend>
                 <fieldset className="fields">
                     <label>Plane Type</label>
-                    <select name="planeTypeID" onChange={handleInputChange}>
+                    <select name="plane_type_id" onChange={handleInputChange}>
                     {planeTypes.map((planeType) => (
                         <option value={planeType.plane_type_id} key={planeType.plane_type_id}>{planeType.type_name}</option> 
                     ))}
                     </select>
                     <label>Current Airport</label>
-                    <select name="currentAirportID" onChange={handleInputChange} >
+                    <select name="current_airport_id" onChange={handleInputChange} >
                     {airports.map((airport) => (
                         <option value={airport.airport_id} key={airport.airport_id}>{airport.airport_name}</option> 
                     ))}

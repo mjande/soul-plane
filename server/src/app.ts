@@ -502,6 +502,8 @@ app.post("/planes/", async (req: Request, res: Response) => {
     const insertQuery = `INSERT INTO Planes (plane_type_id, current_airport_id)\
     VALUES (${planeTypeID}, ${currentAirportID});`
 
+    console.log(insertQuery)
+
     await db.pool.query(insertQuery)
 
     res.json({ success: true, message: 'Plane added successfully', data });
