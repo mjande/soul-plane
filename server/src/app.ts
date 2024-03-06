@@ -377,6 +377,22 @@ app.post("/PassengerFlights", async (req: Request, res: Response) => {
   }
 })
 
+app.delete("/passengerFlights/:fid/:pid", async (req: Request, res: Response) => {
+  try {
+    const data = req.body;
+    const flight_id = data.flight_id;
+    const passenger_id = data.passenger_id;
+    const deleteQuery = `DELETE FROM Passengers_flights WHERE flight_id = ${flight_id} AND passenger_id = ${passenger_id}`
+
+    db.pool.query(deleteQuery)
+
+    res.json({ success: true, message: 'Plane Type deleted successfully' });
+  } catch(error) {
+    console.error(error);
+    res.status(500).json({ success: false, message: 'Internal Server Error' });
+  }
+})
+
 app.get("/flights", async (req: Request, res: Response) => {
   try {
     const selectQuery = 'SELECT * FROM Flights'
@@ -390,6 +406,18 @@ app.get("/flights", async (req: Request, res: Response) => {
   }
 })
 
+app.get("/flights/:id", async (req: Request, res: Response) => {
+  try {
+    const selectQuery = `SELECT * FROM Flights WHERE flight_id = ${req.params.id}`
+
+    const [results] = await db.pool.query(selectQuery)
+
+    res.json(results)
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ success: false, message: 'Internal Server Error' });
+  }
+})
 
 /* LISTENER */
 app.listen(port, () => {

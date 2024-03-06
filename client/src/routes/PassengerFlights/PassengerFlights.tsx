@@ -4,7 +4,7 @@ import Axios from 'axios';
 import { Passenger } from "../Passengers/Passengers";
 import { Airport } from "../Airports";
 
-interface PassengerFlights {
+export interface PassengerFlights {
   flight_id: string;
   passenger_id: string;
 }
@@ -74,10 +74,10 @@ function PassengerFlights() {
             {passengerFlights.map((passengerFlight, index) => (
               <tr key={index}>
                 <td>
-                  <Link to={`/passengerFlights/update/${passengerFlight.flight_id}`}>Edit</Link>
+                  <Link to={`/PassengerFlights/update/${passengerFlight.flight_id}/${passengerFlight.passenger_id}`}>Edit</Link>
                 </td>
                 <td>
-                  <Link to={`/passengerFlights/delete/${passengerFlight.passenger_id}`}>Delete</Link>
+                  <Link to={`/PassengerFlights/delete/${passengerFlight.flight_id}/${passengerFlight.passenger_id}`}>Delete</Link>
                 </td>
                 <td>{passengerFlight.flight_id}</td>
                 <td>{passengerFlight.passenger_id}</td>
