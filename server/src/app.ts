@@ -457,7 +457,7 @@ app.get("/flights/:id", async (req: Request, res: Response) => {
 app.get("/planes", async (req: Request, res: Response) => {
   try {
     const selectQuery =  'SELECT plane_id, \
-                          Plane_types.type_name AS type_name,\
+                          Plane_types.type_name AS plane_type,\
                           Airports.airport_name AS current_airport FROM Planes\
                           JOIN Plane_types ON Planes.plane_type_id = Plane_types.plane_type_id\
                           LEFT JOIN Airports ON Planes.current_airport_id = Airports.airport_id;'
@@ -474,8 +474,8 @@ app.get("/planes", async (req: Request, res: Response) => {
 app.get("/planes/:id", async (req: Request, res: Response) => {
   try {
     const selectQuery =  `SELECT plane_id,\
-                          Plane_types.type_name AS planeType,\
-                          Airports.airport_name AS currentAirport" FROM Planes\
+                          Plane_types.type_name AS plane_type,\
+                          Airports.airport_name AS current_airport FROM Planes\
                           JOIN Plane_types ON Planes.plane_type_id = Plane_types.plane_type_id\
                           LEFT JOIN Airports ON Planes.current_airport_id = Airports.airport_id\
                           WHERE plane_id = ${req.params.id};`
@@ -515,8 +515,12 @@ app.post("/planes/", async (req: Request, res: Response) => {
 
 app.delete("/planes/:id", async (req: Request, res: Response) => {
   try {
+    console.log("Working")
+    
     const planeID = parseInt(req.params.id)
     const deleteQuery = `DELETE FROM Planes WHERE plane_id = ${planeID}`
+
+    console.log(deleteQuery)
 
     await db.pool.query(deleteQuery)
 

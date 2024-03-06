@@ -4,7 +4,7 @@ import Axios from "axios"
 
 interface Plane {
   plane_id: number,
-  type_name: string,
+  plane_type: string,
   current_airport: string
 }
 
@@ -23,9 +23,6 @@ function Planes() {
     getPlanes()
   }, [])
   
-  
-  
-  
   return (
     <div>
       <h1>Planes</h1>
@@ -39,8 +36,8 @@ function Planes() {
               <th>New</th>
               <th></th>
               <th>Plane ID</th>
-              <th>Current Airport</th>
               <th>Plane Type</th>
+              <th>Current Airport</th>
             </tr>
           </thead>
           <tbody>
@@ -50,10 +47,10 @@ function Planes() {
                   <a href="#">Edit</a>
                 </td>
                 <td>
-                  <a href="#">Delete</a>
+                  <Link to={`/planes/delete/${plane.plane_id}`}>Delete</Link>
                 </td>
                 <td>{plane.plane_id}</td>
-                <td>{plane.type_name}</td>
+                <td>{plane.plane_type}</td>
                 <td>{plane.current_airport ? plane.current_airport : "NULL"}</td>
               </tr>
             ))}
@@ -87,24 +84,6 @@ function Planes() {
           </fieldset>
           <div className="buttons-container">
             <input className="btn" type="submit" value="Save Update Plane" />
-            <input className="btn" type="button" value="Cancel" />
-          </div>
-        </form>
-      </div>
-
-      <div id="delete">
-        <form id="deletePlane" method="post">
-          <legend>
-            <strong>Delete Plane</strong>
-          </legend>
-          <fieldset className="fields">
-            <p>Are you sure you wish to delete the following?</p>
-            <span>Plane ID: 1</span>
-            <span>Current Airport: Spokane International Airport</span>
-            <span>Plane Type: Airbus A320-200</span>
-          </fieldset>
-          <div className="buttons-container">
-            <input className="btn" type="submit" value="Delete Plane" />
             <input className="btn" type="button" value="Cancel" />
           </div>
         </form>

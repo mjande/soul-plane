@@ -38,7 +38,7 @@ function PlaneTypes() {
           </thead>
           <tbody>
             {planeTypes.map((planeType) => (
-              <tr>
+              <tr key={planeType.plane_type_id}>
                 <td>
                   <Link to={`/PlaneTypes/update/${planeType.plane_type_id}`}>Edit</Link>
                 </td>
