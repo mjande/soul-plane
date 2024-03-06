@@ -493,14 +493,14 @@ app.post("/planes/", async (req: Request, res: Response) => {
   try {
     const data = req.body
     const planeTypeID = parseInt(data.planeTypeID)
-    let currentAirportID = data.currentAirportID
+    let currentAirportID: number | string = parseInt(data.currentAirportID)
 
-    if (currentAirportID == undefined) {
+    if (isNaN(currentAirportID)) {
       currentAirportID = "NULL"
     }
 
-    const insertQuery = `INSERT INTO Planes (plane_type_id, current_airport_id)
-    VALUES ("${planeTypeID}", ${currentAirportID});`
+    const insertQuery = `INSERT INTO Planes (plane_type_id, current_airport_id)\
+    VALUES (${planeTypeID}, ${currentAirportID});`
 
     await db.pool.query(insertQuery)
 

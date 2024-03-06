@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom"
+
 
 function Planes() {
   return (
@@ -53,34 +55,8 @@ function Planes() {
             </tr>
           </tbody>
         </table>
+        <Link to="/planes/new">Add Plane Type</Link>
         <p>&nbsp;</p>
-      </div>
-
-      <div id="insert">
-        <form id="addPlane" method="post">
-          <legend>
-            <strong>Add Plane</strong>
-          </legend>
-          <fieldset className="fields">
-            <label>Current Airport</label>
-            <select name="current_airport_id">
-              <option value="1">Portland International Airport</option>
-              <option value="2">Seattle-Tacoma International Airport</option>
-              <option value="3">Spokane International Airport</option>
-              <option value="4">Currently Unavailable</option>
-            </select>
-            <label>Plane Type</label>
-            <select name="plane_type_id">
-              <option value="1">Airbus A320-200</option>
-              <option value="2">Boeing B737-800</option>
-              <option value="3">Embraer 135</option>
-            </select>
-          </fieldset>
-          <div className="buttons-container">
-            <input className="btn" type="submit" value="Add Plane" />
-            <input className="btn" type="button" value="Cancel" />
-          </div>
-        </form>
       </div>
 
       <div id="update">
