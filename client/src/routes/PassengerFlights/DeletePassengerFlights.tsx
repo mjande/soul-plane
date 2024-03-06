@@ -19,6 +19,10 @@ export default function DeletePassengerFlightsForm() {
   const [passenger, setPassenger] = useState<Passenger | null>(null);
   const [airports, setAirports] = useState<Airport[]>([]);
   const [flights, setFlights] = useState<Flights | null>(null);
+  const [formData] = useState({
+    flight_id: fid,
+    passenger_id: pid,
+  });
 
   useEffect(() => {
     async function getPassenger() {
@@ -70,7 +74,8 @@ export default function DeletePassengerFlightsForm() {
 
     try {
       const response = await Axios.delete(
-        `http://${import.meta.env.VITE_HOST_NAME}:55767/passengerFlights/${fid}/${pid}`
+        `http://${import.meta.env.VITE_HOST_NAME}:55767/passengerFlights/${fid}/${pid}`,
+        {data: formData}
       );
 
       console.log(response);
