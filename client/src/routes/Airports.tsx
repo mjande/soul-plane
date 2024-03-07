@@ -222,6 +222,7 @@ function Airports() {
                 </option>
               ))}
               </select>
+            <label>Airport Name</label> <input type="text" name="airport_name" value={updateFormData.airport_name} className="short-text-input" onChange={handleUpdateInputChange}/>
             <label>Airport Code</label> <input type="text" name="airport_code" value={updateFormData.airport_code} className="short-text-input" onChange={handleUpdateInputChange} maxLength={3}/>
             <label>Location</label> <input type="text" name="location" value={updateFormData.location} onChange={handleUpdateInputChange}/>
           </fieldset>
