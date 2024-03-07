@@ -1,5 +1,44 @@
+import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import Axios from "axios";
+
+interface Flight {
+  flight_id: number,
+  plane_id: number, 
+  plane_type: string,
+  depart_airport_id: number, 
+  depart_airport_name: string,
+  arrive_airport_id: number,
+  arrive_airport_name: string,
+  depart_time: Date,
+  arrive_time: Date
+}
+
+interface Plane {
+  plane_id: number,
+  plane_type: string,
+  current_airport: string
+}
 
 function Flights() {
+  const [flights, setFlights] = useState<Flight[]>([])
+  const [planes, setPlanes] = useState<Planes{}>({})
+
+  useEffect(() => {
+    async function getFlights() {
+      const response = await Axios.get(`http://${import.meta.env.VITE_HOST_NAME}:55767/flights`)
+      const flightsArray = response.data
+      flightsArray.sort((a: Flight, b: Flight) => a.flight_id - b.flight_id)
+
+      setFlights(flightsArray)
+    }
+
+    async function getPlanes() {
+      const response = await Axios.get(`http://${import.meta.env.VITE_HOST_NAME}:557676/planes`)
+    }
+  })
+
+
   return (
     <div>
       <h1>Flights</h1>

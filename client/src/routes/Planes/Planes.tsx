@@ -17,7 +17,7 @@ function Planes() {
       const planesArray = response.data
       planesArray.sort((a: Plane, b: Plane) => a.plane_id - b.plane_id)
 
-      setPlanes(response.data)
+      setPlanes(planesArray)
     }
 
     getPlanes()

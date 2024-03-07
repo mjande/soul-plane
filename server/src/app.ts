@@ -429,7 +429,7 @@ app.put("/passengerFlights/:fid/:pid", async (req: Request, res: Response) => {
 
 app.get("/flights", async (req: Request, res: Response) => {
   try {
-    const selectQuery = 'SELECT * FROM Flights'
+    const selectQuery = 'SELECT * FROM Flights';
 
     const [results] = await db.pool.query(selectQuery)
 
