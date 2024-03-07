@@ -32,12 +32,18 @@ SELECT Flights.flight_id, DepartAirport.airport_name AS "Departure Airport", Arr
 
 /* Flights */
 
--- Get all flights 
+-- Get all flights (temp query until we nail down what data we want from this query)
+SELECT * FROM Flights;
+
+-- Get all flights (temp query until we nail down what data we want from this query)
 SELECT flight_id, Flights.plane_id, Plane_types.type_name AS "Plane Type", DepartAirport.airport_name AS "Departure Airport", ArriveAirport.airport_name AS "Arrival Airport", depart_time, arrive_time FROM Flights
     JOIN Airports AS DepartAirport ON Flights.depart_airport_id = DepartAirport.airport_id
     JOIN Airports AS ArriveAirport ON Flights.arrive_airport_id = ArriveAirport.airport_id
     JOIN Planes ON Flights.plane_id = Planes.plane_id
     JOIN Plane_types ON Planes.plane_type_id = Plane_types.plane_type_id;
+
+-- Get flight by ID
+SELECT * FROM Flights WHERE flight_id = :id_from_url;
 
 -- Create a new flight 
 INSERT INTO Flights (plane_id, depart_airport_id, arrive_airport_id, depart_time, arrive_time)
@@ -66,7 +72,7 @@ DELETE FROM Flights WHERE flight_id = :flight_id_selected_from_browse_flights_pa
 SELECT * FROM Airports;
 
 -- Create a new airport
-INSERT (airport_name, airport_code, location) 
+INSERT INTO Airports (airport_name, airport_code, location) 
     VALUES (:airport_name_input, :airport_code_input, :location_input);
 
 -- Update an airport
@@ -84,6 +90,9 @@ DELETE FROM Airports WHERE airport_id = :airport_id_selected_from_browse_airport
 
 -- Get all passengers
 SELECT * FROM Passengers;
+
+-- Get passenger by ID
+SELECT * FROM Passengers WHERE passenger_id = :id_from_url;
 
 -- Create a passenger
 INSERT INTO Passengers (first_name, last_name, phone, email, address, city, state_abbr, zip_code, passport_number)
@@ -108,12 +117,15 @@ DELETE FROM Passengers WHERE passenger_id = :passenger_id_selected_from_browse_p
 /* Planes */
 
 -- Get all planes
-SELECT plane_id, Plane_types.type_name AS "Plane Type", Airports.airport_name AS "Current Airport" FROM Planes
+SELECT plane_id, Plane_types.type_name AS plane_type, 
+    Airports.airport_name AS current_airport 
+    FROM Planes
     JOIN Plane_types ON Planes.plane_type_id = Plane_types.plane_type_id
     LEFT JOIN Airports ON Planes.current_airport_id = Airports.airport_id;
 
 -- Get a plane by ID
-SELECT plane_id, Plane_types.type_name AS "Plane Type", Airports.airport_name AS "Current Airport" FROM Planes
+SELECT plane_id, Plane_types.type_name AS plane_type,
+    Airports.airport_name AS current_airport FROM Planes
     JOIN Plane_types ON Planes.plane_type_id = Plane_types.plane_type_id
     LEFT JOIN Airports ON Planes.current_airport_id = Airports.airport_id
     WHERE plane_id = :plane_id_from_form;
@@ -140,6 +152,9 @@ DELETE FROM Planes WHERE plane_id = :plane_id_selected_from_browse_planes_page
 
 -- Get all plane types
 SELECT * FROM Plane_types;
+
+-- Get plane type by ID
+SELECT * FROM Plane_types WHERE plane_type_id = :id_from_url;
 
 -- Create a new plane type
 INSERT INTO Plane_types (type_name, capacity, range_in_hrs)
@@ -178,19 +193,3 @@ UPDATE Passengers_flights
 DELETE FROM Passengers_flights 
     WHERE passenger_id = :passenger_id_selected_from_browse_passengers_flights_page
     AND flight_id = :flight_id_selected_from_browse_passengers_flights_page
-
--- Add airport attributes
-INSERT INTO Airports (airport_name, airport_code, location)
-    VALUES (:airport_name_input, :airport_code_input, :location_input);
-
--- Update/edit airport attributes
-UPDATE Airports
-    SET airport_name = :airport_name_input,
-    airport_code = :airport_code_input,
-    location = :location_input
-
--- Delete airport 
-DELETE FROM Airports 
-    WHERE airport_id = :selected_airport_id;
-
-

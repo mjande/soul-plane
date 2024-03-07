@@ -53,18 +53,6 @@ app.get("/Airports", async (req: Request, res: Response) => {
   res.send(JSON.stringify(results));
 });
 
-// Get passenger flights
-app.get("/PassengerFlights", async (req: Request, res: Response) => {
-  // Define queries
-  const query = 'SELECT * FROM Passengers_flights;';
-
-  // Get results from database
-  const [results] = await db.pool.query(query);
-
-  // Send JSON back to client
-  res.send(JSON.stringify(results));
-});
-
 // Create new airport
 app.post('/Airports', async (req, res) => {
   try {
@@ -310,7 +298,7 @@ app.put("/passengers/:id", async (req: Request, res: Response) => {
     state_abbr = "${state_abbr}",\
     zip_code = "${zip_code}",\
     passport_number = "${passport_number}"\
-    WHERE passenger_id= ${passenger_id}
+    WHERE passenger_id = ${passenger_id}
   `  
 
     db.pool.query(updateQuery)
@@ -412,7 +400,7 @@ app.put("/passengerFlights/:fid/:pid", async (req: Request, res: Response) => {
 
     let updateQuery = `
       UPDATE Passengers_flights 
-      SET flight_id='${flight_id}', passenger_id='${passenger_id}' 
+      SET flight_id='${flight_id}', passenger_id ='${passenger_id}' 
       WHERE flight_id = '${fid}' AND passenger_id = '${pid}'
     `;
 
