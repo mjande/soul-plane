@@ -31,7 +31,7 @@ export default function UpdatePassengersForm() {
 
     useEffect(() => {
         async function getPassengers() {
-            const response = await Axios.get(`http://localhost:55767/passengers/${id}`)
+            const response = await Axios.get(`http://${import.meta.env.VITE_HOST_NAME}:55767/passengers/${id}`)
             const data = response.data[0]
             setFormData({
                 first_name: data.first_name,

@@ -19,7 +19,7 @@ export default function UpdatePlaneTypeForm() {
 
     useEffect(() => {
         async function getPlaneType() {
-            const response = await Axios.get(`http://localhost:55767/plane-types/${id}`)
+            const response = await Axios.get(`http://${import.meta.env.VITE_HOST_NAME}:55767/plane-types/${id}`)
             const data = response.data[0]
 
             setFormData({
