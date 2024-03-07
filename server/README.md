@@ -29,4 +29,5 @@ npm install
 npm run dev
 ```
 
+A local version of the backend is now running at 'http://localhost:55767'.
 

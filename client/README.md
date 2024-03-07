@@ -10,7 +10,13 @@ For this step, we chose to implement CRUD actions for the Airports entity (which
 
 # Local Setup
 
-To run the front end locally, first copy the client folder to a local directory. Then, use the commands below to open the project, install the relevant dependencies, and start the front end.
+To run the front end locally, first copy the client folder to a local directory. Then, you will need to create a .env file in the client directory to host the front on your desired hostname. Your .env file should look something like this (use 'localhost' or '127.0.0.1' for running locally):
+
+```
+VITE_HOST_NAME = "localhost"
+```
+
+Then, use the commands below to open the project, install the relevant dependencies, and start the front end.
 
 ```
   cd client
@@ -18,6 +24,8 @@ To run the front end locally, first copy the client folder to a local directory.
   npm run dev
 ```
 
-Note: The CRUD actions for Airports will not work if you aren't also running the backend locally. See the set up notes written in server/README.md for more information. You will also need to make some changes to the Airports.tsx file to make local requests. See that file for more details.
+A local version of the front is now running at 'http://localhost:2275'.
+
+Note: The CRUD actions  will not work if you aren't also running the backend locally. See the set up notes written in server/README.md for more information. 
 
 
