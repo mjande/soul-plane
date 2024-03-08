@@ -6,23 +6,14 @@ interface Flight {
   flight_id: number,
   plane_id: number, 
   plane_type: string,
-  depart_airport_id: number, 
   depart_airport_name: string,
-  arrive_airport_id: number,
   arrive_airport_name: string,
-  depart_time: Date,
-  arrive_time: Date
-}
-
-interface Plane {
-  plane_id: number,
-  plane_type: string,
-  current_airport: string
+  depart_time: string,
+  arrive_time: string
 }
 
 function Flights() {
   const [flights, setFlights] = useState<Flight[]>([])
-  const [planes, setPlanes] = useState<Planes{}>({})
 
   useEffect(() => {
     async function getFlights() {
@@ -33,11 +24,8 @@ function Flights() {
       setFlights(flightsArray)
     }
 
-    async function getPlanes() {
-      const response = await Axios.get(`http://${import.meta.env.VITE_HOST_NAME}:557676/planes`)
-    }
-  })
-
+    getFlights()
+  }, [])
 
   return (
     <div>
@@ -55,54 +43,28 @@ function Flights() {
               <th>Flight ID</th>
               <th>Departure Airport</th>
               <th>Arrival Airport</th>
-              <th>Plane</th>
+              <th>Plane ID</th>
               <th>Departure Time</th>
               <th>Arrival Time</th>
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>
-                <a href="#">Edit</a>
-              </td>
-              <td>
-                <a href="#">Delete</a>
-              </td>
-              <td>1</td>
-              <td>Portland International Airport</td>
-              <td>Seattle-Tacoma International Airport</td>
-              <td>Plane #3 (Embraer 135)</td>
-              <td>February 5, 2024, at 14:30:00</td>
-              <td>February 11, 2024, at 02:15:00</td>
-            </tr>
-            <tr>
-              <td>
-                <a href="#">Edit</a>
-              </td>
-              <td>
-                <a href="#">Delete</a>
-              </td>
-              <td>2</td>
-              <td>Seattle-Tacoma International Airport</td>
-              <td>Spokane International Airport</td>
-              <td>Plane #2 (Boeing B737-800)</td>
-              <td>March 12, 2024, at 18:15:00</td>
-              <td>April 2, 2024, at 12:30:00</td>
-            </tr>
-            <tr>
-              <td>
-                <a href="#">Edit</a>
-              </td>
-              <td>
-                <a href="#">Delete</a>
-              </td>
-              <td>3</td>
-              <td>Spokane International Airport</td>
-              <td>Portland International Airport</td>
-              <td>Plane #1 (Airbus A320-200)</td>
-              <td>April 20, 2024, at 09:45:00</td>
-              <td>May 22, 2024, at 11:15:00</td>
-            </tr>
+            {flights.map(flight => (
+              <tr>
+                <td>
+                  <Link to={`/flights/update/${flight.flight_id}`}>Edit</Link>
+                </td>
+                <td>
+                  <Link to={`/flights/delete/${flight.flight_id}`}></Link>
+                </td>
+                <td>{flight.flight_id}</td>
+                <td>{flight.depart_airport_name}</td>
+                <td>{flight.arrive_airport_name}</td>
+                <td>{`${flight.plane_id} (${flight.plane_type})`}</td>
+                <td>{flight.depart_time}</td>
+                <td>{flight.arrive_time}</td>
+              </tr>
+            ))}
           </tbody>
         </table>
         <p>&nbsp;</p>

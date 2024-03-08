@@ -429,7 +429,19 @@ app.put("/passengerFlights/:fid/:pid", async (req: Request, res: Response) => {
 
 app.get("/flights", async (req: Request, res: Response) => {
   try {
-    const selectQuery = 'SELECT * FROM Flights';
+    const selectQuery =   'SELECT flight_id,\
+                          Flights.plane_id,\
+                          Plane_types.type_name AS plane_type,\
+                          depart_airport_id,\
+                          DepartAirport.airport_name AS depart_airport_name,\
+                          arrive_airport_id,\
+                          ArriveAirport.airport_name AS arrive_airport_name,\
+                          depart_time, arrive_time FROM Flights\
+                          JOIN Airports AS DepartAirport ON Flights.depart_airport_id = DepartAirport.airport_id\
+                          JOIN Airports AS ArriveAirport ON Flights.arrive_airport_id = ArriveAirport.airport_id\
+                          JOIN Planes ON Flights.plane_id = Planes.plane_id\
+                          JOIN Plane_types ON Planes.plane_type_id = Plane_types.plane_type_id;'
+                      
 
     const [results] = await db.pool.query(selectQuery)
 
