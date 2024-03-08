@@ -1,6 +1,6 @@
 import Axios from "axios";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
 
 interface Flight {
     flight_id: number,
@@ -14,6 +14,8 @@ interface Flight {
 
 export default function DeleteFlightForm() {
     const { id } = useParams();
+
+    const navigate = useNavigate()
 
     const [flight, setFlight] = useState<Flight>({
         flight_id: 0,
@@ -61,7 +63,7 @@ export default function DeleteFlightForm() {
             </fieldset>
             <div className="buttons-container">
                 <input className="btn" type="submit" value="Delete Flight" />
-                <input className="btn" type="button" value="Cancel" />
+                <input className="btn" type="button" value="Cancel" onClick={() => navigate(-1)}/>
             </div>
             </form>
         </div>    
