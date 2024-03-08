@@ -1,12 +1,12 @@
 import Axios from "axios";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom"
 
 interface Flight {
     flight_id: number,
     plane_id: number,
     plane_type: string,
-    depart_aiport_name: string,
+    depart_airport_name: string,
     arrive_airport_name: string,
     depart_time: Date,
     arrive_time: Date
@@ -16,6 +16,7 @@ export default function DeleteFlightForm() {
     const { id } = useParams();
 
     const [flight, setFlight] = useState<Flight>({
+        flight_id: 0,
         plane_id: 0,
         plane_type: '',
         depart_airport_name: '',
@@ -31,6 +32,7 @@ export default function DeleteFlightForm() {
 
             setFlight({
                 flight_id: data.flight_id,
+                plane_id: data.plane_id,
                 plane_type: data.plane_type,
                 depart_airport_name: data.depart_airport_name,
                 arrive_airport_name: data.arrive_airport_name,
@@ -50,12 +52,12 @@ export default function DeleteFlightForm() {
             </legend>
             <fieldset className="fields">
                 <span>Are you sure you wish to delete the following? </span>
-                <span>Flight ID: 1</span>
-                <span>Departure Airport: Portland International Airport</span>
-                <span>Arrival Airport: Seattle-Tacoma International Airport</span>
-                <span>Plane: Plane #3 (Embraer 135)</span>
-                <span>Depart Time: February 5, 2024, at 14:30:00 </span>
-                <span>Arrival Time: February 11, 2024, at 02:15:00</span>
+                <span>Flight ID: {flight.flight_id}</span>
+                <span>Departure Airport: {flight.depart_airport_name}</span>
+                <span>Arrival Airport: {flight.arrive_airport_name}</span>
+                <span>Plane ID: {flight.plane_id} ({flight.plane_type})</span>
+                <span>Depart Time: {new Date(flight.depart_time).toLocaleString()}</span>
+                <span>Arrival Time: {new Date(flight.arrive_time).toLocaleString()}</span>
             </fieldset>
             <div className="buttons-container">
                 <input className="btn" type="submit" value="Delete Flight" />
