@@ -327,6 +327,18 @@ app.delete("/passengers/:id", async (req: Request, res: Response) => {
 /* PassengerFlights */
 
 app.get("/PassengerFlights", async (req: Request, res: Response) => {
+  // Define queries
+  const query = 'SELECT * FROM Passengers_flights;';
+
+  // Get results from database
+  const [results] = await db.pool.query(query);
+
+  // Send JSON back to client
+  res.send(JSON.stringify(results));
+});
+
+// Not sure why this is here?
+app.get("/PassengerFlights", async (req: Request, res: Response) => {
   try {
     const query = `
     SELECT Passengers.first_name, Passengers.last_name, DepartAirport.airport_name, ArriveAirport.airport_name, Flights.depart_time, Flights.arrive_time FROM Passengers_flights
