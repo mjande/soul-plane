@@ -1,5 +1,5 @@
 import Axios from "axios";
-import { useEffect, useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom"
 
 interface Flight {
@@ -45,10 +45,22 @@ export default function DeleteFlightForm() {
 
         getFlight()
     }, [id])
+
+    async function handleSubmit(event: FormEvent<HTMLFormElement>) {
+        event.preventDefault()
+
+        try {
+          const response = await Axios.delete(`http://${import.meta.env.VITE_HOST_NAME}:55767/flights/${id}`)
+          console.log(response)
+          navigate("/flights")
+        } catch(error) {
+            console.log(error)
+        }
+    }
     
     return (
         <div id="delete">
-            <form id="deleteFlight" method="post">
+            <form id="deleteFlight" method="post" onSubmit={handleSubmit}>
             <legend>
                 <strong>Delete Flight</strong>
             </legend>
