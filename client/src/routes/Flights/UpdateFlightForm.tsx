@@ -119,7 +119,7 @@ export function UpdateFlightForm() {
           </fieldset>
           <div className="buttons-container">
             <input className="btn" type="submit" value="Save Update Flight" />
-            <input className="btn" type="button" value="Cancel" />
+            <input className="btn" type="button" value="Cancel" onClick={() => navigate(-1)}/>
           </div>
         </form>
       </div>    
