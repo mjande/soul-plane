@@ -8,8 +8,8 @@ interface Flight {
   plane_type: string,
   depart_airport_name: string,
   arrive_airport_name: string,
-  depart_time: string,
-  arrive_time: string
+  depart_time: Date,
+  arrive_time: Date
 }
 
 function Flights() {
@@ -61,47 +61,14 @@ function Flights() {
                 <td>{flight.depart_airport_name}</td>
                 <td>{flight.arrive_airport_name}</td>
                 <td>{`${flight.plane_id} (${flight.plane_type})`}</td>
-                <td>{flight.depart_time}</td>
-                <td>{flight.arrive_time}</td>
+                <td>{new Date(flight.depart_time).toLocaleString()}</td>
+                <td>{new Date(flight.arrive_time).toLocaleString()}</td>
               </tr>
             ))}
           </tbody>
         </table>
+        <Link to="/flights/new">Add Flight</Link>
         <p>&nbsp;</p>
-      </div>
-
-      <div id="insert">
-        <form id="addFlight" method="post">
-          <legend>
-            <strong>Add Flight</strong>
-          </legend>
-          <fieldset className="fields">
-            <label>Departure Airport</label>
-            <select name="depart_airport_id">
-              <option value="1">Portland International Airport</option>
-              <option value="2">Seattle-Tacoma International</option>
-              <option value="3">Spokane International Airport</option>
-            </select>
-            <label>Arrival Airport</label>
-            <select name="arrive_airport_id">
-              <option value="1">Portland International Airport</option>
-              <option value="2">Seattle-Tacoma International</option>
-              <option value="3">Spokane International Airport</option>
-            </select>
-            <label>Plane</label>
-            <select name="plane_id">
-              <option value="1">Plane #1 (Airbus A320-200)</option>
-              <option value="2">Plane #2 (Boeing B737-800)</option>
-              <option value="3">Plane #3 (Embraer 135)</option>
-            </select>
-            <label>Departure Time</label> <input type="datetime-local" name="depart_time" />
-            <label>Arrival Time</label> <input type="datetime-local" name="arrive_time" />
-          </fieldset>
-          <div className="buttons-container">
-            <input className="btn" type="submit" value="Add Flight" />
-            <input className="btn" type="button" value="Cancel" />
-          </div>
-        </form>
       </div>
 
       <div id="update">

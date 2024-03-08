@@ -23,6 +23,7 @@ import UpdatePassengerFlightsForm from './routes/PassengerFlights/UpdatePassenge
 import NewPlaneForm from './routes/Planes/NewPlaneForm.tsx';
 import DeletePlaneForm from './routes/Planes/DeletePlaneForm.tsx';
 import UpdatePlaneForm from './routes/Planes/UpdatePlaneForm.tsx';
+import NewFlightForm from './routes/Flights/NewFlightForm.tsx';
 
 const router = createBrowserRouter([
   {
@@ -42,6 +43,10 @@ const router = createBrowserRouter([
       {
         path: "/Flights",
         element: <Flights/>,
+      },
+      {
+        path: "/Flights/new",
+        element: <NewFlightForm />
       },
       {
         path: "/PassengerFlights",

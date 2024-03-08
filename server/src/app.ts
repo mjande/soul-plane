@@ -9,7 +9,7 @@
 /* SETUP */
 import 'dotenv/config'
 import express, { Express, Request, Response } from "express";
-
+import { convertToSQLDateTime } from './utils';
 
 const app: Express = express();
 const port = 55767;
@@ -471,22 +471,11 @@ app.post("/flights", async (req: Request, res: Response) => {
     const planeID = parseInt(data.plane_id)
     const departAirportID = parseInt(data.depart_airport_id)
     const arriveAirportID = parseInt(data.arrive_airport_id)
-    const departTime = data.depart_time
-    const arriveTime = data.arrive_time
+    const departTime = convertToSQLDateTime(data.depart_time)
+    const arriveTime = convertToSQLDateTime(data.arrive_time)
 
-    const insertQuery = `INSERT INTO Flights (
-                          plane_id,\ 
-                          depart_airport_id,\ 
-                          arrive_airport_id,\ 
-                          depart_time,\ 
-                          arrive_time\
-                         ) VALUES (\
-                          ${planeID},\ 
-                          ${departAirportID},\ 
-                          ${arriveAirportID},\ 
-                          ${departTime},\
-                          ${arriveTime}\
-                         );`
+    const insertQuery = `INSERT INTO Flights (plane_id, depart_airport_id, arrive_airport_id, depart_time, arrive_time)\
+                         VALUES (${planeID}, ${departAirportID}, ${arriveAirportID}, '${departTime}', '${arriveTime}');`
 
     await db.pool.query(insertQuery)
 
