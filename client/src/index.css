@@ -61,7 +61,6 @@ fieldset {
   flex-wrap: wrap;
   align-content: space-around;
   align-items: start;
-  max-height: 29vh;
 }
 
 .short-text-input {

@@ -33,17 +33,23 @@ SELECT Flights.flight_id, DepartAirport.airport_name AS "Departure Airport", Arr
 /* Flights */
 
 -- Get all flights (temp query until we nail down what data we want from this query)
-SELECT * FROM Flights;
-
--- Get all flights (temp query until we nail down what data we want from this query)
-SELECT flight_id, Flights.plane_id, Plane_types.type_name AS "Plane Type", DepartAirport.airport_name AS "Departure Airport", ArriveAirport.airport_name AS "Arrival Airport", depart_time, arrive_time FROM Flights
+SELECT flight_id, Flights.plane_id, Plane_types.type_name AS plane_type, depart_airport_id,
+    DepartAirport.airport_name AS depart_airport_name, arrive_airport_id, ArriveAirport.airport_name AS arrive_airport_name,
+    depart_time, arrive_time FROM Flights
     JOIN Airports AS DepartAirport ON Flights.depart_airport_id = DepartAirport.airport_id
     JOIN Airports AS ArriveAirport ON Flights.arrive_airport_id = ArriveAirport.airport_id
     JOIN Planes ON Flights.plane_id = Planes.plane_id
     JOIN Plane_types ON Planes.plane_type_id = Plane_types.plane_type_id;
 
 -- Get flight by ID
-SELECT * FROM Flights WHERE flight_id = :id_from_url;
+SELECT flight_id, Flights.plane_id, Plane_types.type_name AS plane_type, depart_airport_id,
+    DepartAirport.airport_name AS depart_airport_name, arrive_airport_id, ArriveAirport.airport_name AS arrive_airport_name,
+    depart_time, arrive_time FROM Flights
+    JOIN Airports AS DepartAirport ON Flights.depart_airport_id = DepartAirport.airport_id
+    JOIN Airports AS ArriveAirport ON Flights.arrive_airport_id = ArriveAirport.airport_id
+    JOIN Planes ON Flights.plane_id = Planes.plane_id
+    JOIN Plane_types ON Planes.plane_type_id = Plane_types.plane_type_id
+    WHERE Flights.flight_id = :id_from_url;
 
 -- Create a new flight 
 INSERT INTO Flights (plane_id, depart_airport_id, arrive_airport_id, depart_time, arrive_time)
