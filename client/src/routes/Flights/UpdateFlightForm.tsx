@@ -82,24 +82,24 @@ export function UpdateFlightForm() {
             <strong>Update Flight</strong>
           </legend>
           <fieldset className="fields">
-            <span>Flight ID: 1</span>
+            <span>Flight ID: {id}</span>
             <label>Departure Airport</label>
             <select name="depart_airport_id">
-              <option value="1">Portland International Airport</option>
-              <option value="2">Seattle-Tacoma International</option>
-              <option value="3">Spokane International Airport</option>
+              {airports.map(airport => (
+                <option key={airport.airport_id} value={airport.airport_id}>{airport.airport_name}</option>
+              ))}
             </select>
             <label>Arrival Airport</label>
             <select name="arrive_airport_id">
-              <option value="1">Portland International Airport</option>
-              <option value="2">Seattle-Tacoma International</option>
-              <option value="3">Spokane International Airport</option>
+              {airports.map(airport => (
+                <option key={airport.airport_id} value={airport.airport_id}>{airport.airport_name}</option>
+              ))}
             </select>
             <label>Plane</label>
             <select name="plane_id">
-              <option value="1">Plane #1 (Airbus A320-200)</option>
-              <option value="2">Plane #2 (Boeing B737-800)</option>
-              <option value="3">Plane #3 (Embraer 135)</option>
+              {planes.map(plane => (
+                <option key={plane.plane_id} value={plane.plane_id}>{plane.plane_id} ({plane.plane_type})</option>
+              ))}
             </select>
             <label>Departure Time</label> <input type="datetime-local" value="2024-02-05T14:30" name="depart_time" />
             <label>Arrival Time</label> <input type="datetime-local" value="2024-02-11T02:15" name="arrive_time" />
