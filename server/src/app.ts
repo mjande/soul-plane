@@ -515,16 +515,10 @@ app.put("/flights/:id", async (req: Request, res: Response) => {
     const planeID = parseInt(data.plane_id)
     const departAirportID = parseInt(data.depart_airport_id)
     const arriveAirportID = parseInt(data.arrive_airport_id)
-    const departTime = data.depart_time
-    const arriveTime = data.arrive_time
+    const departTime = convertToSQLDateTime(data.depart_time)
+    const arriveTime = convertToSQLDateTime(data.arrive_time)
 
-    const updateQuery = `UPDATE Flights\
-                          SET plane_id = ${planeID},\ 
-                          depart_airport_id = ${departAirportID},\ 
-                          arrive_airport_id = ${arriveAirportID},\ 
-                          depart_time = ${departTime},\
-                          arrive_time = ${arriveTime}\
-                         );`
+    const updateQuery = `UPDATE Flights SET plane_id = ${planeID}, depart_airport_id = ${departAirportID}, arrive_airport_id = ${arriveAirportID}, depart_time = '${departTime}', arrive_time = '${arriveTime}' WHERE flight_id = ${flightID};`
   
     await db.pool.query(updateQuery)
 
