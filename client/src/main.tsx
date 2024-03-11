@@ -5,7 +5,7 @@ import Root from "./routes/Root.tsx";
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import Home from './routes/Home.tsx';
 import ErrorPage from './static/ErrorPage.tsx';
-import Airports from './routes/Airports.tsx';
+import Airports from './routes/Airports/Airports.tsx';
 import Flights from './routes/Flights/Flights.tsx';
 import PassengerFlights from './routes/PassengerFlights/PassengerFlights.tsx';
 import Passengers from './routes/Passengers/Passengers.tsx';
@@ -26,6 +26,9 @@ import UpdatePlaneForm from './routes/Planes/UpdatePlaneForm.tsx';
 import NewFlightForm from './routes/Flights/NewFlightForm.tsx';
 import DeleteFlightForm from './routes/Flights/DeleteFlightForm.tsx';
 import { UpdateFlightForm } from './routes/Flights/UpdateFlightForm.tsx';
+import NewAirports from './routes/Airports/NewAirports.tsx';
+import { UpdateAirports } from './routes/Airports/UpdateAirports.tsx';
+import DeleteAirports from './routes/Airports/DeleteAirports.tsx';
 
 const router = createBrowserRouter([
   {
@@ -41,6 +44,18 @@ const router = createBrowserRouter([
       {
         path: "/airports",
         element: <Airports />,
+      },
+      {
+        path: "/Airports/new",
+        element: <NewAirports />
+      },
+      {
+        path: "/Airports/update/:id",
+        element: <UpdateAirports />
+      },
+      {
+        path: "Airports/delete/:id",
+        element: <DeleteAirports />
       },
       {
         path: "/Flights",

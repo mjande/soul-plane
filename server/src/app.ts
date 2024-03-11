@@ -53,6 +53,19 @@ app.get("/Airports", async (req: Request, res: Response) => {
   res.send(JSON.stringify(results));
 });
 
+app.get("/Airports/:id", async (req: Request, res: Response) => {
+  try {
+    const selectQuery = `SELECT * FROM Airports WHERE airport_id = ${req.params.id}`
+
+    const [results] = await db.pool.query(selectQuery)
+
+    res.json(results)
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ success: false, message: 'Internal Server Error' });
+  }
+})
+
 // Create new airport
 app.post('/Airports', async (req, res) => {
   try {
