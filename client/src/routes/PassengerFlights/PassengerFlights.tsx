@@ -4,11 +4,13 @@ import Axios from 'axios';
 import { Passenger } from "../Passengers/Passengers";
 import { Airport } from "../Airports";
 
+// Define PassengerFlights property
 export interface PassengerFlights {
   flight_id: string;
   passenger_id: string;
 }
 
+// Define Flights property
 interface Flights{
   flight_id: string;
   arrive_airport_id: string;
@@ -16,11 +18,14 @@ interface Flights{
 }
 
 function PassengerFlights() {
+  // Initialize passengerFlights, passengers, flights, and airports for client
   const [passengerFlights, setPassengerFlights] = useState<PassengerFlights[]>([]);
   const [passengers, setPassengers] = useState<Passenger[]>([]);
   const [flights, setFlights] = useState<Flights[]>([]);
   const [airports, setAirports] = useState<Airport[]>([]);
 
+
+  // Get request to grab passenger flights data
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -35,18 +40,21 @@ function PassengerFlights() {
     fetchData();
   }, []);
 
+  // Get request to grab passengers data 
   useEffect(() => {
     Axios.get(`http://${import.meta.env.VITE_HOST_NAME}:55767/passengers`).then((response) => {
       setPassengers(response.data);
     });
   }, []);
 
+  // Get request to grab flights data
   useEffect(() => {
     Axios.get(`http://${import.meta.env.VITE_HOST_NAME}:55767/flights`).then((response) => {
       setFlights(response.data);
     });
   }, []);
 
+  // Get request to grab airports data
   useEffect(() => {
     Axios.get(`http://${import.meta.env.VITE_HOST_NAME}:55767/airports`).then((response) => {
       setAirports(response.data);

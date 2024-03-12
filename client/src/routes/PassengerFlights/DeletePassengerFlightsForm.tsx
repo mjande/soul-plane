@@ -3,12 +3,15 @@ import Axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 import { Airport } from "../Airports";
 
+
+// Define flights properties
 interface Flights {
   flight_id: string;
   arrive_airport_id: string;
   depart_airport_id: string;
 }
 
+// Define Passenger Properties
 interface Passenger {
   first_name: string;
   last_name: string;
@@ -16,6 +19,8 @@ interface Passenger {
 
 export default function DeletePassengerFlightsForm() {
   const { fid, pid } = useParams<{ fid?: string; pid?: string }>();
+
+  // Initialize airport, passenger, and flights data for client
   const [passenger, setPassenger] = useState<Passenger | null>(null);
   const [airports, setAirports] = useState<Airport[]>([]);
   const [flights, setFlights] = useState<Flights | null>(null);
@@ -24,6 +29,7 @@ export default function DeletePassengerFlightsForm() {
     passenger_id: pid,
   });
 
+  // Grab current passenger based on passenger id
   useEffect(() => {
     async function getPassenger() {
       try {
@@ -42,6 +48,7 @@ export default function DeletePassengerFlightsForm() {
     getPassenger();
   }, [pid]);
 
+  // Grab flights based on current flight id
   useEffect(() => {
     async function getFlights() {
       try {
@@ -61,6 +68,7 @@ export default function DeletePassengerFlightsForm() {
     getFlights();
   }, [fid]);
 
+  // Get request for grabbing airport data
   useEffect(() => {
     Axios.get(`http://${import.meta.env.VITE_HOST_NAME}:55767/airports`).then((response) => {
       setAirports(response.data);
@@ -69,6 +77,7 @@ export default function DeletePassengerFlightsForm() {
 
   const navigate = useNavigate();
 
+  // Handle deleting passenger flights
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
