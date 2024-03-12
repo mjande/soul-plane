@@ -2,6 +2,8 @@ import { FormEvent, ChangeEvent, useState, useEffect } from "react"
 import Axios from "axios"
 import { useNavigate, useParams } from "react-router-dom"
 
+
+// Define passenger properties
 interface FormData {
     first_name: string,
     last_name: string,
@@ -16,7 +18,7 @@ interface FormData {
 
 export default function UpdatePassengersForm() {
     const { id } = useParams();
-
+    // Initialize passenger form data
     const [formData, setFormData] = useState<FormData>({
         first_name: '',
         last_name: '',
@@ -29,6 +31,7 @@ export default function UpdatePassengersForm() {
         passport_number: '',
     })
 
+    // Get request for current passenger
     useEffect(() => {
         async function getPassengers() {
             const response = await Axios.get(`http://${import.meta.env.VITE_HOST_NAME}:55767/passengers/${id}`)
@@ -50,6 +53,7 @@ export default function UpdatePassengersForm() {
 
     const navigate = useNavigate();
 
+    // Handle input change for passenger form
     async function handleInputChange(event: ChangeEvent<HTMLInputElement>) {
         const { name, value } = event.target
         setFormData((prevFormData) => ({
@@ -58,6 +62,7 @@ export default function UpdatePassengersForm() {
         }))
     }
     
+    // Handle updating current passenger using a put request
     async function handleSubmit(event: FormEvent<HTMLFormElement>) {
         event.preventDefault()
 

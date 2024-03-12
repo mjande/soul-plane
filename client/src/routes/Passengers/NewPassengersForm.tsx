@@ -2,6 +2,8 @@ import { FormEvent, ChangeEvent, useState } from "react"
 import Axios from "axios"
 import { useNavigate } from "react-router-dom"
 
+
+// Define Passengers property
 interface FormData {
     first_name: string,
     last_name: string,
@@ -15,6 +17,7 @@ interface FormData {
 }
 
 export default function NewPassengersForm() {
+    // Initialize passenger data on clientside
     const [formData, setFormData] = useState<FormData>({
         first_name: '',
         last_name: '',
@@ -28,6 +31,7 @@ export default function NewPassengersForm() {
     })
     const navigate = useNavigate();
 
+    // Handle input change on passengers form
     async function handleInputChange(event: ChangeEvent<HTMLInputElement>) {
         const { name, value } = event.target
         setFormData((prevFormData) => ({
@@ -36,6 +40,7 @@ export default function NewPassengersForm() {
         }))
     }
     
+    // Handle adding new passengers using a post request
     async function handleSubmit(event: FormEvent<HTMLFormElement>) {
         event.preventDefault()
 

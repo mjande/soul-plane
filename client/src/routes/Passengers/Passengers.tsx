@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Axios from 'axios';
 
+// Define Passengers Property
 export interface Passenger {
   passenger_id: string,
   first_name: string,
@@ -16,8 +17,10 @@ export interface Passenger {
 }
 
 function Passengers() {
+  // Initialize passengers into clientside
   const [passengers, setPassengers] = useState<Passenger[]>([]);  
 
+  // Get request to get all passengers
   useEffect(() => {
     Axios.get(`http://${import.meta.env.VITE_HOST_NAME}:55767/passengers`).then((response) => {
       setPassengers(response.data)
