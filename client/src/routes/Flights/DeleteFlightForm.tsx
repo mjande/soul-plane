@@ -2,6 +2,8 @@ import Axios from "axios";
 import { FormEvent, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom"
 
+
+// Define flight properties
 interface Flight {
     flight_id: number,
     plane_id: number,
@@ -16,7 +18,7 @@ export default function DeleteFlightForm() {
     const { id } = useParams();
 
     const navigate = useNavigate()
-
+    // initialize flight data for client
     const [flight, setFlight] = useState<Flight>({
         flight_id: 0,
         plane_id: 0,
@@ -27,6 +29,7 @@ export default function DeleteFlightForm() {
         arrive_time: new Date()
     })
 
+    // Get current flight form
     useEffect(() => {
         async function getFlight() {
             const response = await Axios.get(`http://${import.meta.env.VITE_HOST_NAME}:55767/flights/${id}`)
@@ -46,6 +49,8 @@ export default function DeleteFlightForm() {
         getFlight()
     }, [id])
 
+
+    // Handle delete request for current flight based on id
     async function handleSubmit(event: FormEvent<HTMLFormElement>) {
         event.preventDefault()
 
