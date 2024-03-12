@@ -2,6 +2,7 @@ import { FormEvent, ChangeEvent, useState } from "react"
 import Axios from "axios"
 import { useNavigate } from "react-router-dom"
 
+// Define airport properties in Form Data
 interface FormData {
     airport_id: number;
     airport_name: string;
@@ -10,6 +11,7 @@ interface FormData {
 }
 
 export default function NewAirports() {
+    // Initialize Airport FormData
     const [formData, setFormData] = useState<FormData>({
         airport_id: 0,
         airport_name: '',
@@ -18,6 +20,7 @@ export default function NewAirports() {
     })
     const navigate = useNavigate();
 
+    // Track input change
     async function handleInputChange(event: ChangeEvent<HTMLInputElement>) {
         const { name, value } = event.target
         setFormData((prevFormData) => ({
@@ -25,7 +28,8 @@ export default function NewAirports() {
             [name]: value,
         }))
     }
-    
+
+    // Handle submitting data for new airports
     async function handleSubmit(event: FormEvent<HTMLFormElement>) {
         event.preventDefault()
 

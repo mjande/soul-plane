@@ -2,6 +2,8 @@ import { FormEvent, useState, useEffect } from "react"
 import Axios from "axios"
 import { useNavigate, useParams } from "react-router-dom"
 
+
+// Define Airport properties in FormData
 interface FormData {
     airport_id: number;
     airport_name: string;
@@ -10,6 +12,7 @@ interface FormData {
 }
 
 export default function DeleteAirports() {
+    // Grab airport id from url and initialize airport form data
     const { id } = useParams();
     const [formData, setFormData] = useState<FormData>({
         airport_id: 0,
@@ -18,8 +21,9 @@ export default function DeleteAirports() {
         location: "",
     })
 
+    // Get request for airports by id
     useEffect(() => {
-        async function getPassengers() {
+        async function getAirports() {
             const response = await Axios.get(`http://${import.meta.env.VITE_HOST_NAME}:55767/airports/${id}`)
             const data = response.data[0]
             setFormData({
@@ -29,11 +33,12 @@ export default function DeleteAirports() {
                 location: data.location,
             })
         }
-        getPassengers()
+        getAirports()
     }, [id])
 
     const navigate = useNavigate();
     
+    // Submit airport data into the backend to delete airport by id
     async function handleSubmit(event: FormEvent<HTMLFormElement>) {
         event.preventDefault()
 
