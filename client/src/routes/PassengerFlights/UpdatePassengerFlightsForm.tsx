@@ -107,8 +107,8 @@ export default function UpdatePassengerForm() {
               {flights.map((flight) => (
                 <option key={flight.flight_id} value={flight.flight_id}>
                   {`${
-                    airports[Number(flight.arrive_airport_id) - 1]?.airport_name
-                  } → ${airports[Number(flight.depart_airport_id) - 1]?.airport_name}`}
+                    airports[Number(flight.depart_airport_id) - 1]?.airport_name
+                  } → ${airports[Number(flight.arrive_airport_id) - 1]?.airport_name}`}
                 </option>
               ))}
             </select>
