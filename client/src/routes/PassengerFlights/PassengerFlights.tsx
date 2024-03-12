@@ -85,7 +85,7 @@ function PassengerFlights() {
                   {flights.map((flight) => (
                     passengerFlight.flight_id === flight.flight_id && (
                       <div key={passengerFlight.flight_id}>
-                        {airports[Number(flight.arrive_airport_id) - 1]?.airport_name} <span>&#8594;</span> {airports[Number(flight.depart_airport_id) - 1]?.airport_name}
+                        {airports[Number(flight.depart_airport_id) - 1]?.airport_name} <span>&#8594;</span> {airports[Number(flight.arrive_airport_id) - 1]?.airport_name}
                       </div>
                     )
                   ))}

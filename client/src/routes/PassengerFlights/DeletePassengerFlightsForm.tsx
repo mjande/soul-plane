@@ -96,7 +96,7 @@ export default function DeletePassengerFlightsForm() {
         {flights && (
           <div>
             <span>Flight: </span>
-            {airports[Number(flights.arrive_airport_id) - 1]?.airport_name} <span>&#8594;</span> {airports[Number(flights.depart_airport_id) - 1]?.airport_name}
+            {airports[Number(flights.depart_airport_id) - 1]?.airport_name} <span>&#8594;</span> {airports[Number(flights.arrive_airport_id) - 1]?.airport_name}
           </div>
         )}
 
