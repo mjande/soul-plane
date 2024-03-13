@@ -7,6 +7,20 @@ import express, { Request, Response } from "express"
 const router = express.Router()
 import db from "../database/db-connector"
 
+// Type checking for errors adapted from Typescript docs
+// Source URL: https://www.typescriptlang.org/docs/handbook/2/narrowing.html#using-type-predicates
+// Date: 3/13/24
+
+// A simple interface that defines the error number returned by a query
+interface MySQLError {
+    errno: number
+}
+
+// Check to see if the error caught in route is a MySQLError
+function isMySQLError(error: unknown): error is MySQLError {
+    return (error as MySQLError).errno !== undefined;
+}
+
 // Routes adapted from Node Starter App with changes adapted from MySQL2 docs (with exception of individual SQL queries and processing unique fields, which was our own work)
 // Source URL: https://github.com/osu-cs340-ecampus/nodejs-starter-app
 // Source URL: https://sidorares.github.io/node-mysql2/docs
@@ -56,6 +70,12 @@ router.post("/", async (req: Request, res: Response) => {
     } catch (error) {
         // Error handling
         console.error(error);
+
+        // Checks error number for dulicate entry code
+        if (isMySQLError(error) && error.errno == 1062) {
+            return res.status(409).json({ success: false, message: "Duplicate Entry Error"})
+        }
+
         res.status(500).json({ success: false, message: 'Internal Server Error' });
     }
 })

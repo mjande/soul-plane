@@ -1,7 +1,7 @@
 import { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import Axios from 'axios';
 import { Passenger } from "../Passengers/Passengers";
-import { Airport } from "../Airports";
+import { Airport } from "../Airports/Airports";
 import { useNavigate } from "react-router-dom";
 
 
@@ -67,9 +67,19 @@ export default function NewPassengerFlights() {
         `http://${import.meta.env.VITE_HOST_NAME}:55767/passengerFlights`,
         formData
       );
+
       console.log(response);
+
       navigate("/PassengerFlights");
     } catch (error) {
+      // Type checking adapted from StackOverflow post
+      // Source URL: https://stackoverflow.com/questions/69264472/axios-error-typescript-annotation-must-be-any-or-unknown-if
+      // Date: 3/13/24
+      if (Axios.isAxiosError(error) && error.response?.data.message == "Duplicate Entry Error") {
+          alert("Error: This passenger is already booked on this flight! Please select a different passenger or a different flight.")
+          console.log("Error: This passenger is already booked on this flight! Please select a different passenger or a different flight.")
+      }
+      
       console.log(error);
     }
   }
@@ -89,6 +99,7 @@ export default function NewPassengerFlights() {
               name="flight_id"
               onChange={handleInputChange}
               value={formData.flight_id}
+              required
             >
               <option value="" disabled>Select Flight</option>
               {flights.map((flight) => (
@@ -104,6 +115,7 @@ export default function NewPassengerFlights() {
               name="passenger_id"
               onChange={handleInputChange}
               value={formData.passenger_id}
+              required
             >
               <option value="" disabled>Select Passenger</option>
               {passengers.map((passenger) => (

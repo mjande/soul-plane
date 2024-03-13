@@ -1,7 +1,7 @@
 import { FormEvent, useState, useEffect, ChangeEvent } from "react";
 import Axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
-import { Airport } from "../Airports";
+import { Airport } from "../Airports/Airports";
 
 // Define flights property
 interface Flights {

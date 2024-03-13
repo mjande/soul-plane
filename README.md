@@ -3,7 +3,9 @@
 Documentation for front-end and back-end can be found in the README.md files in the client and server subdirectories. Read through the files for more information about accessing the front- and back-end.
 
 ## Citations
-- Within our backend we used [the starter app/code](https://github.com/osu-cs340-ecampus/nodejs-starter-app) provided on eCampus to get a foundation on getting started with our node.js backend. We also used [mySQL](https://sidorares.github.io/node-mysql2/docs) docs to get our code to interact with the database, [CORS request](https://www.twilio.com/en-us/blog/add-cors-support-express-typescript-api), and used the [express docs](https://expressjs.com/en/guide/routing.html) for the rest of our needs in the creation and usage of routers. We also used the resources found at [MDN Web Docs](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/tel) for form validation.
+- Within our backend we used [the starter app/code](https://github.com/osu-cs340-ecampus/nodejs-starter-app) provided on eCampus to get a foundation on getting started with our node.js backend. We also used [mySQL](https://sidorares.github.io/node-mysql2/docs) docs to get our code to interact with the database, [CORS request](https://www.twilio.com/en-us/blog/add-cors-support-express-typescript-api), and used the [express docs](https://expressjs.com/en/guide/routing.html) for the rest of our needs in the creation and usage of routers. A few small changes were also adapted from the following sources: [MDN Web Docs](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/tel) for form validation, and [StackOverflow](https://stackoverflow.com/questions/69264472/axios-error-typescript-annotation-must-be-any-or-unknown-if) and [TypeScript docs](https://www.typescriptlang.org/docs/handbook/2/narrowing.html#using-type-predicates) for type checking.
+
+We also used the resources found at 
 
 ## TODO
 - Fix feedback received from Draft 5 Ed post
@@ -21,9 +23,8 @@ Documentation for front-end and back-end can be found in the README.md files in 
 - Make sure DDL.sql is cleanly importable
 - Add citation note about starter code to README
 
-## Suggestions from Ed\
+## Suggestions from Ed
 - Edit styles for passengers so form is a single column
-- Restrict NULL fields for Plane Types
 - Restrict NULL fields for PassengerFlights
 - Add default values for Create Flight
 - Add default values for Create Plane
@@ -34,4 +35,5 @@ Documentation for front-end and back-end can be found in the README.md files in 
 - Restrict NULL fields for Airports
 - Validate phone number and state in passengers and add placeholders
 - Restrict NULL fields for Passengers
+- Restrict NULL fields for Plane Types
 
