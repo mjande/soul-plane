@@ -60,7 +60,7 @@ function Planes() {
             ))}
           </tbody>
         </table>
-        <Link to="/planes/new">Add Plane Type</Link>
+        <Link to="/planes/new">Add Plane</Link>
         <p>&nbsp;</p>
       </div>
     </div>
