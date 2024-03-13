@@ -2,6 +2,7 @@ import { FormEvent, ChangeEvent, useState } from "react"
 import Axios from "axios"
 import { useNavigate } from "react-router-dom"
 
+// Define Plane Type property
 interface FormData {
     type_name: string,
     capacity: number,
@@ -9,6 +10,7 @@ interface FormData {
 }
 
 export default function NewPlaneTypeForm() {
+    // Initialize formData for plane tyoe for client
     const [formData, setFormData] = useState<FormData>({
         type_name: '',
         capacity: 0,   
@@ -16,6 +18,7 @@ export default function NewPlaneTypeForm() {
     })
     const navigate = useNavigate();
 
+    // Handle input change for plane type form
     async function handleInputChange(event: ChangeEvent<HTMLInputElement>) {
         const { name, value } = event.target
         setFormData((prevFormData) => ({
@@ -24,6 +27,7 @@ export default function NewPlaneTypeForm() {
         }))
     }
     
+    // Handle submitting new plane types using a post request to the plane type form
     async function handleSubmit(event: FormEvent<HTMLFormElement>) {
         event.preventDefault()
 
