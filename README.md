@@ -21,7 +21,6 @@ Documentation for front-end and back-end can be found in the README.md files in 
 - Add citation note about starter code to README
 
 ## Suggestions from Ed
-- Restrict NULL fields for Airplanes
 - Validate phone number and state in passengers and add placeholders
 - Restrict NULL fields for Passengers
 - Edit styles for passengers so form is a single column
@@ -33,4 +32,5 @@ Documentation for front-end and back-end can be found in the README.md files in 
 - Delete seems to not be working for Plane Types?
 
 ### Completed Suggestions
+- Restrict NULL fields for Airports
 

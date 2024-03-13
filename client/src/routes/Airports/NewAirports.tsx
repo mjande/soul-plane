@@ -52,9 +52,9 @@ export default function NewAirports() {
                         <strong>Add Airport</strong>
                     </legend>
                     <fieldset className="fields">
-                    <label>Airport Name</label> <input type="text" name="airport_name" onChange={handleInputChange} className="long-text-input" />
-                    <label>Airport Code</label> <input type="text" name="airport_code" onChange={handleInputChange} className="short-text-input" maxLength={3}/>
-                    <label>Location</label> <input type="text" name="location" onChange={handleInputChange} />
+                    <label>Airport Name</label> <input type="text" name="airport_name" onChange={handleInputChange} className="long-text-input" required placeholder="Airport Name"/>
+                    <label>Airport Code</label> <input type="text" name="airport_code" onChange={handleInputChange} className="short-text-input" maxLength={3} required placeholder="ABC" />
+                    <label>Location</label> <input type="text" name="location" onChange={handleInputChange} required placeholder="City, ST" />
                     </fieldset>
                     <div className="buttons-container">
                     <input className="btn" type="submit" value="Add Airport" />

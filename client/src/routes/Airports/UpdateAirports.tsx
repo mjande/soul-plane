@@ -80,6 +80,7 @@ export function UpdateAirports() {
             name="airport_name"
             value={formData.airport_name}
             onChange={handleInputChange}
+            required
           />
           <label>Airport Code</label>
           <input
@@ -87,6 +88,7 @@ export function UpdateAirports() {
             name="airport_code"
             value={formData.airport_code}
             onChange={handleInputChange}
+            required
           />
           <label>Location</label>
           <input
@@ -94,6 +96,7 @@ export function UpdateAirports() {
             name="location"
             value={formData.location}
             onChange={handleInputChange}
+            required
           />
         </fieldset>
         <div className="buttons-container">
