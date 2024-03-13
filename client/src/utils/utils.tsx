@@ -19,9 +19,9 @@ export const preloadScreen = () => {
     return { isLoading }
 }
 
+// Function below adapted from dev.to post:
+// Source URL: https://dev.to/kevinluo201/set-value-of-datetime-local-input-field-3435
 // Date: 3/8/24
-// Function below adapted from:
-// https://dev.to/kevinluo201/set-value-of-datetime-local-input-field-3435
 export function convertToDateTimeLocalString(date: Date) {
     const year = date.getFullYear();
     const month = (date.getMonth() + 1).toString().padStart(2, "0");

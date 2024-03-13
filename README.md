@@ -8,9 +8,29 @@ Documentation for front-end and back-end can be found in the README.md files in 
 ## TODO
 - Fix feedback received from Draft 5 Ed post
 - Condense changes to 1 page executive summary
+- Capture screenshots of each of the UI pages on the website (especially noting delete from M:N, NULLable relationship, and M:N update)
+- Polish root README
+- Polish front end README 
+- Polish back end README
+
+### Completed
+- Write citations where needed (and highligh original work where appropriate)
+- Add clarifying comments to HTML and JS files
 - Make sure queries in backend match queries in DML.sql
 - Make sure DDL.sql is cleanly importable
-- Capture screenshots of each of the UI pages on the website (especially noting delete from M:N, NULLable relationship, and M:N update)
-- Write citations where needed (and highligh original work where appropriate)
 - Add citation note about starter code to README
-- Add clarifying comments to HTML and JS files
+
+## Suggestions from Ed
+- Restrict NULL fields for Airplanes
+- Validate phone number and state in passengers and add placeholders
+- Restrict NULL fields for Passengers
+- Edit styles for passengers so form is a single column
+- Restrict NULL fields for Plane Types
+- Restrict NULL fields for PassengerFlights
+- Add default values for Create Flight
+- Add default values for Create Plane
+- "When deleting a passenger, the data on the confirmation screen overflows outside of the border. (I am using Mozilla Firefox on Windows 10)" - I can't reproduce this so maybe don't worry about it?
+- Delete seems to not be working for Plane Types?
+
+### Completed Suggestions
+
