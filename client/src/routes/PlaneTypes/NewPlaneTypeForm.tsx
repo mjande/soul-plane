@@ -51,11 +51,11 @@ export default function NewPlaneTypeForm() {
                 </legend>
                 <fieldset className="fields">
                 <label>Type Name</label>
-                <input type="text" name="type_name" onChange={handleInputChange}/>
+                <input type="text" name="type_name" onChange={handleInputChange} required />
                 <label>Capacity</label>
-                <input type="number" name="capacity" onChange={handleInputChange} />
+                <input type="number" name="capacity" onChange={handleInputChange} required/>
                 <label>Range (hrs)</label>
-                <input type="number" name="range_in_hrs" onChange={handleInputChange} />
+                <input type="number" name="range_in_hrs" onChange={handleInputChange} required/>
                 </fieldset>
                 <div className="buttons-container">
                 <input className="btn" type="submit" value="Add Plane Type" />

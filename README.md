@@ -12,6 +12,7 @@ Documentation for front-end and back-end can be found in the README.md files in 
 - Polish root README
 - Polish front end README 
 - Polish back end README
+- Double check phone number formatting in forms is okay
 
 ### Completed
 - Write citations where needed (and highligh original work where appropriate)
@@ -20,9 +21,7 @@ Documentation for front-end and back-end can be found in the README.md files in 
 - Make sure DDL.sql is cleanly importable
 - Add citation note about starter code to README
 
-## Suggestions from Ed
-- Validate phone number and state in passengers and add placeholders
-- Restrict NULL fields for Passengers
+## Suggestions from Ed\
 - Edit styles for passengers so form is a single column
 - Restrict NULL fields for Plane Types
 - Restrict NULL fields for PassengerFlights
@@ -33,4 +32,6 @@ Documentation for front-end and back-end can be found in the README.md files in 
 
 ### Completed Suggestions
 - Restrict NULL fields for Airports
+- Validate phone number and state in passengers and add placeholders
+- Restrict NULL fields for Passengers
 

@@ -71,11 +71,11 @@ export default function UpdatePlaneTypeForm() {
             <fieldset className="fields">
             <span>Plane Type ID: {id}</span>
                 <label>Type Name</label>
-                <input type="text" name="type_name" value={formData.type_name} onChange={handleInputChange}/>
+                <input type="text" name="type_name" value={formData.type_name} onChange={handleInputChange} required/>
                 <label>Capacity</label>
-                <input type="number" name="capacity" value={formData.capacity} onChange={handleInputChange} />
+                <input type="number" name="capacity" value={formData.capacity} onChange={handleInputChange} required />
                 <label>Range (hrs)</label>
-                <input type="number" name="range_in_hrs" value={formData.range_in_hrs} onChange={handleInputChange} />
+                <input type="number" name="range_in_hrs" value={formData.range_in_hrs} onChange={handleInputChange} required />
                 </fieldset>
                 <div className="buttons-container">
                 <input className="btn" type="submit" value="Update Plane Type" />
