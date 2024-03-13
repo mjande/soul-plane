@@ -71,7 +71,7 @@ router.post("/", async (req: Request, res: Response) => {
         // Error handling
         console.error(error);
 
-        // Checks error number for dulicate entry code
+        // Checks error number for duplicate entry code
         if (isMySQLError(error) && error.errno == 1062) {
             return res.status(409).json({ success: false, message: "Duplicate Entry Error"})
         }
@@ -105,6 +105,11 @@ router.put("/:fid/:pid", async (req: Request, res: Response) => {
     } catch (error) {
         // Error handling
         console.error(error);
+
+        // Checks error number for duplicate entry code
+        if (isMySQLError(error) && error.errno == 1062) {
+            return res.status(409).json({ success: false, message: "Duplicate Entry Error"})
+        }
         res.status(500).json({ success: false, message: 'Internal Server Error' });
     }
 });

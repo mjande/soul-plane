@@ -91,6 +91,14 @@ export default function UpdatePassengerForm() {
       navigate("/PassengerFlights");
     } catch (error) {
       console.error(error);
+
+      // Type checking adapted from StackOverflow post
+      // Source URL: https://stackoverflow.com/questions/69264472/axios-error-typescript-annotation-must-be-any-or-unknown-if
+      // Date: 3/13/24
+      if (Axios.isAxiosError(error) && error.response?.data.message == "Duplicate Entry Error") {
+        alert("Error: This passenger is already booked on this flight! Please select a different passenger or a different flight.")
+        console.log("Error: This passenger is already booked on this flight! Please select a different passenger or a different flight.")
+    }
     }
   }
 
