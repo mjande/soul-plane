@@ -1,13 +1,12 @@
 import { FormEvent, ChangeEvent, useState, useEffect } from "react"
 import Axios from "axios"
 import { useNavigate } from "react-router-dom"
-import { convertToDateTimeLocalString } from "../../utils/utils"
 
 // Define Flight properties
 interface FormData {
-    depart_airport_id: number,
-    arrive_airport_id: number,
-    plane_id: number,
+    depart_airport_id: number | "",
+    arrive_airport_id: number | "",
+    plane_id: number | "",
     depart_time: string,
     arrive_time: string
 }
@@ -24,19 +23,14 @@ interface Plane {
     plane_type: string
 }
 
-export default function NewFlightForm() {
-    // Generate default values for departure and arrival times
-    const departDefault = new Date()
-    const arriveDefault = new Date()
-    arriveDefault.setHours(departDefault.getHours() + 3)
-    
+export default function NewFlightForm() {    
     // Initialize Flight Data
     const [formData, setFormData] = useState<FormData>({
-        depart_airport_id: 1,
-        arrive_airport_id: 2,
-        plane_id: 1,
-        depart_time: convertToDateTimeLocalString(departDefault),
-        arrive_time: convertToDateTimeLocalString(arriveDefault)
+        depart_airport_id: "",
+        arrive_airport_id: "",
+        plane_id: "",
+        depart_time: "",
+        arrive_time: ""
     })
     const [airports, setAirports] = useState<Airport[]>([])
     const [planes, setPlanes] = useState<Plane[]>([])
@@ -90,25 +84,28 @@ export default function NewFlightForm() {
         </legend>
         <fieldset className="fields">
             <label>Departure Airport</label>
-            <select name="depart_airport_id" onChange={handleInputChange} value={formData.depart_airport_id}>
+            <select name="depart_airport_id" onChange={handleInputChange} value={formData.depart_airport_id} required >
+                <option value="" disabled>Select Departure Airport</option>
                 {airports.map(airport => (
                     <option key={airport.airport_id} value={airport.airport_id}>{airport.airport_name}</option>
                 ))}
             </select>
             <label>Arrival Airport</label>
-            <select name="arrive_airport_id"  onChange={handleInputChange} value={formData.arrive_airport_id}>
+            <select name="arrive_airport_id"  onChange={handleInputChange} value={formData.arrive_airport_id} required>
+                <option value="" disabled>Select Arrival Airport</option>
                 {airports.map(airport => (
                     <option key={airport.airport_id} value={airport.airport_id}>{airport.airport_name}</option>
                 ))}
             </select>
             <label>Plane ID</label>
-            <select name="plane_id"  onChange={handleInputChange} value={formData.plane_id}>
-            {planes.map(plane => (
-                <option key={plane.plane_id} value={plane.plane_id}>{`${plane.plane_id} (${plane.plane_type})`}</option> 
-            ))}
+            <select name="plane_id"  onChange={handleInputChange} value={formData.plane_id} required>
+                <option disabled value="">Select Plane</option>
+                {planes.map(plane => (
+                    <option key={plane.plane_id} value={plane.plane_id}>{`${plane.plane_id} (${plane.plane_type})`}</option> 
+                ))}
             </select>
-            <label>Departure Date</label> <input type="datetime-local" name="depart_time"  onChange={handleInputChange} value={formData.depart_time}/>
-            <label>Arrival Time</label> <input type="datetime-local" name="arrive_time"  onChange={handleInputChange} value={formData.arrive_time}/>
+            <label>Departure Date</label> <input type="datetime-local" name="depart_time"  onChange={handleInputChange} value={formData.depart_time} required/>
+            <label>Arrival Time</label> <input type="datetime-local" name="arrive_time"  onChange={handleInputChange} value={formData.arrive_time} required/>
         </fieldset>
         <div className="buttons-container">
             <input className="btn" type="submit" value="Add Flight" />
