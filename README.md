@@ -25,8 +25,7 @@ We also used the resources found at
 
 ## Suggestions from Ed
 - "When deleting a passenger, the data on the confirmation screen overflows outside of the border. (I am using Mozilla Firefox on Windows 10)" - I can't reproduce this so maybe don't worry about it?
-- Delete seems to not be working for Plane Types?
-- Restrict flights to and from the same airport
+- Delete seems to not be working for Plane Types? - can't reproduce this one either
 
 ### Completed Suggestions
 - Restrict NULL fields for Airports
@@ -37,4 +36,5 @@ We also used the resources found at
 - Add default values for Create Flight
 - Add default values for Create Plane
 - Edit styles for passengers so form is a single column
+- Restrict flights to and from the same airport
 
