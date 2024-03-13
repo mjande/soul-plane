@@ -106,17 +106,18 @@ export default function UpdatePlaneForm() {
                 </legend>
                 <fieldset className="fields">
                     <span>Plane ID: {id}</span>
-                    <label htmlFor="current_airport_id">Current Airport</label>
-                    <select name="current_airport_id" onChange={handleSelectChange} value={formData.current_airport_id}>
-                    {airports.map((airport) => (
-                        <option key={airport.airport_id} value={airport.airport_id}>{airport.airport_name}</option>
-                    ))}
-                    </select>
 
                     <label htmlFor="plane_type_id">Plane Type</label>
                     <select name="plane_type_id" onChange={handleSelectChange} value={formData.plane_type_id}>
                     {planeTypes.map((planeType) => (
                         <option key={planeType.plane_type_id} value={planeType.plane_type_id}>{planeType.type_name}</option>
+                    ))}
+                    </select>
+
+                    <label htmlFor="current_airport_id">Current Airport</label>
+                    <select name="current_airport_id" onChange={handleSelectChange} value={formData.current_airport_id}>
+                    {airports.map((airport) => (
+                        <option key={airport.airport_id} value={airport.airport_id}>{airport.airport_name}</option>
                     ))}
                     </select>
                 </fieldset>

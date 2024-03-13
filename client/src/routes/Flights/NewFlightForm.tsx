@@ -87,14 +87,26 @@ export default function NewFlightForm() {
             <select name="depart_airport_id" onChange={handleInputChange} value={formData.depart_airport_id} required >
                 <option value="" disabled>Select Departure Airport</option>
                 {airports.map(airport => (
-                    <option key={airport.airport_id} value={airport.airport_id}>{airport.airport_name}</option>
+                    <option 
+                        key={airport.airport_id} 
+                        value={airport.airport_id}
+                        /* Disable arrive airport from dropdown */
+                        disabled={airport.airport_id == formData.arrive_airport_id}
+                        >
+                            {airport.airport_name} 
+                    </option>
                 ))}
             </select>
             <label>Arrival Airport</label>
             <select name="arrive_airport_id"  onChange={handleInputChange} value={formData.arrive_airport_id} required>
                 <option value="" disabled>Select Arrival Airport</option>
                 {airports.map(airport => (
-                    <option key={airport.airport_id} value={airport.airport_id}>{airport.airport_name}</option>
+                    <option 
+                        key={airport.airport_id} 
+                        value={airport.airport_id}
+                        disabled={airport.airport_id == formData.depart_airport_id}>
+                            {airport.airport_name}
+                    </option>
                 ))}
             </select>
             <label>Plane ID</label>

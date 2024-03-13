@@ -18,8 +18,8 @@ interface Airport {
 
 // Define Plane property
 interface FormData {
-    plane_type_id: number,
-    current_airport_id?: number
+    plane_type_id: number | "",
+    current_airport_id?: number | ""
 }
 
 export default function NewPlaneForm() {
@@ -37,7 +37,6 @@ export default function NewPlaneForm() {
         // Get airports for airports dropdown
         async function getAirports() {
             const response = await Axios.get(`http://${import.meta.env.VITE_HOST_NAME}:55767/Airports`);
-            response.data.push({ airport_id: "", airport_name: "Currently Unavailable" })
             setAirports(response.data)
         }
 
@@ -47,8 +46,8 @@ export default function NewPlaneForm() {
     
     // Establish initial dropdown values
     const [formData, setFormData] = useState<FormData>({
-        plane_type_id: 1,
-        current_airport_id: 1
+        plane_type_id: "",
+        current_airport_id: ""
     })
 
     const navigate = useNavigate();
@@ -86,16 +85,18 @@ export default function NewPlaneForm() {
                 </legend>
                 <fieldset className="fields">
                     <label>Plane Type</label>
-                    <select name="plane_type_id" onChange={handleInputChange}>
-                    {planeTypes.map((planeType) => (
-                        <option value={planeType.plane_type_id} key={planeType.plane_type_id}>{planeType.type_name}</option> 
-                    ))}
+                    <select name="plane_type_id" onChange={handleInputChange} required value={formData.plane_type_id}>
+                        <option value="" disabled>Select Plane Type</option>
+                        {planeTypes.map((planeType) => (
+                            <option value={planeType.plane_type_id} key={planeType.plane_type_id}>{planeType.type_name}</option> 
+                        ))}
                     </select>
                     <label>Current Airport</label>
-                    <select name="current_airport_id" onChange={handleInputChange} >
-                    {airports.map((airport) => (
-                        <option value={airport.airport_id} key={airport.airport_id}>{airport.airport_name}</option> 
-                    ))}
+                    <select name="current_airport_id" onChange={handleInputChange} value={formData.current_airport_id}>
+                        <option value="">Currently Unavailable</option>
+                        {airports.map((airport) => (
+                            <option value={airport.airport_id} key={airport.airport_id}>{airport.airport_name}</option> 
+                        ))}
                     </select>
                 </fieldset>
                 <div className="buttons-container">

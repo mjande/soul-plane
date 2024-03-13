@@ -106,13 +106,23 @@ export function UpdateFlightForm() {
             <label>Departure Airport</label>
             <select name="depart_airport_id" value={formData.depart_airport_id} onChange={handleInputChange} required>
               {airports.map(airport => (
-                <option key={airport.airport_id} value={airport.airport_id}>{airport.airport_name}</option>
+                <option 
+                  key={airport.airport_id} 
+                  value={airport.airport_id}
+                  disabled={airport.airport_id == formData.arrive_airport_id}>
+                    {airport.airport_name}
+                </option>
               ))}
             </select>
             <label>Arrival Airport</label>
             <select name="arrive_airport_id" value={formData.arrive_airport_id} onChange={handleInputChange} required>
               {airports.map(airport => (
-                <option key={airport.airport_id} value={airport.airport_id}>{airport.airport_name}</option>
+                <option 
+                  key={airport.airport_id} 
+                  value={airport.airport_id}
+                  disabled={airport.airport_id == formData.depart_airport_id}> 
+                    {airport.airport_name}
+                </option>
               ))}
             </select>
             <label>Plane ID</label>
