@@ -2,6 +2,7 @@ import { FormEvent, ChangeEvent, useState, useEffect } from "react";
 import Axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 
+// Initialize Airport properties in FormData
 interface FormData {
   airport_id: number;
   airport_name: string;
@@ -10,6 +11,7 @@ interface FormData {
 }
 
 export function UpdateAirports() {
+  // Grab airport id from url and initialize airport form data
   const { id } = useParams();
   const [formData, setFormData] = useState<FormData>({
     airport_id: 0,
@@ -18,6 +20,7 @@ export function UpdateAirports() {
     location: "",
   });
 
+  // Get request to get the current airport
   useEffect(() => {
     async function getAirports() {
       const response = await Axios.get(
@@ -35,6 +38,8 @@ export function UpdateAirports() {
 
   const navigate = useNavigate();
 
+
+  // Track input changes in form
   async function handleInputChange(
     event: ChangeEvent<HTMLSelectElement | HTMLInputElement>
   ) {
@@ -45,6 +50,7 @@ export function UpdateAirports() {
     }));
   }
 
+  // Submit updated airport data into backend
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
 

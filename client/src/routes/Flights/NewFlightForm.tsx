@@ -3,6 +3,7 @@ import Axios from "axios"
 import { useNavigate } from "react-router-dom"
 import { convertToDateTimeLocalString } from "../../utils/utils"
 
+// Define Flight properties
 interface FormData {
     depart_airport_id: number,
     arrive_airport_id: number,
@@ -11,11 +12,13 @@ interface FormData {
     arrive_time: string
 }
 
+//  Define Airport properties
 interface Airport {
     airport_id: number,
     airport_name: string
 }
 
+// Define Plane properties
 interface Plane {
     plane_id: number,
     plane_type: string
@@ -27,6 +30,7 @@ export default function NewFlightForm() {
     const arriveDefault = new Date()
     arriveDefault.setHours(departDefault.getHours() + 3)
     
+    // Initialize Flight Data
     const [formData, setFormData] = useState<FormData>({
         depart_airport_id: 1,
         arrive_airport_id: 2,
@@ -37,6 +41,8 @@ export default function NewFlightForm() {
     const [airports, setAirports] = useState<Airport[]>([])
     const [planes, setPlanes] = useState<Plane[]>([])
 
+
+    // Get request to grab data from airport and planes
     useEffect(() => {
         async function getAirports() {
             const response = await Axios.get(`http://${import.meta.env.VITE_HOST_NAME}:55767/Airports`)
@@ -54,6 +60,7 @@ export default function NewFlightForm() {
 
     const navigate = useNavigate()
 
+    // Handle input change for Flight Form
     async function handleInputChange(event: ChangeEvent<HTMLSelectElement | HTMLInputElement>) {
         const { name, value } = event.target
         setFormData((prevFormData) => ({
@@ -62,6 +69,7 @@ export default function NewFlightForm() {
         }))
     }
 
+    // Handle post request to add new flights
     async function handleSubmit(event: FormEvent<HTMLFormElement>) {
         event.preventDefault()
 

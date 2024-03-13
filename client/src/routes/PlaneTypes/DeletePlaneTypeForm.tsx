@@ -2,6 +2,7 @@ import { FormEvent, useState, useEffect } from "react"
 import Axios from "axios"
 import { useNavigate, useParams } from "react-router-dom"
 
+// Define plane type property
 interface PlaneType {
     type_name: string,
     capacity: 0,
@@ -10,13 +11,14 @@ interface PlaneType {
 
 export default function DeletePlaneTypeForm() {
     const { id } = useParams() 
-
+    // Initialize plane type data into client
     const [planeType, setPlaneType] = useState<PlaneType>({
         type_name: '',
         capacity: 0,
         range_in_hrs: 0
     })
 
+    // Get request for current plane type
     useEffect(() => {
         async function getPlaneType() {
             const response = await Axios.get(`http://${import.meta.env.VITE_HOST_NAME}:55767/plane-types/${id}`)
@@ -34,6 +36,7 @@ export default function DeletePlaneTypeForm() {
 
     const navigate = useNavigate()
 
+    // Handle submitting delete request for current plane type
     async function handleSubmit(event: FormEvent<HTMLFormElement>) {
         event.preventDefault()
 

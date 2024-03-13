@@ -2,6 +2,7 @@ import { FormEvent, ChangeEvent, useState, useEffect } from "react"
 import Axios from "axios"
 import { useNavigate } from "react-router-dom"
 
+// Define plane type property
 interface PlaneType {
     plane_type_id: number,
     type_name: string,
@@ -9,17 +10,20 @@ interface PlaneType {
     range_in_hrs: number
   }
 
+// Define airport property
 interface Airport {
     airport_id: number;
     airport_name: string;
 }
 
+// Define Plane property
 interface FormData {
     plane_type_id: number,
     current_airport_id?: number
 }
 
 export default function NewPlaneForm() {
+    // Initialize plane types and airports in client
     const [planeTypes, setPlaneTypes] = useState<PlaneType[]>([]);
     const [airports, setAirports] = useState<Airport[]>([]);
     
@@ -49,6 +53,7 @@ export default function NewPlaneForm() {
 
     const navigate = useNavigate();
 
+    // Handle input change for plane form
     async function handleInputChange(event: ChangeEvent<HTMLSelectElement>) {
         const { name, value } = event.target
         setFormData((prevFormData) => ({
@@ -57,6 +62,7 @@ export default function NewPlaneForm() {
         }))
     }
     
+    // Handle submission to backend using post request for plane form
     async function handleSubmit(event: FormEvent<HTMLFormElement>) {
         event.preventDefault()
 

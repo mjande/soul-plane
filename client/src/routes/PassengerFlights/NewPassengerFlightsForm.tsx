@@ -4,18 +4,22 @@ import { Passenger } from "../Passengers/Passengers";
 import { Airport } from "../Airports";
 import { useNavigate } from "react-router-dom";
 
+
+// Define Flights Properties
 interface Flights {
   flight_id: string;
   arrive_airport_id: string;
   depart_airport_id: string;
 }
 
+// Define PassengerFlights FormData properties
 interface FormData {
   flight_id: string;
   passenger_id: string;
 }
 
 export default function NewPassengerFlights() {
+  // Initialize data for client for passengers, flights, airports, and passenger flights
   const [passengers, setPassengers] = useState<Passenger[]>([]);
   const [flights, setFlights] = useState<Flights[]>([]);
   const [airports, setAirports] = useState<Airport[]>([]);
@@ -24,6 +28,7 @@ export default function NewPassengerFlights() {
     passenger_id: '',
   });
 
+  // Get request to get data for passengers, flights, airports
   useEffect(() => {
     Axios.get(`http://${import.meta.env.VITE_HOST_NAME}:55767/passengers`).then((response) => {
       setPassengers(response.data);
@@ -44,6 +49,7 @@ export default function NewPassengerFlights() {
 
   const navigate = useNavigate();
 
+  // Handle input changes for passenger flights
   function handleInputChange(event: ChangeEvent<HTMLSelectElement>) {
     const { name, value } = event.target;
     setFormData((prevFormData) => ({
@@ -52,6 +58,7 @@ export default function NewPassengerFlights() {
     }));
   }
 
+  // Send a post request for adding new passenger flights
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
 

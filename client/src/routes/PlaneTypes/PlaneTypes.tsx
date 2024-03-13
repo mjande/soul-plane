@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Axios from 'axios';
 
+// Define plane type property
 interface PlaneType {
   plane_type_id: number,
   type_name: string,
@@ -10,9 +11,10 @@ interface PlaneType {
 }
 
 function PlaneTypes() {
+  // Initialize plane type data for client
   const [planeTypes, setPlaneTypes] = useState<PlaneType[]>([]);  
   
-  // receive data from get request
+  // Get request to retrieve all plane type data
     useEffect(() => {
       Axios.get(`http://${import.meta.env.VITE_HOST_NAME}:55767/plane-types`).then((response) => {
         setPlaneTypes(response.data)

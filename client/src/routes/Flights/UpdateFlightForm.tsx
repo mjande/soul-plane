@@ -3,16 +3,19 @@ import Axios from "axios"
 import { useNavigate, useParams } from "react-router-dom"
 import { convertToDateTimeLocalString } from "../../utils/utils"
 
+// Define Airport Property
 interface Airport {
     airport_id: number,
     airport_name: string
 }
 
+// Define Plane Property
 interface Plane {
     plane_id: number,
     plane_type: string
 }
 
+// Define Flight Property
 interface FormData {
     flight_id: number,
     depart_airport_id: number,
@@ -25,6 +28,7 @@ interface FormData {
 export function UpdateFlightForm() {
     const { id } = useParams()
     
+    // Initialize Flight Form Data
     const [formData, setFormData] = useState<FormData>({
         flight_id: 0,
         depart_airport_id: 1,
@@ -36,6 +40,7 @@ export function UpdateFlightForm() {
     const [airports, setAirports] = useState<Airport[]>([])
     const [planes, setPlanes] = useState<Plane[]>([])
 
+    // Get request for current flight, airports, and planes
     useEffect(() => {        
         async function getFlight() {
             const response = await Axios.get(`http://${import.meta.env.VITE_HOST_NAME}:55767/flights/${id}`)
@@ -68,6 +73,7 @@ export function UpdateFlightForm() {
 
     const navigate = useNavigate()
 
+    // Handles flight form input change
     async function handleInputChange(event: ChangeEvent<HTMLSelectElement | HTMLInputElement>) {
         const { name, value } = event.target
         setFormData((prevFormData) => ({
@@ -76,6 +82,7 @@ export function UpdateFlightForm() {
         }))
     }
 
+    // Handle form submission for flight updates based on flight id
     async function handleSubmit(event: FormEvent<HTMLFormElement>) {
         event.preventDefault()
 

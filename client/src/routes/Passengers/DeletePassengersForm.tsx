@@ -2,6 +2,7 @@ import { FormEvent, useState, useEffect } from "react"
 import Axios from "axios"
 import { useNavigate, useParams } from "react-router-dom"
 
+// Define passengers property
 interface FormData {
     first_name: string,
     last_name: string,
@@ -17,6 +18,7 @@ interface FormData {
 export default function DeletePassengersForm() {
     const { id } = useParams();
 
+    // Initialize passengers data in client side
     const [formData, setFormData] = useState<FormData>({
         first_name: '',
         last_name: '',
@@ -29,6 +31,7 @@ export default function DeletePassengersForm() {
         passport_number: '',
     })
 
+    // Get request for current passengers using its id
     useEffect(() => {
         async function getPassengers() {
             const response = await Axios.get(`http://${import.meta.env.VITE_HOST_NAME}:55767/passengers/${id}`)
@@ -50,6 +53,7 @@ export default function DeletePassengersForm() {
 
     const navigate = useNavigate();
     
+    // Handle deleting passenger form using delete request
     async function handleSubmit(event: FormEvent<HTMLFormElement>) {
         event.preventDefault()
 

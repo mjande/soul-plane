@@ -2,6 +2,8 @@ import { FormEvent, ChangeEvent, useState, useEffect } from "react"
 import Axios from "axios"
 import { useNavigate, useParams } from "react-router-dom"
 
+
+// Define PlaneType property
 interface PlaneType {
     plane_type_id: number,
     type_name: string,
@@ -9,6 +11,7 @@ interface PlaneType {
     range_in_hrs: number
   }
 
+// Define Airport property
 interface Airport {
     airport_id: number;
     airport_name: string;
@@ -16,6 +19,8 @@ interface Airport {
     location?: string;
 }
 
+
+// Define plane property
 interface FormData {
     plane_type_id: number,
     current_airport_id?: number
@@ -23,6 +28,7 @@ interface FormData {
 
 export default function UpdatePlaneForm() {
     const { id } = useParams();
+    //Initialize plane types, airports, and planes data for client
     const [planeTypes, setPlaneTypes] = useState<PlaneType[]>([])
     const [airports, setAirports] = useState<Airport[]>([])
     
@@ -31,7 +37,9 @@ export default function UpdatePlaneForm() {
         current_airport_id: 1
     })
 
+
     useEffect(() => {
+        // Get request to grab the current plane using plane id
         async function getPlane() {
             const response = await Axios.get(`http://${import.meta.env.VITE_HOST_NAME}:55767/planes/${id}`)
             const data = response.data[0] 
@@ -42,11 +50,13 @@ export default function UpdatePlaneForm() {
             })
         }
 
+        // Get request to grab plane types data
         async function getPlaneTypes() {
             const response = await Axios.get(`http://${import.meta.env.VITE_HOST_NAME}:55767/plane-types`)
             setPlaneTypes(response.data)
         }
 
+        // Get request to grab airports data
         async function getAirports() {
             const response = await Axios.get(`http://${import.meta.env.VITE_HOST_NAME}:55767/airports`)
             response.data.push({ airport_id: "", airport_name: "Currently Unavailable" })
@@ -61,6 +71,8 @@ export default function UpdatePlaneForm() {
 
     const navigate = useNavigate();
 
+
+    // Handle select drop down change
     async function handleSelectChange(event: ChangeEvent<HTMLSelectElement>) {
         const { name, value } = event.target
 
@@ -70,6 +82,7 @@ export default function UpdatePlaneForm() {
         }))
     }
 
+    // Handle submitting updated plane form using put request
     async function handleSubmit(event: FormEvent<HTMLFormElement>) {
         event.preventDefault()
 

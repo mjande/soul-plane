@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom"
 import Axios from "axios"
 
+
+// Define Plane property
 interface Plane {
   plane_id: number,
   plane_type: string,
@@ -9,8 +11,10 @@ interface Plane {
 }
 
 function Planes() {
+  // Initialize plane data into client side
   const [planes, setPlanes] = useState<Plane[]>([])
 
+  // Get request to grab all plane data from backend
   useEffect(() => {
     async function getPlanes() {
       const response = await Axios.get(`http://${import.meta.env.VITE_HOST_NAME}:55767/planes`)

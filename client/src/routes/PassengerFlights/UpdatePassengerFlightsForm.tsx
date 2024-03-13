@@ -3,12 +3,14 @@ import Axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 import { Airport } from "../Airports";
 
+// Define flights property
 interface Flights {
   flight_id: string;
   arrive_airport_id: string;
   depart_airport_id: string;
 }
 
+// Define passenger property
 interface Passenger {
   passenger_id: string;
   first_name: string;
@@ -16,6 +18,7 @@ interface Passenger {
 }
 
 export default function UpdatePassengerForm() {
+  // Grab flight id and passenger id and initialize data for flights, passengers, airports, and passenger flights
   const { fid, pid } = useParams();
   const [originalFid] = useState(fid);
   const [originalPid] = useState(pid);
@@ -27,12 +30,14 @@ export default function UpdatePassengerForm() {
     passenger_id: pid,
   });
 
+  // Grab airports using a get request to the backend
   useEffect(() => {
     Axios.get(`http://${import.meta.env.VITE_HOST_NAME}:55767/airports`).then((response) => {
       setAirports(response.data);
     });
   }, []);
 
+  // Get request for passengers and flights
   useEffect(() => {
     async function getPassengers() {
       try {
@@ -63,6 +68,7 @@ export default function UpdatePassengerForm() {
 
   const navigate = useNavigate();
 
+  // Handle input changes for updating passenger flights
   async function handleInputChange(event: ChangeEvent<HTMLSelectElement>) {
     const { name, value } = event.target;
     console.log(name, value)
@@ -72,6 +78,7 @@ export default function UpdatePassengerForm() {
     }));
   }
 
+  // Handle updating passenger flight form using put request
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     try {

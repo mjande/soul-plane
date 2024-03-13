@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom"
 import Axios from "axios"
 
+// Define Airport properties
 export interface Airport {
     airport_id: number;
     airport_name: string;
@@ -10,8 +11,10 @@ export interface Airport {
   }
 
 function Airports() {
+    // Initialize airport data
     const [airports, setAirports] = useState<Airport[]>([]);
 
+    // Get request for airport data
     useEffect(() => {
         Axios.get(`http://${import.meta.env.VITE_HOST_NAME}:55767/Airports`).then((response) => {
           setAirports(response.data);

@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Axios from "axios";
 
+
+// Define Flight property
 interface Flight {
   flight_id: number,
   plane_id: number, 
@@ -13,8 +15,11 @@ interface Flight {
 }
 
 function Flights() {
+  // Initialize flight for clientside
   const [flights, setFlights] = useState<Flight[]>([])
 
+
+  // Get request for flights in the database
   useEffect(() => {
     async function getFlights() {
       const response = await Axios.get(`http://${import.meta.env.VITE_HOST_NAME}:55767/flights`)
