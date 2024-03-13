@@ -86,23 +86,28 @@ export default function UpdatePassengersForm() {
                 </legend>
                 <fieldset className="fields">
                     <label>First Name</label>
-                    <input type="text" name="first_name" onChange={handleInputChange} value={formData.first_name}/>
+                    <input type="text" name="first_name" onChange={handleInputChange} value={formData.first_name} required/>
                     <label>Last Name</label>
-                    <input type="text" name="last_name" onChange={handleInputChange} value={formData.last_name}/>
+                    <input type="text" name="last_name" onChange={handleInputChange} value={formData.last_name} required />
                     <label>Phone</label>
-                    <input type="tel" name="phone" onChange={handleInputChange} value={formData.phone}/>
+                    {/* 
+                        Pattern for validating phone numbers from MDN Web Docs
+                        Source URL: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/tel
+                        Date: 3/13/24 
+                    */}
+                    <input type="tel" name="phone" onChange={handleInputChange} value={formData.phone} required pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" placeholder="123-456-7890"/>
                     <label>Email</label>
-                    <input type="email" name="email" onChange={handleInputChange} value={formData.email}/>
+                    <input type="email" name="email" onChange={handleInputChange} value={formData.email} required placeholder="username@email.com"/>
                     <label>Address</label>
-                    <input type="text" name="address" onChange={handleInputChange} value={formData.address}/>
+                    <input type="text" name="address" onChange={handleInputChange} value={formData.address} required />
                     <label>City</label>
-                    <input type="text" name="city" onChange={handleInputChange} value={formData.city}/>
+                    <input type="text" name="city" onChange={handleInputChange} value={formData.city} required/>
                     <label>State</label>
-                    <input type="text" name="state_abbr" onChange={handleInputChange} value={formData.state_abbr}/>
+                    <input type="text" name="state_abbr" onChange={handleInputChange} value={formData.state_abbr} required placeholder="OR" maxLength={2} pattern="[A-Z]{2}"/>
                     <label>Zip Code</label>
-                    <input type="text" pattern="[0-9]{5}" name="zip_code" onChange={handleInputChange} value={formData.zip_code}/>
+                    <input type="text" pattern="[0-9]{5}" name="zip_code" onChange={handleInputChange} value={formData.zip_code} required placeholder="99999" maxLength={5}/>
                     <label>Passport Number</label>
-                    <input type="text" name="passport_number" onChange={handleInputChange} value={formData.passport_number}/>
+                    <input type="text" name="passport_number" onChange={handleInputChange} value={formData.passport_number} required maxLength={9}/>
                 </fieldset>
                 <div className="buttons-container">
                     <input className="btn" type="submit" value="Update Passenger" />
