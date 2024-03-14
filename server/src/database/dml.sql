@@ -180,22 +180,22 @@ DELETE FROM Plane_types WHERE plane_type_id = :plane_type_id_selected_from_brows
 /* Passengers Flights */
 
 -- Get all flights for each passenger
-SELECT Passengers.first_name, Passengers.last_name, DepartAirport.airport_name, ArriveAirport.airport_name, Flights.depart_time, Flights.arrive_time FROM Passengers_flights
-    JOIN Passengers ON Passengers_flights.passenger_id = Passengers.passenger_id
-    JOIN Flights ON Passengers_flights.flight_id = Flights.flight_id
+SELECT Passengers.first_name, Passengers.last_name, DepartAirport.airport_name, ArriveAirport.airport_name, Flights.depart_time, Flights.arrive_time FROM Passenger_Flights
+    JOIN Passengers ON Passenger_Flights.passenger_id = Passengers.passenger_id
+    JOIN Flights ON Passenger_Flights.flight_id = Flights.flight_id
     JOIN Airports AS DepartAirport ON Flights.depart_airport_id = DepartAirport.airport_id
     JOIN Airports AS ArriveAirport ON Flights.arrive_airport_id = ArriveAirport.airport_id;
 
 -- Associate a passenger with a flight (M:M relationship addition)
-INSERT INTO Passengers_flights (passenger_id, flight_id)
+INSERT INTO Passenger_Flights (passenger_id, flight_id)
     VALUES (:passenger_dropdown_input, :flight_dropdown_input);
 
 -- Update the relationship between a passenger and a flight (M:M relationship update)
-UPDATE Passengers_flights
+UPDATE Passenger_Flights
     SET passenger_id = :passenger_dropdown_input,
     flight_id = :flight_dropdown_input;
 
 -- Dis-associate a passenger with a flight (M:M relationship deletion)
-DELETE FROM Passengers_flights 
-    WHERE passenger_id = :passenger_id_selected_from_browse_passengers_flights_page
-    AND flight_id = :flight_id_selected_from_browse_passengers_flights_page
+DELETE FROM Passenger_Flights 
+    WHERE passenger_id = :passenger_id_selected_from_browse_Passenger_Flights_page
+    AND flight_id = :flight_id_selected_from_browse_Passenger_Flights_page
