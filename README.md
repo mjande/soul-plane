@@ -1,20 +1,74 @@
 # Soul Plane
 
-Documentation for front-end and back-end can be found in the README.md files in the client and server subdirectories. Read through the files for more information about accessing the front- and back-end.
+This application is an airline fleet management tool developed as part of the Introduction to Databases course at Oregon State University. It is designed to fulfill the needs of a small regional airline that has a fleet of under 50 planes and sells tickets for ~30 direct flights each week. The airline serves around 500 customers a week and has an annual revenue of roughly $15 million. The database for this airline stores data for its flights each week, and each flight goes from one airport to another using a particular plane in the fleet and containing a certain number of passengers. The airline uses this database to maintain data about their current fleet and record flights as transactions involving a plane flying from one airport to another with a number of associated passengers.
 
 ## Citations
-- Within our backend we used [the starter app/code](https://github.com/osu-cs340-ecampus/nodejs-starter-app) provided on eCampus to get a foundation on getting started with our node.js backend. We also used [mySQL](https://sidorares.github.io/node-mysql2/docs) docs to get our code to interact with the database, [CORS request](https://www.twilio.com/en-us/blog/add-cors-support-express-typescript-api), and used the [express docs](https://expressjs.com/en/guide/routing.html) for the rest of our needs in the creation and usage of routers. A few small changes were also adapted from the following sources: [MDN Web Docs](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/tel) for form validation, and [StackOverflow](https://stackoverflow.com/questions/69264472/axios-error-typescript-annotation-must-be-any-or-unknown-if) and [TypeScript docs](https://www.typescriptlang.org/docs/handbook/2/narrowing.html#using-type-predicates) for type checking.
+Within our backend we used [the starter app/code](https://github.com/osu-cs340-ecampus/nodejs-starter-app) provided on Canvas to get a foundation on getting started with our node.js backend. We also used the [mySQL](https://sidorares.github.io/node-mysql2/docs) docs to get our code to interact with the database, a [Twilio blog post](https://www.twilio.com/en-us/blog/add-cors-support-express-typescript-api) for fixing issues related to Cross-Origin requests, and the [Express docs](https://expressjs.com/en/guide/routing.html) for the rest of our needs in the creation and usage of routers. A few small changes were also adapted from the following sources: [MDN Web Docs](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/tel) for form validation, and [StackOverflow](https://stackoverflow.com/questions/69264472/axios-error-typescript-annotation-must-be-any-or-unknown-if) and [TypeScript docs](https://www.typescriptlang.org/docs/handbook/2/narrowing.html#using-type-predicates) for type checking.
+
+### Citation Links
+- Node.js Starter App: https://github.com/osu-cs340-ecampus/nodejs-starter-app
+- MySQL docs: https://sidorares.github.io/node-mysql2/docs
+- Twilio blog post: https://www.twilio.com/en-us/blog/add-cors-support-express-typescript-api
+- Express docs: https://expressjs.com/en/guide/routing.html
+- MDN Web docs: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/tel
+- Stack Overflow post: https://stackoverflow.com/questions/69264472/axios-error-typescript-annotation-must-be-any-or-unknown-if
+- TypeScript docs: https://www.typescriptlang.org/docs/handbook/2/narrowing.html#using-type-predicates
+
+## Usage
+
+To use the application, you must use a VPN to connect to OSU's flip servers. To access the front end (UI) of the application, connect to the Flip 2 server and navigate to `flip2.engr.oregonstate.edu:2275`. The home page contains links to each of the entities in the database, where a user can create, read, update, or delete any entity record. 
+
+## Local Installation
+
+If you wish to work with a local version of the application, you must first have these dependencies installed:
+- MySQL (with a MySQL server running on your local system)
+- Node.js
+- Node Package Manager (npm)
+
+Start by cloning the project into a local directory using `git clone git@github.com:paul-nguyen-1/soul-plane.git`. Before starting up the application, you will need to define and populate a local database on your local MySQL server:
+
+```.sh
+cd soul-plane/server/src/database
+mysql -u [local-database-username] -p [local-database-name]
+source ddl.sql
+```
+
+You will be prompted to enter your database password before running the DDL file. If executed correctly, you should see data for each of the entities displayed in your terminal. Exit out of MySQL in your terminal. 
+
+Next, you will need to add your database credentials to a .env file in the `server` directory so that the application's backend can connect to your local database. The .env file should follow this format:
+
+```
+DBHOST = "127.0.0.1"
+DBUSER = "[local-database-username]"
+DBPASSWORD = "[local-database-password]"
+DBDATABASE = "[local-database-name]"
+```
+
+You are now ready to start up the application's backend. Navigate back to the `server` directory and execute the following commands:
+
+```.sh
+npm install
+npm run dev
+```
+
+You can test that the backend is running correctly by running a sample query to the backend URL, such as `localhost:55767/Airports`. That request should return the three airports just loaded into the database.
+
+Finally, to start the application's frontend, create a .env file in the `client` directory with just the line `VITE_HOST_NAME=localhost`. Then, navigate to the `client` folder and execute these commands:
+
+```.sh
+npm install
+npm run dev
+```
+
+The application should now be running at `localhost:2275`
+
 
 ## TODO
 - Review Executive Summary for typos (Matt)
 - Capture screenshots of each of the UI pages on the website (especially noting delete from M:N, NULLable relationship, and M:N update) (Paul)
-- Polish root README (Matt)
-- Polish front end README (Matt)
-- Polish back end README (Matt)
-- Double check phone number formatting in forms is okay (Paul)
-- Change PassengersFlights to PassengerFlights anywhere that occurs (easier to say and matches what we have been using for routes in code) (Matt)
 
 ### Completed
+- Polish README (Matt)
 - Condense changes to 1 page executive summary
 - Fix feedback received from Draft 5 Ed post
 - Write citations where needed (and highligh original work where appropriate)
@@ -22,6 +76,7 @@ Documentation for front-end and back-end can be found in the README.md files in 
 - Make sure queries in backend match queries in DML.sql
 - Make sure DDL.sql is cleanly importable
 - Add citation note about starter code to README
+- Change PassengersFlights to PassengerFlights anywhere that occurs (easier to say and matches what we have been using for routes in code) (Matt)
 
 ## Suggestions from Ed
 - "When deleting a passenger, the data on the confirmation screen overflows outside of the border. (I am using Mozilla Firefox on Windows 10)" - I can't reproduce this so maybe don't worry about it?
