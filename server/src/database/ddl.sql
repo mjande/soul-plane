@@ -84,9 +84,9 @@ INSERT INTO Flights (depart_airport_id, arrive_airport_id, plane_id, depart_time
 (3, 1, 2, '2024-04-20 09:45:00', '2024-05-22 11:15:00');
 
 
--- Create Passenger_Flights Table
-DROP TABLE IF EXISTS Passenger_Flights;
-CREATE TABLE Passenger_Flights (
+-- Create Passenger_flights Table
+DROP TABLE IF EXISTS Passenger_flights;
+CREATE TABLE Passenger_flights (
     passenger_id INT NOT NULL,
     flight_id INT NOT NULL,
     PRIMARY KEY (passenger_id, flight_id),
@@ -96,8 +96,8 @@ CREATE TABLE Passenger_Flights (
         ON DELETE CASCADE
 );
 
--- Insert values into Passenger_Flights table
-INSERT INTO Passenger_Flights (flight_id, passenger_id) VALUES
+-- Insert values into Passenger_flights table
+INSERT INTO Passenger_flights (flight_id, passenger_id) VALUES
 (2, 1),
 (3, 2),
 (1, 3);
@@ -131,5 +131,5 @@ select * from Airports;
 select * from Plane_types;
 select * from Planes;
 select * from Flights;
-select * from Passenger_Flights;
+select * from Passenger_flights;
 select * from Passengers;

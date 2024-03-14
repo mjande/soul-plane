@@ -30,7 +30,7 @@ function isMySQLError(error: unknown): error is MySQLError {
 router.get("/", async (req: Request, res: Response) => {
     try {
         // Define query
-        const query = 'SELECT * FROM Passenger_Flights;';
+        const query = 'SELECT * FROM Passenger_flights;';
 
         // Get results from database
         const [results] = await db.pool.query(query);
@@ -53,7 +53,7 @@ router.post("/", async (req: Request, res: Response) => {
         const passenger_id = data.passenger_id;
     
         const insertQuery = `
-            INSERT INTO Passenger_Flights (flight_id, passenger_id
+            INSERT INTO Passenger_flights (flight_id, passenger_id
             ) VALUES ("${flight_id}", "${passenger_id}");
         `;
   
@@ -91,7 +91,7 @@ router.put("/:fid/:pid", async (req: Request, res: Response) => {
         const passenger_id = data.passenger_id  
     
         let updateQuery = `
-            UPDATE Passenger_Flights 
+            UPDATE Passenger_flights 
                 SET flight_id='${flight_id}', passenger_id ='${passenger_id}' 
                 WHERE flight_id = '${fid}' AND passenger_id = '${pid}'
         `;
@@ -121,7 +121,7 @@ router.delete("/:fid/:pid", async (req: Request, res: Response) => {
         const data = req.body;
         const flight_id = data.flight_id;
         const passenger_id = data.passenger_id;
-        const deleteQuery = `DELETE FROM Passenger_Flights WHERE flight_id = ${flight_id} AND passenger_id = ${passenger_id}`
+        const deleteQuery = `DELETE FROM Passenger_flights WHERE flight_id = ${flight_id} AND passenger_id = ${passenger_id}`
   
         // Get results from database
         const [results] = await db.pool.query(deleteQuery)
