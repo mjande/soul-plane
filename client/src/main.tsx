@@ -30,6 +30,9 @@ import NewAirports from './routes/Airports/NewAirports.tsx';
 import { UpdateAirports } from './routes/Airports/UpdateAirports.tsx';
 import DeleteAirports from './routes/Airports/DeleteAirports.tsx';
 
+// Utilize Browser Router from React Router to set up Pages
+// https://reactrouter.com/en/main/routers/create-browser-router
+
 const router = createBrowserRouter([
   {
     path: "/",
