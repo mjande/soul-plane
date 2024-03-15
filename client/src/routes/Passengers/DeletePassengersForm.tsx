@@ -72,7 +72,7 @@ export default function DeletePassengersForm() {
         <div id="delete">
         <form id="deletePassengers" method="put" onSubmit={handleSubmit}>
           <legend>
-            <strong>Delete Passenger Type</strong>
+            <strong>Delete Passenger</strong>
           </legend>
           <fieldset className="fields">
             <p>Are you sure you wish to delete the following?</p>

@@ -93,7 +93,7 @@ export default function NewPassengerFlights() {
       <div id="insert">
         <form id="addPassengers" method="post" onSubmit={handleSubmit}>
           <legend>
-            <strong>Add Passenger</strong>
+            <strong>Add Passenger Flight</strong>
           </legend>
           <fieldset className="fields">
             <label>Flight</label>
