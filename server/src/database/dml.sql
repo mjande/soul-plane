@@ -12,14 +12,14 @@ Author:     Paul Nguyen, Matt Anderson
 /* Queries to populate dropdowns for creating and updating other entities */
 
 -- Get plane IDs and plane types for plane id dropdown
-SELECT Planes.plane_id, Plane_types.type_name FROM Planes
-    JOIN Plane_types ON Planes.plane_type_id = Plane_types.plane_type_id;
+SELECT Planes.plane_id, Plane_Types.type_name FROM Planes
+    JOIN Plane_Types ON Planes.plane_type_id = Plane_Types.plane_type_id;
 
 -- Get all airport IDs and names to populate Departing Airport, Arriving Airport, and Current Airport dropdowns
 SELECT airport_id, airport_name FROM Airports;
 
 -- Get all plane type IDs and type_names for plane type dropdown
-SELECT plane_type_id, type_name FROM Plane_types;
+SELECT plane_type_id, type_name FROM Plane_Types;
 
 -- Get passenger IDs, and first and last names for passenger dropdown
 SELECT passenger_id, first_name, last_name FROM Passengers;
@@ -33,22 +33,22 @@ SELECT Flights.flight_id, DepartAirport.airport_name AS "Departure Airport", Arr
 /* Flights */
 
 -- Get all flights 
-SELECT flight_id, Flights.plane_id, Plane_types.type_name AS plane_type, depart_airport_id,
+SELECT flight_id, Flights.plane_id, Plane_Types.type_name AS plane_type, depart_airport_id,
     DepartAirport.airport_name AS depart_airport_name, arrive_airport_id, ArriveAirport.airport_name AS arrive_airport_name,
     depart_time, arrive_time FROM Flights
     JOIN Airports AS DepartAirport ON Flights.depart_airport_id = DepartAirport.airport_id
     JOIN Airports AS ArriveAirport ON Flights.arrive_airport_id = ArriveAirport.airport_id
     JOIN Planes ON Flights.plane_id = Planes.plane_id
-    JOIN Plane_types ON Planes.plane_type_id = Plane_types.plane_type_id;
+    JOIN Plane_Types ON Planes.plane_type_id = Plane_Types.plane_type_id;
 
 -- Get flight by ID
-SELECT flight_id, Flights.plane_id, Plane_types.type_name AS plane_type, depart_airport_id,
+SELECT flight_id, Flights.plane_id, Plane_Types.type_name AS plane_type, depart_airport_id,
     DepartAirport.airport_name AS depart_airport_name, arrive_airport_id, ArriveAirport.airport_name AS arrive_airport_name,
     depart_time, arrive_time FROM Flights
     JOIN Airports AS DepartAirport ON Flights.depart_airport_id = DepartAirport.airport_id
     JOIN Airports AS ArriveAirport ON Flights.arrive_airport_id = ArriveAirport.airport_id
     JOIN Planes ON Flights.plane_id = Planes.plane_id
-    JOIN Plane_types ON Planes.plane_type_id = Plane_types.plane_type_id
+    JOIN Plane_Types ON Planes.plane_type_id = Plane_Types.plane_type_id
     WHERE Flights.flight_id = :id_from_url;
 
 -- Create a new flight 
@@ -126,16 +126,16 @@ DELETE FROM Passengers WHERE passenger_id = :passenger_id_selected_from_browse_p
 /* Planes */
 
 -- Get all planes
-SELECT plane_id, Plane_types.type_name AS plane_type, 
+SELECT plane_id, Plane_Types.type_name AS plane_type, 
     Airports.airport_name AS current_airport 
     FROM Planes
-    JOIN Plane_types ON Planes.plane_type_id = Plane_types.plane_type_id
+    JOIN Plane_Types ON Planes.plane_type_id = Plane_Types.plane_type_id
     LEFT JOIN Airports ON Planes.current_airport_id = Airports.airport_id;
 
 -- Get a plane by ID
-SELECT plane_id, Plane_types.type_name AS plane_type,
+SELECT plane_id, Plane_Types.type_name AS plane_type,
     Airports.airport_name AS current_airport FROM Planes
-    JOIN Plane_types ON Planes.plane_type_id = Plane_types.plane_type_id
+    JOIN Plane_Types ON Planes.plane_type_id = Plane_Types.plane_type_id
     LEFT JOIN Airports ON Planes.current_airport_id = Airports.airport_id
     WHERE plane_id = :plane_id_from_form;
 
@@ -155,24 +155,24 @@ DELETE FROM Planes WHERE plane_id = :plane_id_selected_from_browse_planes_page
 /* Plane types */
 
 -- Get all plane types
-SELECT * FROM Plane_types;
+SELECT * FROM Plane_Types;
 
 -- Get plane type by ID
-SELECT * FROM Plane_types WHERE plane_type_id = :id_from_url;
+SELECT * FROM Plane_Types WHERE plane_type_id = :id_from_url;
 
 -- Create a new plane type
-INSERT INTO Plane_types (type_name, capacity, range_in_hrs)
+INSERT INTO Plane_Types (type_name, capacity, range_in_hrs)
     VALUES (:type_name_input, :capacity_input, :range_in_hrs_input);
 
 -- Update a plane type
-UPDATE Plane_types
+UPDATE Plane_Types
     SET type_name = :type_name_input,
     capacity = :capacity_input,
     range_in_hrs = :range_in_hrs_input
     WHERE plane_type_id = :plane_type_id_from_form
 
 -- Delete a plane type
-DELETE FROM Plane_types WHERE plane_type_id = :plane_type_id_selected_from_browse_plane_types_page
+DELETE FROM Plane_Types WHERE plane_type_id = :plane_type_id_selected_from_browse_Plane_Types_page
 
 
 /* Passengers Flights */

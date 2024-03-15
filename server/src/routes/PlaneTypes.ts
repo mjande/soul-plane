@@ -16,7 +16,7 @@ import db from "../database/db-connector"
 router.get("/", async (req: Request, res: Response) => {
     try {
         // Define query
-        const selectQuery = 'SELECT * FROM Plane_types'
+        const selectQuery = 'SELECT * FROM Plane_Types'
 
         // Get results from database
         const [results] = await db.pool.query(selectQuery)
@@ -34,7 +34,7 @@ router.get("/", async (req: Request, res: Response) => {
 router.get("/:id", async (req: Request, res: Response) => {
     try {
         // Define query
-        const selectQuery = `SELECT * FROM Plane_types WHERE plane_type_id = ${req.params.id}`
+        const selectQuery = `SELECT * FROM Plane_Types WHERE plane_type_id = ${req.params.id}`
 
         // Get results from database
         const [results] = await db.pool.query(selectQuery)
@@ -57,7 +57,7 @@ router.post("/", async (req: Request, res: Response) => {
         const capacity = parseInt(data.capacity)
         const rangeInHours = parseInt(data.range_in_hrs)
   
-        const insertQuery = `INSERT INTO Plane_types (type_name, capacity, range_in_hrs)
+        const insertQuery = `INSERT INTO Plane_Types (type_name, capacity, range_in_hrs)
         VALUES ("${typeName}", ${capacity}, ${rangeInHours});`
   
         // Get results from database
@@ -83,7 +83,7 @@ router.put("/:id", async (req: Request, res: Response) => {
         const capacity = parseInt(data.capacity)
         const rangeInHours = parseInt(data.range_in_hrs)
         const updateQuery = `
-            UPDATE Plane_types 
+            UPDATE Plane_Types 
                 SET type_name = "${typeName}",
                 capacity = ${capacity},
                 range_in_hrs = ${rangeInHours}
@@ -107,7 +107,7 @@ router.delete("/:id", async (req: Request, res: Response) => {
     try {
         // Define query
         const planeTypeID = parseInt(req.params.id)
-        const deleteQuery = `DELETE FROM Plane_types WHERE plane_type_id = ${planeTypeID}`
+        const deleteQuery = `DELETE FROM Plane_Types WHERE plane_type_id = ${planeTypeID}`
   
         // Get results from databse
         const [results] = await db.pool.query(deleteQuery)

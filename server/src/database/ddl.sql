@@ -26,17 +26,17 @@ INSERT INTO Airports (airport_name, airport_code, location) VALUES
 ('Seattle-Tacoma International Airport', 'SEA', 'SeaTac, WA'),
 ('Spokane International Airport', 'GEG', 'Spokane, WA');
 
--- Create Plane_types Table
-DROP TABLE IF EXISTS Plane_types;
-CREATE TABLE Plane_types (
+-- Create Plane_Types Table
+DROP TABLE IF EXISTS Plane_Types;
+CREATE TABLE Plane_Types (
     plane_type_id INT PRIMARY KEY AUTO_INCREMENT,
     type_name VARCHAR(255) NOT NULL,
     capacity INT NOT NULL,
     range_in_hrs INT NOT NULL
 );
 
--- Insert values into Plane_types table
-INSERT INTO Plane_types (type_name, capacity, range_in_hrs) VALUES
+-- Insert values into Plane_Types table
+INSERT INTO Plane_Types (type_name, capacity, range_in_hrs) VALUES
 ('Airbus A320-200', 180, 5),
 ('Boeing B737-800', 190, 5),
 ('Embraer 135', 37, 3);
@@ -47,7 +47,7 @@ CREATE TABLE Planes (
     plane_id INT PRIMARY KEY AUTO_INCREMENT,
     plane_type_id INT NOT NULL,
     current_airport_id INT,
-    FOREIGN KEY (plane_type_id) REFERENCES Plane_types(plane_type_id)
+    FOREIGN KEY (plane_type_id) REFERENCES Plane_Types(plane_type_id)
         ON DELETE RESTRICT,
     FOREIGN KEY (current_airport_id) REFERENCES Airports(airport_id)
     
@@ -128,7 +128,7 @@ SET FOREIGN_KEY_CHECKS=1;
 COMMIT;
 
 select * from Airports;
-select * from Plane_types;
+select * from Plane_Types;
 select * from Planes;
 select * from Flights;
 select * from Passenger_flights;

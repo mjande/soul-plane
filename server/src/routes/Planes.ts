@@ -17,9 +17,9 @@ router.get("/", async (req: Request, res: Response) => {
     try {
         // Define query
         const selectQuery = `
-            SELECT plane_id, Plane_types.type_name AS plane_type,
+            SELECT plane_id, Plane_Types.type_name AS plane_type,
                 Airports.airport_name AS current_airport FROM Planes
-                JOIN Plane_types ON Planes.plane_type_id = Plane_types.plane_type_id
+                JOIN Plane_Types ON Planes.plane_type_id = Plane_Types.plane_type_id
                 LEFT JOIN Airports ON Planes.current_airport_id = Airports.airport_id;
         `
   
@@ -40,9 +40,9 @@ router.get("/:id", async (req: Request, res: Response) => {
     try {
         // Define query
         const selectQuery = `
-            SELECT plane_id, Planes.plane_type_id AS plane_type_id, Plane_types.type_name AS plane_type, 
+            SELECT plane_id, Planes.plane_type_id AS plane_type_id, Plane_Types.type_name AS plane_type, 
                 Planes.current_airport_id AS current_airport_id, Airports.airport_name AS current_airport FROM Planes
-                JOIN Plane_types ON Planes.plane_type_id = Plane_types.plane_type_id\
+                JOIN Plane_Types ON Planes.plane_type_id = Plane_Types.plane_type_id\
                 LEFT JOIN Airports ON Planes.current_airport_id = Airports.airport_id\
                 WHERE plane_id = ${req.params.id};
         `
