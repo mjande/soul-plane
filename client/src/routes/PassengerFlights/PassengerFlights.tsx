@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Axios from 'axios';
 import { Passenger } from "../Passengers/Passengers";
-import { Airport } from "../Airports";
+import { Airport } from "../Airports/Airports";
 
 // Define PassengerFlights property
 export interface PassengerFlights {

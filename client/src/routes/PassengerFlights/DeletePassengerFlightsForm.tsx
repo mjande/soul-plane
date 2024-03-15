@@ -1,7 +1,7 @@
 import { FormEvent, useState, useEffect } from "react";
 import Axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
-import { Airport } from "../Airports";
+import { Airport } from "../Airports/Airports";
 
 
 // Define flights properties
@@ -100,20 +100,21 @@ export default function DeletePassengerFlightsForm() {
         <legend>
           <strong>Delete Passenger Flight</strong>
         </legend>
+        <fieldset>
         <p>Are you sure you wish to delete the following?</p>
+          {flights && (
+            <div>
+              <span>Flight: </span>
+              {airports[Number(flights.depart_airport_id) - 1]?.airport_name} <span>&#8594;</span> {airports[Number(flights.arrive_airport_id) - 1]?.airport_name}
+            </div>
+          )}
 
-        {flights && (
-          <div>
-            <span>Flight: </span>
-            {airports[Number(flights.depart_airport_id) - 1]?.airport_name} <span>&#8594;</span> {airports[Number(flights.arrive_airport_id) - 1]?.airport_name}
-          </div>
-        )}
-
-        {passenger && (
-          <div>
-            <span>Name: {passenger.first_name} {passenger.last_name}</span>
-          </div>
-        )}
+          {passenger && (
+            <div>
+              <span>Name: {passenger.first_name} {passenger.last_name}</span>
+            </div>
+          )}
+        </fieldset>
 
         <div className="buttons-container">
           <input
