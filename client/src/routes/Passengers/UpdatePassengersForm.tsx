@@ -107,7 +107,7 @@ export default function UpdatePassengersForm() {
                     <label>Zip Code</label>
                     <input type="text" pattern="[0-9]{5}" name="zip_code" onChange={handleInputChange} value={formData.zip_code} required placeholder="99999" maxLength={5}/>
                     <label>Passport Number</label>
-                    <input type="text" name="passport_number" onChange={handleInputChange} value={formData.passport_number} required maxLength={9}/>
+                    <input type="text" name="passport_number" onChange={handleInputChange} value={formData.passport_number} required maxLength={20}/>
                 </fieldset>
                 <div className="buttons-container">
                     <input className="btn" type="submit" value="Update Passenger" />
