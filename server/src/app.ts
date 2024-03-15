@@ -1,15 +1,14 @@
-// Date: 2/27/2024
-// Express code adapted from
-// Source URL: https://github.com/osu-cs340-ecampus/nodejs-starter-app
-
-// Date: 2/27/2024
 // Code for interacting with MySQL database adapted from 
 // Source URL: https://sidorares.github.io/node-mysql2/docs
+// Date: 2/27/2024
 
 /* SETUP */
+
+// Express code adapted from
+// Source URL: https://github.com/osu-cs340-ecampus/nodejs-starter-app
+// Date: 2/27/2024
 import 'dotenv/config'
-import express, { Express, Request, Response } from "express";
-import { convertToSQLDateTime } from './utils';
+import express, { Express } from "express";
 
 const app: Express = express();
 const port = 55767;
@@ -34,13 +33,11 @@ const options: cors.CorsOptions = {
 
 app.use(cors(options))
 
-// Database
-import db from "./database/db-connector"
-
 /* ROUTES */
 
 // Creation and use of routers adapted from Express docs
 // Source URL: https://expressjs.com/en/guide/routing.html
+// Date: 3/15/24
 
 import planeTypesRouter from "./routes/PlaneTypes"
 app.use('/plane-types', planeTypesRouter)
@@ -61,6 +58,10 @@ import passengerFlightsRouter from "./routes/PassengerFlights"
 app.use("/passengerFlights", passengerFlightsRouter)
 
 /* LISTENER */
+
+// Express code adapted from
+// Source URL: https://github.com/osu-cs340-ecampus/nodejs-starter-app
+// Date: 2/27/2024
 app.listen(port, () => {
   console.log(
     `Express started on http://${process.env.DBHOST}:${port}; press Ctrl-C to terminate.`

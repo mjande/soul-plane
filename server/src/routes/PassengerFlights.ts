@@ -1,4 +1,4 @@
-// Routing infrastructure adapted from Express docs and Node Starter App
+// Express and database code adapted from Express docs and Node Starter App
 // Source URL: https://expressjs.com/en/guide/routing.html
 // Source URL: https://github.com/osu-cs340-ecampus/nodejs-starter-app
 // Date: 3/12/24
