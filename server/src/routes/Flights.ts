@@ -24,7 +24,7 @@ router.get("/", async (req: Request, res: Response) => {
                 depart_time, arrive_time FROM Flights
                 JOIN Airports AS DepartAirport ON Flights.depart_airport_id = DepartAirport.airport_id
                 JOIN Airports AS ArriveAirport ON Flights.arrive_airport_id = ArriveAirport.airport_id
-                JOIN Planes ON Flights.plane_id = Planes.plane_id\
+                JOIN Planes ON Flights.plane_id = Planes.plane_id
                 JOIN Plane_types ON Planes.plane_type_id = Plane_types.plane_type_id;
         `
                         

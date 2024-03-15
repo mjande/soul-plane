@@ -85,9 +85,9 @@ router.put("/:id", async (req: Request, res: Response) => {
         const updateQuery = `
             UPDATE Plane_types 
                 SET type_name = "${typeName}",
-                capacity = ${capacity},\
-                range_in_hrs = ${rangeInHours}\
-                WHERE plane_type_id = ${planeTypeId};\
+                capacity = ${capacity},
+                range_in_hrs = ${rangeInHours}
+                WHERE plane_type_id = ${planeTypeId};
         `
   
         // Get results from database

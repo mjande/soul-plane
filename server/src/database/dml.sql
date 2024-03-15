@@ -32,7 +32,7 @@ SELECT Flights.flight_id, DepartAirport.airport_name AS "Departure Airport", Arr
 
 /* Flights */
 
--- Get all flights (temp query until we nail down what data we want from this query)
+-- Get all flights 
 SELECT flight_id, Flights.plane_id, Plane_types.type_name AS plane_type, depart_airport_id,
     DepartAirport.airport_name AS depart_airport_name, arrive_airport_id, ArriveAirport.airport_name AS arrive_airport_name,
     depart_time, arrive_time FROM Flights
@@ -76,6 +76,9 @@ DELETE FROM Flights WHERE flight_id = :flight_id_selected_from_browse_flights_pa
 
 -- Get all airports
 SELECT * FROM Airports;
+
+-- Get airport by ID 
+SELECT * FROM Airports WHERE airport_id = ${req.params.id}
 
 -- Create a new airport
 INSERT INTO Airports (airport_name, airport_code, location) 
@@ -140,15 +143,10 @@ SELECT plane_id, Plane_types.type_name AS plane_type,
 INSERT INTO Planes (plane_type_id, current_airport_id)
     VALUES (:plane_type_dropdown_input, :current_airport_dropdown_input);
 
--- Update a plane 
+-- Update a plane (:current_airport_dropdown_input possibly NULL)
 UPDATE Planes
     SET plane_type_id = :plane_id_dropdown_input,
     current_airport_id = :current_airport_dropdown_input
-    WHERE plane_id = :plane_id_from_form;
-
--- Update a plane to maintenance status by setting its current airport to NULL
-UPDATE Planes
-    SET current_airport_id = NULL
     WHERE plane_id = :plane_id_from_form;
 
 -- Delete a plane
@@ -179,12 +177,8 @@ DELETE FROM Plane_types WHERE plane_type_id = :plane_type_id_selected_from_brows
 
 /* Passengers Flights */
 
--- Get all flights for each passenger
-SELECT Passengers.first_name, Passengers.last_name, DepartAirport.airport_name, ArriveAirport.airport_name, Flights.depart_time, Flights.arrive_time FROM Passenger_flights
-    JOIN Passengers ON Passenger_flights.passenger_id = Passengers.passenger_id
-    JOIN Flights ON Passenger_flights.flight_id = Flights.flight_id
-    JOIN Airports AS DepartAirport ON Flights.depart_airport_id = DepartAirport.airport_id
-    JOIN Airports AS ArriveAirport ON Flights.arrive_airport_id = ArriveAirport.airport_id;
+-- Get all flights for each passenger (flight and passengers names loaded from separate queries)
+SELECT * FROM Passenger_Flights;
 
 -- Associate a passenger with a flight (M:M relationship addition)
 INSERT INTO Passenger_flights (passenger_id, flight_id)
@@ -193,7 +187,8 @@ INSERT INTO Passenger_flights (passenger_id, flight_id)
 -- Update the relationship between a passenger and a flight (M:M relationship update)
 UPDATE Passenger_flights
     SET passenger_id = :passenger_dropdown_input,
-    flight_id = :flight_dropdown_input;
+    flight_id = :flight_dropdown_input
+    WHERE flight_id = :original_flight_id_from_url AND passenger_id = :original_passenger_id_from_url;
 
 -- Dis-associate a passenger with a flight (M:M relationship deletion)
 DELETE FROM Passenger_flights 
