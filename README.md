@@ -1,9 +1,11 @@
 # Soul Plane
 
-This application is an airline fleet management tool developed as part of the Introduction to Databases course at Oregon State University. It is designed to fulfill the needs of a small regional airline that has a fleet of under 50 planes and sells tickets for ~30 direct flights each week. The airline serves around 500 customers a week and has an annual revenue of roughly $15 million. The database for this airline stores data for its flights each week, and each flight goes from one airport to another using a particular plane in the fleet and containing a certain number of passengers. The airline uses this database to maintain data about their current fleet and record flights as transactions involving a plane flying from one airport to another with a number of associated passengers.
+This application is an airline fleet management tool developed as part of the Introduction to Databases course at Oregon State University. It is designed to fulfill the needs of a small regional airline that has a fleet of under 50 planes and sells tickets for ~30 direct flights each week. This fictional airline serves around 500 customers a week and has an annual revenue of roughly $15 million. The database for this airline stores data for its flights each week, and each flight goes from one airport to another using a particular plane in the fleet and containing a certain number of passengers. The airline uses this database to maintain data about their current fleet and record flights as transactions involving a plane flying from one airport to another with a number of associated passengers.
 
 ## Citations
-Within our backend we used [the starter app/code](https://github.com/osu-cs340-ecampus/nodejs-starter-app) provided on Canvas to get a foundation on getting started with our node.js backend. We also used the [mySQL](https://sidorares.github.io/node-mysql2/docs) docs to get our code to interact with the database, a [Twilio blog post](https://www.twilio.com/en-us/blog/add-cors-support-express-typescript-api) for fixing issues related to Cross-Origin requests, and the [Express docs](https://expressjs.com/en/guide/routing.html) for the rest of our needs in the creation and usage of routers. A few small changes were also adapted from the following sources: [MDN Web Docs](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/tel) for form validation, and [StackOverflow](https://stackoverflow.com/questions/69264472/axios-error-typescript-annotation-must-be-any-or-unknown-if) and [TypeScript docs](https://www.typescriptlang.org/docs/handbook/2/narrowing.html#using-type-predicates) for type checking.
+Within our backend we used [the starter app/code](https://github.com/osu-cs340-ecampus/nodejs-starter-app) provided on Canvas to get a foundation on getting started with our node.js backend. We also used the [mySQL](https://sidorares.github.io/node-mysql2/docs) docs to get our code to interact with the database, a [Twilio blog post](https://www.twilio.com/en-us/blog/add-cors-support-express-typescript-api) for fixing issues related to Cross-Origin requests, and the [Express docs](https://expressjs.com/en/guide/routing.html) for the rest of our needs in the creation and usage of routers. 
+
+A few small changes to the frontend were also adapted from the following sources: [MDN Web Docs](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/tel) for form validation, and [StackOverflow](https://stackoverflow.com/questions/69264472/axios-error-typescript-annotation-must-be-any-or-unknown-if) and [TypeScript docs](https://www.typescriptlang.org/docs/handbook/2/narrowing.html#using-type-predicates) for type checking. With the exception of the previous sources, all the React pages were entirely our own work.
 
 ### Citation Links
 - Node.js Starter App: https://github.com/osu-cs340-ecampus/nodejs-starter-app
@@ -61,35 +63,3 @@ npm run dev
 ```
 
 The application should now be running at `localhost:2275`
-
-
-## TODO
-- Review Executive Summary for typos (Matt)
-- Capture screenshots of each of the UI pages on the website (especially noting delete from M:N, NULLable relationship, and M:N update) (Paul)
-
-### Completed
-- Polish README (Matt)
-- Condense changes to 1 page executive summary
-- Fix feedback received from Draft 5 Ed post
-- Write citations where needed (and highligh original work where appropriate)
-- Add clarifying comments to HTML and JS files
-- Make sure queries in backend match queries in DML.sql
-- Make sure DDL.sql is cleanly importable
-- Add citation note about starter code to README
-- Change PassengersFlights to PassengerFlights anywhere that occurs (easier to say and matches what we have been using for routes in code) (Matt)
-
-## Suggestions from Ed
-- "When deleting a passenger, the data on the confirmation screen overflows outside of the border. (I am using Mozilla Firefox on Windows 10)" - I can't reproduce this so maybe don't worry about it?
-- Delete seems to not be working for Plane Types? - can't reproduce this one either
-
-### Completed Suggestions
-- Restrict NULL fields for Airports
-- Validate phone number and state in passengers and add placeholders
-- Restrict NULL fields for Passengers
-- Restrict NULL fields for Plane Types
-- Restrict NULL fields for PassengerFlights
-- Add default values for Create Flight
-- Add default values for Create Plane
-- Edit styles for passengers so form is a single column
-- Restrict flights to and from the same airport
-
