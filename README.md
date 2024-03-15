@@ -5,7 +5,7 @@ This application is an airline fleet management tool developed as part of the In
 ## Citations
 Within our backend we used [the starter app/code](https://github.com/osu-cs340-ecampus/nodejs-starter-app) provided on Canvas to get a foundation on getting started with our node.js backend. We also used the [mySQL](https://sidorares.github.io/node-mysql2/docs) docs to get our code to interact with the database, a [Twilio blog post](https://www.twilio.com/en-us/blog/add-cors-support-express-typescript-api) for fixing issues related to Cross-Origin requests, and the [Express docs](https://expressjs.com/en/guide/routing.html) for the rest of our needs in the creation and usage of routers. 
 
-A few small changes to the frontend were also adapted from the following sources: [MDN Web Docs](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/tel) for form validation, and [StackOverflow](https://stackoverflow.com/questions/69264472/axios-error-typescript-annotation-must-be-any-or-unknown-if) and [TypeScript docs](https://www.typescriptlang.org/docs/handbook/2/narrowing.html#using-type-predicates) for type checking. With the exception of the previous sources, all the React pages were entirely our own work.
+A few small changes to the frontend were also adapted from the following sources: [MDN Web Docs](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/tel) for form validation, [React Router](https://reactrouter.com/en/main) for setting up the page routes, [Axios](https://axios-http.com/docs/intro) for interacting with the server, and [StackOverflow](https://stackoverflow.com/questions/69264472/axios-error-typescript-annotation-must-be-any-or-unknown-if) and [TypeScript docs](https://www.typescriptlang.org/docs/handbook/2/narrowing.html#using-type-predicates) for type checking. With the exception of the previous sources, all the React pages were entirely our own work.
 
 ### Citation Links
 - Node.js Starter App: https://github.com/osu-cs340-ecampus/nodejs-starter-app
@@ -15,6 +15,8 @@ A few small changes to the frontend were also adapted from the following sources
 - MDN Web docs: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/tel
 - Stack Overflow post: https://stackoverflow.com/questions/69264472/axios-error-typescript-annotation-must-be-any-or-unknown-if
 - TypeScript docs: https://www.typescriptlang.org/docs/handbook/2/narrowing.html#using-type-predicates
+- React Router https://reactrouter.com/en/main
+- Axios https://axios-http.com/docs/intro
 
 ## Usage
 
