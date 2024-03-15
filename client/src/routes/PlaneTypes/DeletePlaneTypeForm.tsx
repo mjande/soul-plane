@@ -19,6 +19,7 @@ export default function DeletePlaneTypeForm() {
     })
 
     // Get request for current plane type
+    // https://axios-http.com/docs/api_intro
     useEffect(() => {
         async function getPlaneType() {
             const response = await Axios.get(`http://${import.meta.env.VITE_HOST_NAME}:55767/plane-types/${id}`)
@@ -37,6 +38,7 @@ export default function DeletePlaneTypeForm() {
     const navigate = useNavigate()
 
     // Handle submitting delete request for current plane type
+    // https://axios-http.com/docs/api_intro
     async function handleSubmit(event: FormEvent<HTMLFormElement>) {
         event.preventDefault()
 
