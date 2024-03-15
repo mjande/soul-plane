@@ -1,11 +1,17 @@
-// Express and database code adapted from Express docs and Node Starter App
+// Express imports adapted from Express docs and Node Starter App
 // Source URL: https://expressjs.com/en/guide/routing.html
 // Source URL: https://github.com/osu-cs340-ecampus/nodejs-starter-app
 // Date: 3/12/24
 
 import express, { Request, Response } from "express"
 const router = express.Router()
+
+// Database connection copied from Node Starter App
+// Source URL: https://github.com/osu-cs340-ecampus/nodejs-starter-app
+// Date: 3/15/24
 import db from "../database/db-connector"
+
+
 import { convertToSQLDateTime } from '../utils';
 
 // Routes adapted from Node Starter App with changes adapted from MySQL2 docs (with exception of individual SQL queries and processing unique fields, which was our own work)
