@@ -21,6 +21,7 @@ function Passengers() {
   const [passengers, setPassengers] = useState<Passenger[]>([]);  
 
   // Get request to get all passengers
+  // https://axios-http.com/docs/api_intro
   useEffect(() => {
     Axios.get(`http://${import.meta.env.VITE_HOST_NAME}:55767/passengers`).then((response) => {
       setPassengers(response.data)

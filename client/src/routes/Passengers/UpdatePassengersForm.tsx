@@ -32,6 +32,7 @@ export default function UpdatePassengersForm() {
     })
 
     // Get request for current passenger
+    // https://axios-http.com/docs/api_intro
     useEffect(() => {
         async function getPassengers() {
             const response = await Axios.get(`http://${import.meta.env.VITE_HOST_NAME}:55767/passengers/${id}`)
@@ -63,6 +64,7 @@ export default function UpdatePassengersForm() {
     }
     
     // Handle updating current passenger using a put request
+    // https://axios-http.com/docs/api_intro
     async function handleSubmit(event: FormEvent<HTMLFormElement>) {
         event.preventDefault()
 
