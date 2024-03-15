@@ -20,6 +20,7 @@ export default function DeletePlaneForm() {
     })
 
     // Grab current plane using planes id
+    // https://axios-http.com/docs/api_intro
     useEffect(() => {
         async function getPlane() {
             const response = await Axios.get(`http://${import.meta.env.VITE_HOST_NAME}:55767/planes/${id}`)
@@ -38,6 +39,7 @@ export default function DeletePlaneForm() {
     const navigate = useNavigate()
 
     // Handle deleting current plane id
+    // https://axios-http.com/docs/api_intro
     async function handleSubmit(event: FormEvent<HTMLFormElement>) {
         event.preventDefault()
 
