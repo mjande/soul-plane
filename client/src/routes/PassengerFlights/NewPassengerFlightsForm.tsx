@@ -29,6 +29,7 @@ export default function NewPassengerFlights() {
   });
 
   // Get request to get data for passengers, flights, airports
+  // https://axios-http.com/docs/api_intro
   useEffect(() => {
     Axios.get(`http://${import.meta.env.VITE_HOST_NAME}:55767/passengers`).then((response) => {
       setPassengers(response.data);
@@ -59,6 +60,7 @@ export default function NewPassengerFlights() {
   }
 
   // Send a post request for adding new passenger flights
+  // https://axios-http.com/docs/api_intro
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
