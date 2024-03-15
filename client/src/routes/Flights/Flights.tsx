@@ -20,6 +20,7 @@ function Flights() {
 
 
   // Get request for flights in the database
+  // https://axios-http.com/docs/api_intro
   useEffect(() => {
     async function getFlights() {
       const response = await Axios.get(`http://${import.meta.env.VITE_HOST_NAME}:55767/flights`)

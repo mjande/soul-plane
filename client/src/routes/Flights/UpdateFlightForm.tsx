@@ -41,6 +41,7 @@ export function UpdateFlightForm() {
     const [planes, setPlanes] = useState<Plane[]>([])
 
     // Get request for current flight, airports, and planes
+    // https://axios-http.com/docs/api_intro
     useEffect(() => {        
         async function getFlight() {
             const response = await Axios.get(`http://${import.meta.env.VITE_HOST_NAME}:55767/flights/${id}`)
@@ -83,6 +84,7 @@ export function UpdateFlightForm() {
     }
 
     // Handle form submission for flight updates based on flight id
+    // https://axios-http.com/docs/api_intro
     async function handleSubmit(event: FormEvent<HTMLFormElement>) {
         event.preventDefault()
 

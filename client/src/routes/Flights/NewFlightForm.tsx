@@ -37,6 +37,7 @@ export default function NewFlightForm() {
 
 
     // Get request to grab data from airport and planes
+    // https://axios-http.com/docs/api_intro
     useEffect(() => {
         async function getAirports() {
             const response = await Axios.get(`http://${import.meta.env.VITE_HOST_NAME}:55767/Airports`)
@@ -64,6 +65,7 @@ export default function NewFlightForm() {
     }
 
     // Handle post request to add new flights
+    // https://axios-http.com/docs/api_intro
     async function handleSubmit(event: FormEvent<HTMLFormElement>) {
         event.preventDefault()
 
