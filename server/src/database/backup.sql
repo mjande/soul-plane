@@ -1,13 +1,13 @@
--- MariaDB dump 10.19  Distrib 10.5.22-MariaDB, for Linux (x86_64)
+-- MySQL dump 10.13  Distrib 8.3.0, for macos14.2 (arm64)
 --
--- Host: classmysql.engr.oregonstate.edu    Database: cs340_andemat4
+-- Host: localhost    Database: soulplanelocal
 -- ------------------------------------------------------
--- Server version	10.6.16-MariaDB-log
+-- Server version	8.3.0
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
+/*!50503 SET NAMES utf8mb4 */;
 /*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
 /*!40103 SET TIME_ZONE='+00:00' */;
 /*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
@@ -21,15 +21,15 @@
 
 DROP TABLE IF EXISTS `Airports`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `Airports` (
-  `airport_id` int(11) NOT NULL AUTO_INCREMENT,
+  `airport_id` int NOT NULL AUTO_INCREMENT,
   `airport_name` varchar(255) NOT NULL,
   `airport_code` varchar(3) NOT NULL,
   `location` varchar(255) NOT NULL,
   PRIMARY KEY (`airport_id`),
   UNIQUE KEY `airport_code` (`airport_code`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -38,8 +38,32 @@ CREATE TABLE `Airports` (
 
 LOCK TABLES `Airports` WRITE;
 /*!40000 ALTER TABLE `Airports` DISABLE KEYS */;
-INSERT INTO `Airports` VALUES (1,'Portland International Airport','PDX','Portland, OR'),(2,'Seattle-Tacoma International Airport','SEA','SeaTac, WA'),(3,'Spokane International Airport','GEG','Spokane, WA'),(6,'Dallas Love Field','DAL','Dallas, TX');
+INSERT INTO `Airports` VALUES (1,'Portland International Airport','PDX','Portland, OR'),(2,'Seattle-Tacoma International Airport','SEA','SeaTac, WA'),(3,'Spokane International Airport','GEG','Spokane, WA');
 /*!40000 ALTER TABLE `Airports` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `diagnostic`
+--
+
+DROP TABLE IF EXISTS `diagnostic`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `diagnostic` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `text` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `diagnostic`
+--
+
+LOCK TABLES `diagnostic` WRITE;
+/*!40000 ALTER TABLE `diagnostic` DISABLE KEYS */;
+INSERT INTO `diagnostic` VALUES (1,'MySQL is working!');
+/*!40000 ALTER TABLE `diagnostic` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -48,22 +72,22 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `Flights`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `Flights` (
-  `flight_id` int(11) NOT NULL AUTO_INCREMENT,
-  `plane_id` int(11) NOT NULL,
-  `depart_airport_id` int(11) NOT NULL,
-  `arrive_airport_id` int(11) NOT NULL,
+  `flight_id` int NOT NULL AUTO_INCREMENT,
+  `plane_id` int NOT NULL,
+  `depart_airport_id` int NOT NULL,
+  `arrive_airport_id` int NOT NULL,
   `depart_time` datetime NOT NULL,
   `arrive_time` datetime NOT NULL,
   PRIMARY KEY (`flight_id`),
   KEY `plane_id` (`plane_id`),
   KEY `depart_airport_id` (`depart_airport_id`),
   KEY `arrive_airport_id` (`arrive_airport_id`),
-  CONSTRAINT `Flights_ibfk_1` FOREIGN KEY (`plane_id`) REFERENCES `Planes` (`plane_id`),
-  CONSTRAINT `Flights_ibfk_2` FOREIGN KEY (`depart_airport_id`) REFERENCES `Airports` (`airport_id`) ON DELETE CASCADE,
-  CONSTRAINT `Flights_ibfk_3` FOREIGN KEY (`arrive_airport_id`) REFERENCES `Airports` (`airport_id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+  CONSTRAINT `flights_ibfk_1` FOREIGN KEY (`plane_id`) REFERENCES `Planes` (`plane_id`),
+  CONSTRAINT `flights_ibfk_2` FOREIGN KEY (`depart_airport_id`) REFERENCES `Airports` (`airport_id`) ON DELETE CASCADE,
+  CONSTRAINT `flights_ibfk_3` FOREIGN KEY (`arrive_airport_id`) REFERENCES `Airports` (`airport_id`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -77,14 +101,41 @@ INSERT INTO `Flights` VALUES (1,3,1,2,'2024-02-05 14:30:00','2024-02-11 02:15:00
 UNLOCK TABLES;
 
 --
+-- Table structure for table `Passenger_Flights`
+--
+
+DROP TABLE IF EXISTS `Passenger_Flights`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `Passenger_Flights` (
+  `passenger_id` int NOT NULL,
+  `flight_id` int NOT NULL,
+  PRIMARY KEY (`passenger_id`,`flight_id`),
+  KEY `flight_id` (`flight_id`),
+  CONSTRAINT `passenger_flights_ibfk_1` FOREIGN KEY (`passenger_id`) REFERENCES `Passengers` (`passenger_id`) ON DELETE CASCADE,
+  CONSTRAINT `passenger_flights_ibfk_2` FOREIGN KEY (`flight_id`) REFERENCES `Flights` (`flight_id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `Passenger_Flights`
+--
+
+LOCK TABLES `Passenger_Flights` WRITE;
+/*!40000 ALTER TABLE `Passenger_Flights` DISABLE KEYS */;
+INSERT INTO `Passenger_Flights` VALUES (3,1),(1,2),(2,3);
+/*!40000 ALTER TABLE `Passenger_Flights` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `Passengers`
 --
 
 DROP TABLE IF EXISTS `Passengers`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `Passengers` (
-  `passenger_id` int(11) NOT NULL AUTO_INCREMENT,
+  `passenger_id` int NOT NULL AUTO_INCREMENT,
   `first_name` varchar(255) NOT NULL,
   `last_name` varchar(255) NOT NULL,
   `phone` varchar(12) NOT NULL,
@@ -96,7 +147,7 @@ CREATE TABLE `Passengers` (
   `passport_number` varchar(20) NOT NULL,
   PRIMARY KEY (`passenger_id`),
   UNIQUE KEY `passport_number` (`passport_number`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -110,56 +161,29 @@ INSERT INTO `Passengers` VALUES (1,'Paul','Nguyen','111-222-3333','paul@oregonst
 UNLOCK TABLES;
 
 --
--- Table structure for table `Passengers_flights`
+-- Table structure for table `Plane_Types`
 --
 
-DROP TABLE IF EXISTS `Passengers_flights`;
+DROP TABLE IF EXISTS `Plane_Types`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `Passengers_flights` (
-  `passenger_id` int(11) NOT NULL,
-  `flight_id` int(11) NOT NULL,
-  PRIMARY KEY (`passenger_id`,`flight_id`),
-  KEY `flight_id` (`flight_id`),
-  CONSTRAINT `Passengers_flights_ibfk_1` FOREIGN KEY (`passenger_id`) REFERENCES `Passengers` (`passenger_id`) ON DELETE CASCADE,
-  CONSTRAINT `Passengers_flights_ibfk_2` FOREIGN KEY (`flight_id`) REFERENCES `Flights` (`flight_id`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `Passengers_flights`
---
-
-LOCK TABLES `Passengers_flights` WRITE;
-/*!40000 ALTER TABLE `Passengers_flights` DISABLE KEYS */;
-INSERT INTO `Passengers_flights` VALUES (1,2),(2,3),(3,1);
-/*!40000 ALTER TABLE `Passengers_flights` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `Plane_types`
---
-
-DROP TABLE IF EXISTS `Plane_types`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `Plane_types` (
-  `plane_type_id` int(11) NOT NULL AUTO_INCREMENT,
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `Plane_Types` (
+  `plane_type_id` int NOT NULL AUTO_INCREMENT,
   `type_name` varchar(255) NOT NULL,
-  `capacity` int(11) NOT NULL,
-  `range_in_hrs` int(11) NOT NULL,
+  `capacity` int NOT NULL,
+  `range_in_hrs` int NOT NULL,
   PRIMARY KEY (`plane_type_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `Plane_types`
+-- Dumping data for table `Plane_Types`
 --
 
-LOCK TABLES `Plane_types` WRITE;
-/*!40000 ALTER TABLE `Plane_types` DISABLE KEYS */;
-INSERT INTO `Plane_types` VALUES (1,'Airbus A320-200',180,5),(2,'Boeing B737-800',190,5),(3,'Embraer 135',37,3);
-/*!40000 ALTER TABLE `Plane_types` ENABLE KEYS */;
+LOCK TABLES `Plane_Types` WRITE;
+/*!40000 ALTER TABLE `Plane_Types` DISABLE KEYS */;
+INSERT INTO `Plane_Types` VALUES (1,'Airbus A320-200',180,5),(2,'Boeing B737-800',190,5),(3,'Embraer 135',37,3);
+/*!40000 ALTER TABLE `Plane_Types` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -168,17 +192,17 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `Planes`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `Planes` (
-  `plane_id` int(11) NOT NULL AUTO_INCREMENT,
-  `plane_type_id` int(11) NOT NULL,
-  `current_airport_id` int(11) DEFAULT NULL,
+  `plane_id` int NOT NULL AUTO_INCREMENT,
+  `plane_type_id` int NOT NULL,
+  `current_airport_id` int DEFAULT NULL,
   PRIMARY KEY (`plane_id`),
   KEY `plane_type_id` (`plane_type_id`),
   KEY `current_airport_id` (`current_airport_id`),
-  CONSTRAINT `Planes_ibfk_1` FOREIGN KEY (`plane_type_id`) REFERENCES `Plane_types` (`plane_type_id`),
-  CONSTRAINT `Planes_ibfk_2` FOREIGN KEY (`current_airport_id`) REFERENCES `Airports` (`airport_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+  CONSTRAINT `planes_ibfk_1` FOREIGN KEY (`plane_type_id`) REFERENCES `Plane_Types` (`plane_type_id`) ON DELETE RESTRICT,
+  CONSTRAINT `planes_ibfk_2` FOREIGN KEY (`current_airport_id`) REFERENCES `Airports` (`airport_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -200,4 +224,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-03-02 13:36:11
+-- Dump completed on 2024-03-16 11:58:51
