@@ -1,5 +1,6 @@
 import { useLocation, Link } from "react-router-dom";
 
+// Error page is entirely our own work
 export default function ErrorPage() {
   const location = useLocation();
   const error = location.state && location.state.error;

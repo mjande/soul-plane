@@ -15,7 +15,10 @@ function Airports() {
     const [airports, setAirports] = useState<Airport[]>([]);
 
     // Get request for airport data
-    // https://axios-http.com/docs/api_intro
+    
+    // Request adapted from Axios docs
+    // Source URL: https://axios-http.com/docs/api_intro
+    // Date: 3/16/24
     useEffect(() => {
         Axios.get(`http://flip3.engr.oregonstate.edu:55767/Airports`).then((response) => {
           setAirports(response.data);

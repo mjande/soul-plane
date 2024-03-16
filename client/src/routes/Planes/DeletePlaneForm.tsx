@@ -20,7 +20,10 @@ export default function DeletePlaneForm() {
     })
 
     // Grab current plane using planes id
-    // https://axios-http.com/docs/api_intro
+
+    // Request adapted from Axios docs
+    // Source URL: https://axios-http.com/docs/api_intro
+    // Date: 3/16/24
     useEffect(() => {
         async function getPlane() {
             const response = await Axios.get(`http://flip3.engr.oregonstate.edu:55767/planes/${id}`)
@@ -39,7 +42,10 @@ export default function DeletePlaneForm() {
     const navigate = useNavigate()
 
     // Handle deleting current plane id
-    // https://axios-http.com/docs/api_intro
+
+    // Request adapted from Axios docs
+    // Source URL: https://axios-http.com/docs/api_intro
+    // Date: 3/16/24
     async function handleSubmit(event: FormEvent<HTMLFormElement>) {
         event.preventDefault()
 

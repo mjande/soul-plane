@@ -19,8 +19,11 @@ function Flights() {
   const [flights, setFlights] = useState<Flight[]>([])
 
 
-  // Get request for flights in the database
-  // https://axios-http.com/docs/api_intro
+  // Get request for flights in the database 
+
+  // Request adapted from Axios docs
+  // Source URL: https://axios-http.com/docs/api_intro
+  // Date: 3/16/24
   useEffect(() => {
     async function getFlights() {
       const response = await Axios.get(`http://flip3.engr.oregonstate.edu:55767/flights`)

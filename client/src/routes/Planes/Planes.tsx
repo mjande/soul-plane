@@ -15,7 +15,10 @@ function Planes() {
   const [planes, setPlanes] = useState<Plane[]>([])
 
   // Get request to grab all plane data from backend
-  // https://axios-http.com/docs/api_intro
+
+  // Request adapted from Axios docs
+  // Source URL: https://axios-http.com/docs/api_intro
+  // Date: 3/16/24
   useEffect(() => {
     async function getPlanes() {
       const response = await Axios.get(`http://flip3.engr.oregonstate.edu:55767/planes`)

@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 
+// Preloader is entirely our own work
 export const preloadScreen = () => {
     const [isLoading, setIsLoading] = useState(true);
 

@@ -26,7 +26,10 @@ function PassengerFlights() {
 
 
   // Get request to grab passenger flights data
-  // https://axios-http.com/docs/api_intro
+
+  // Request adapted from Axios docs
+  // Source URL: https://axios-http.com/docs/api_intro
+  // Date: 3/16/24
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -42,7 +45,10 @@ function PassengerFlights() {
   }, []);
 
   // Get request to grab passengers data 
-  // https://axios-http.com/docs/api_intro
+
+  // Request adapted from Axios docs
+  // Source URL: https://axios-http.com/docs/api_intro
+  // Date: 3/16/24
   useEffect(() => {
     Axios.get(`http://flip3.engr.oregonstate.edu:55767/passengers`).then((response) => {
       setPassengers(response.data);
@@ -50,6 +56,10 @@ function PassengerFlights() {
   }, []);
 
   // Get request to grab flights data
+
+  // Request adapted from Axios docs
+  // Source URL: https://axios-http.com/docs/api_intro
+  // Date: 3/16/24
   useEffect(() => {
     Axios.get(`http://flip3.engr.oregonstate.edu:55767/flights`).then((response) => {
       setFlights(response.data);
@@ -57,6 +67,10 @@ function PassengerFlights() {
   }, []);
 
   // Get request to grab airports data
+
+  // Request adapted from Axios docs
+  // Source URL: https://axios-http.com/docs/api_intro
+  // Date: 3/16/24
   useEffect(() => {
     Axios.get(`http://flip3.engr.oregonstate.edu:55767/airports`).then((response) => {
       setAirports(response.data);

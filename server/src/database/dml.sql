@@ -9,27 +9,6 @@ Author:     Paul Nguyen, Matt Anderson
 
 -- NOTE: All values preceded by a :colon indicate variables that will have the appropriate value when processed by backend code
 
-/* Queries to populate dropdowns for creating and updating other entities */
-
--- Get plane IDs and plane types for plane id dropdown
-SELECT Planes.plane_id, Plane_Types.type_name FROM Planes
-    JOIN Plane_Types ON Planes.plane_type_id = Plane_Types.plane_type_id;
-
--- Get all airport IDs and names to populate Departing Airport, Arriving Airport, and Current Airport dropdowns
-SELECT airport_id, airport_name FROM Airports;
-
--- Get all plane type IDs and type_names for plane type dropdown
-SELECT plane_type_id, type_name FROM Plane_Types;
-
--- Get passenger IDs, and first and last names for passenger dropdown
-SELECT passenger_id, first_name, last_name FROM Passengers;
-
--- Get flight_id and departure and arrival airports for flight dropdown
-SELECT Flights.flight_id, DepartAirport.airport_name AS "Departure Airport", ArriveAirport.airport_name AS "Arrival Airport" FROM Flights
-    JOIN Airports AS DepartAirport ON Flights.depart_airport_id = DepartAirport.airport_id
-    JOIN Airports AS ArriveAirport ON Flights.arrive_airport_id = ArriveAirport.airport_id;
-
-
 /* Flights */
 
 -- Get all flights 

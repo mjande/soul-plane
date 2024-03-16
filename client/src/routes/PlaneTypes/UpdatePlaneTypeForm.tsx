@@ -20,7 +20,10 @@ export default function UpdatePlaneTypeForm() {
     })
 
     // Get request for current plane type using plane type id
-    // https://axios-http.com/docs/api_intro
+
+    // Request adapted from Axios docs
+    // Source URL: https://axios-http.com/docs/api_intro
+    // Date: 3/16/24
     useEffect(() => {
         async function getPlaneType() {
             const response = await Axios.get(`http://flip3.engr.oregonstate.edu:55767/plane-types/${id}`)
@@ -48,7 +51,10 @@ export default function UpdatePlaneTypeForm() {
     }
 
     // Handle updating plane type form using put request for current plane type
-    // https://axios-http.com/docs/api_intro
+
+    // Request adapted from Axios docs
+    // Source URL: https://axios-http.com/docs/api_intro
+    // Date: 3/16/24
     async function handleSubmit(event: FormEvent<HTMLFormElement>) {
         event.preventDefault()
 

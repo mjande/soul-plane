@@ -37,7 +37,10 @@ export default function NewFlightForm() {
 
 
     // Get request to grab data from airport and planes
-    // https://axios-http.com/docs/api_intro
+
+    // Request adapted from Axios docs
+    // Source URL: https://axios-http.com/docs/api_intro
+    // Date: 3/16/24
     useEffect(() => {
         async function getAirports() {
             const response = await Axios.get(`http://flip3.engr.oregonstate.edu:55767/Airports`)
@@ -64,8 +67,11 @@ export default function NewFlightForm() {
         }))
     }
 
-    // Handle post request to add new flights
-    // https://axios-http.com/docs/api_intro
+    // Handle post request to add new flights 
+
+    // Request adapted from Axios docs
+    // Source URL: https://axios-http.com/docs/api_intro
+    // Date: 3/16/24
     async function handleSubmit(event: FormEvent<HTMLFormElement>) {
         event.preventDefault()
 

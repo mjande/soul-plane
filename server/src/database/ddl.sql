@@ -10,7 +10,6 @@ Author:     Paul Nguyen, Matt Anderson
 SET FOREIGN_KEY_CHECKS=0;
 SET AUTOCOMMIT = 0;
 
-
 -- Create Airports Table
 DROP TABLE IF EXISTS Airports;
 CREATE TABLE Airports (
