@@ -21,8 +21,11 @@ export default function DeleteAirports() {
         location: "",
     })
 
-    // Get request for airports by id
-    // https://axios-http.com/docs/api_intro
+    // Get request for airports by id 
+
+    // Request adapted from Axios docs
+    // Source URL: https://axios-http.com/docs/api_intro
+    // Date: 3/16/24
     useEffect(() => {
         async function getAirports() {
             const response = await Axios.get(`http://${import.meta.env.VITE_HOST_NAME}:55767/airports/${id}`)
@@ -40,7 +43,10 @@ export default function DeleteAirports() {
     const navigate = useNavigate();
     
     // Submit airport data into the backend to delete airport by id
-    // https://axios-http.com/docs/api_intro
+
+    // Request adapted from Axios docs
+    // Source URL: https://axios-http.com/docs/api_intro
+    // Date: 3/16/24
     async function handleSubmit(event: FormEvent<HTMLFormElement>) {
         event.preventDefault()
 

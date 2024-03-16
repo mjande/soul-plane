@@ -29,8 +29,11 @@ export default function DeletePassengerFlightsForm() {
     passenger_id: pid,
   });
 
-  // Grab current passenger based on passenger id
-  // https://axios-http.com/docs/api_intro
+  // Grab current passenger based on passenger id 
+
+  // Request adapted from Axios docs
+  // Source URL: https://axios-http.com/docs/api_intro
+  // Date: 3/16/24
   useEffect(() => {
     async function getPassenger() {
       try {
@@ -50,7 +53,10 @@ export default function DeletePassengerFlightsForm() {
   }, [pid]);
 
   // Grab flights based on current flight id
-  // https://axios-http.com/docs/api_intro
+
+  // Request adapted from Axios docs
+  // Source URL: https://axios-http.com/docs/api_intro
+  // Date: 3/16/24
   useEffect(() => {
     async function getFlights() {
       try {
@@ -70,8 +76,11 @@ export default function DeletePassengerFlightsForm() {
     getFlights();
   }, [fid]);
 
-  // Get request for grabbing airport data
-  // https://axios-http.com/docs/api_intro
+  // Get request for grabbing airport data 
+
+  // Request adapted from Axios docs
+  // Source URL: https://axios-http.com/docs/api_intro
+  // Date: 3/16/24
   useEffect(() => {
     Axios.get(`http://${import.meta.env.VITE_HOST_NAME}:55767/airports`).then((response) => {
       setAirports(response.data);
@@ -80,8 +89,11 @@ export default function DeletePassengerFlightsForm() {
 
   const navigate = useNavigate();
 
-  // Handle deleting passenger flights
-  // https://axios-http.com/docs/api_intro
+  // Handle deleting passenger flights 
+
+  // Request adapted from Axios docs
+  // Source URL: https://axios-http.com/docs/api_intro
+  // Date: 3/16/24
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
 

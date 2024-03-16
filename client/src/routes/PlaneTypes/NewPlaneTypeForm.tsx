@@ -28,7 +28,10 @@ export default function NewPlaneTypeForm() {
     }
     
     // Handle submitting new plane types using a post request to the plane type form
-    // https://axios-http.com/docs/api_intro
+
+    // Request adapted from Axios docs
+    // Source URL: https://axios-http.com/docs/api_intro
+    // Date: 3/16/24
     async function handleSubmit(event: FormEvent<HTMLFormElement>) {
         event.preventDefault()
 

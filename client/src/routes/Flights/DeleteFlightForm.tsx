@@ -29,8 +29,11 @@ export default function DeleteFlightForm() {
         arrive_time: new Date()
     })
 
-    // Get current flight form
-    // https://axios-http.com/docs/api_intro
+    // Get current flight form 
+
+    // Request adapted from Axios docs
+    // Source URL: https://axios-http.com/docs/api_intro
+    // Date: 3/16/24
     useEffect(() => {
         async function getFlight() {
             const response = await Axios.get(`http://${import.meta.env.VITE_HOST_NAME}:55767/flights/${id}`)
@@ -51,8 +54,11 @@ export default function DeleteFlightForm() {
     }, [id])
 
 
-    // Handle delete request for current flight based on id
-    // https://axios-http.com/docs/api_intro
+    // Handle delete request for current flight based on id 
+
+    // Request adapted from Axios docs
+    // Source URL: https://axios-http.com/docs/api_intro
+    // Date: 3/16/24
     async function handleSubmit(event: FormEvent<HTMLFormElement>) {
         event.preventDefault()
 
