@@ -7,12 +7,15 @@
 import mysql from "mysql2/promise"
 
 // Create a connection pool using the provided credentials
+
+// NOTE: If running locally, you will have to update the fields below with your
+// database credentials
 const pool = mysql.createPool({
     connectionLimit: 10,
-    host: 'flip3.engr.oregonstate.edu',
-    user: '',
-    password: '',
-    database: ''
+    host: 'classmysql.engr.oregonstate.edu',
+    user: 'YOUR_USERNAME',
+    password: 'YOUR_PASSWORD',
+    database: 'YOUR_DATABASE_NAME'
 })
 
 export default { pool }

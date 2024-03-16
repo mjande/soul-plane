@@ -20,7 +20,7 @@ A few small changes to the frontend were also adapted from the following sources
 
 ## Usage
 
-To use the application, you must use a VPN to connect to OSU's flip servers. To access the front end (UI) of the application, connect to the Flip 2 server and navigate to `flip3.engr.oregonstate.edu:2275`. The home page contains links to each of the entities in the database, where a user can create, read, update, or delete any entity record. 
+To use the application, you must use a VPN to connect to OSU's flip servers. To access the front end (UI) of the application, connect to the Flip 3 server and navigate to `http://flip3.engr.oregonstate.edu:2275`. The home page contains links to each of the entities in the database, where a user can create, read, update, or delete any entity record. 
 
 ## Local Installation
 
@@ -39,14 +39,7 @@ source ddl.sql
 
 You will be prompted to enter your database password before running the DDL file. If executed correctly, you should see data for each of the entities displayed in your terminal. Exit out of MySQL in your terminal. 
 
-Next, you will need to add your database credentials to a .env file in the `server` directory so that the application's backend can connect to your local database. The .env file should follow this format:
-
-```
-DBHOST = "127.0.0.1"
-DBUSER = "[local-database-username]"
-DBPASSWORD = "[local-database-password]"
-DBDATABASE = "[local-database-name]"
-```
+Next, you will need to add your database credentials to the db-connector.ts file in the `server/databases` directory so that the application's backend can connect to your local database. In that file, fill the fields for hostname, user, password, and database with the information for your local database.
 
 You are now ready to start up the application's backend. Navigate back to the `server` directory and execute the following commands:
 
@@ -57,7 +50,7 @@ npm run dev
 
 You can test that the backend is running correctly by running a sample query to the backend URL, such as `localhost:55767/Airports`. That request should return the three airports just loaded into the database.
 
-Finally, to start the application's frontend, create a .env file in the `client` directory with just the line `VITE_HOST_NAME=localhost`. Then, navigate to the `client` folder and execute these commands:
+Finally, to start the application's frontend, navigate to the `client` folder and execute these commands:
 
 ```.sh
 npm install
@@ -65,3 +58,5 @@ npm run dev
 ```
 
 The application should now be running at `localhost:2275`
+
+NOTE: By default, the front end will be connected to our remote server on the flip servers. To connect it to your local server, you will have to update all the queries so that they request from your local server instead of our project flip server. Every query that looks like this (`http://flip3.engr.oregonstate.edu:557676/\[EntityName\])` should be converted to something like this: `http://localhost:55767/\[EntityName\]`. If you are testing the front and backend separately, this change isn't necessary so long as you are connected to OSU via VPN and can access our remote server.
