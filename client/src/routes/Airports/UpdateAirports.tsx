@@ -24,7 +24,7 @@ export function UpdateAirports() {
   useEffect(() => {
     async function getAirports() {
       const response = await Axios.get(
-        `http://${import.meta.env.VITE_HOST_NAME}:55767/airports/${id}`);
+        `http://flip3.engr.oregonstate.edu:55767/airports/${id}`);
         const airport = response.data[0]
         setFormData({
             airport_id: airport.airport_id,
@@ -57,7 +57,7 @@ export function UpdateAirports() {
 
     try {
       const response = await Axios.put(
-        `http://${import.meta.env.VITE_HOST_NAME}:55767/airports/${id}`,
+        `http://flip3.engr.oregonstate.edu:55767/airports/${id}`,
         formData
       );
       console.log(response);

@@ -33,7 +33,7 @@ export default function DeleteFlightForm() {
     // https://axios-http.com/docs/api_intro
     useEffect(() => {
         async function getFlight() {
-            const response = await Axios.get(`http://${import.meta.env.VITE_HOST_NAME}:55767/flights/${id}`)
+            const response = await Axios.get(`http://flip3.engr.oregonstate.edu:55767/flights/${id}`)
             const data = response.data[0]
 
             setFlight({
@@ -57,7 +57,7 @@ export default function DeleteFlightForm() {
         event.preventDefault()
 
         try {
-          const response = await Axios.delete(`http://${import.meta.env.VITE_HOST_NAME}:55767/flights/${id}`)
+          const response = await Axios.delete(`http://flip3.engr.oregonstate.edu:55767/flights/${id}`)
           console.log(response)
           navigate("/flights")
         } catch(error) {

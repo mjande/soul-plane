@@ -35,7 +35,7 @@ export default function DeletePassengerFlightsForm() {
     async function getPassenger() {
       try {
         const response = await Axios.get(
-          `http://${import.meta.env.VITE_HOST_NAME}:55767/passengers/${pid}`
+          `http://flip3.engr.oregonstate.edu:55767/passengers/${pid}`
         );
         const data = response.data[0];
         setPassenger({
@@ -55,7 +55,7 @@ export default function DeletePassengerFlightsForm() {
     async function getFlights() {
       try {
         const response = await Axios.get(
-          `http://${import.meta.env.VITE_HOST_NAME}:55767/flights/${fid}`
+          `http://flip3.engr.oregonstate.edu:55767/flights/${fid}`
         );
         const data = response.data[0];
         setFlights({
@@ -73,7 +73,7 @@ export default function DeletePassengerFlightsForm() {
   // Get request for grabbing airport data
   // https://axios-http.com/docs/api_intro
   useEffect(() => {
-    Axios.get(`http://${import.meta.env.VITE_HOST_NAME}:55767/airports`).then((response) => {
+    Axios.get(`http://flip3.engr.oregonstate.edu:55767/airports`).then((response) => {
       setAirports(response.data);
     });
   }, []);
@@ -87,7 +87,7 @@ export default function DeletePassengerFlightsForm() {
 
     try {
       const response = await Axios.delete(
-        `http://${import.meta.env.VITE_HOST_NAME}:55767/passengerFlights/${fid}/${pid}`,
+        `http://flip3.engr.oregonstate.edu:55767/passengerFlights/${fid}/${pid}`,
         {data: formData}
       );
 

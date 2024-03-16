@@ -23,7 +23,7 @@ function Flights() {
   // https://axios-http.com/docs/api_intro
   useEffect(() => {
     async function getFlights() {
-      const response = await Axios.get(`http://${import.meta.env.VITE_HOST_NAME}:55767/flights`)
+      const response = await Axios.get(`http://flip3.engr.oregonstate.edu:55767/flights`)
       const flightsArray = response.data
       flightsArray.sort((a: Flight, b: Flight) => a.flight_id - b.flight_id)
 

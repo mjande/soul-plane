@@ -35,7 +35,7 @@ export default function NewAirports() {
         event.preventDefault()
 
         try {
-            const response = await Axios.post(`http://${import.meta.env.VITE_HOST_NAME}:55767/airports`, formData)
+            const response = await Axios.post(`http://flip3.engr.oregonstate.edu:55767/airports`, formData)
             console.log(response)
             navigate("/Airports")
         } catch(error) {

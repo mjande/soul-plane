@@ -35,7 +35,7 @@ export default function DeletePassengersForm() {
     // https://axios-http.com/docs/api_intro
     useEffect(() => {
         async function getPassengers() {
-            const response = await Axios.get(`http://${import.meta.env.VITE_HOST_NAME}:55767/passengers/${id}`)
+            const response = await Axios.get(`http://flip3.engr.oregonstate.edu:55767/passengers/${id}`)
             const data = response.data[0]
             setFormData({
                 first_name: data.first_name,
@@ -60,7 +60,7 @@ export default function DeletePassengersForm() {
         event.preventDefault()
 
         try {
-            const response = await Axios.delete(`http://${import.meta.env.VITE_HOST_NAME}:55767/passengers/${id}`)
+            const response = await Axios.delete(`http://flip3.engr.oregonstate.edu:55767/passengers/${id}`)
             console.log(response)
             navigate("/Passengers")
         } catch(error) {

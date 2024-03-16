@@ -18,7 +18,7 @@ function Planes() {
   // https://axios-http.com/docs/api_intro
   useEffect(() => {
     async function getPlanes() {
-      const response = await Axios.get(`http://${import.meta.env.VITE_HOST_NAME}:55767/planes`)
+      const response = await Axios.get(`http://flip3.engr.oregonstate.edu:55767/planes`)
       const planesArray = response.data
       planesArray.sort((a: Plane, b: Plane) => a.plane_id - b.plane_id)
 

@@ -31,19 +31,19 @@ export default function NewPassengerFlights() {
   // Get request to get data for passengers, flights, airports
   // https://axios-http.com/docs/api_intro
   useEffect(() => {
-    Axios.get(`http://${import.meta.env.VITE_HOST_NAME}:55767/passengers`).then((response) => {
+    Axios.get(`http://flip3.engr.oregonstate.edu:55767/passengers`).then((response) => {
       setPassengers(response.data);
     });
   }, []);
 
   useEffect(() => {
-    Axios.get(`http://${import.meta.env.VITE_HOST_NAME}:55767/flights`).then((response) => {
+    Axios.get(`http://flip3.engr.oregonstate.edu:55767/flights`).then((response) => {
       setFlights(response.data);
     });
   }, []);
 
   useEffect(() => {
-    Axios.get(`http://${import.meta.env.VITE_HOST_NAME}:55767/airports`).then((response) => {
+    Axios.get(`http://flip3.engr.oregonstate.edu:55767/airports`).then((response) => {
       setAirports(response.data);
     });
   }, []);
@@ -66,7 +66,7 @@ export default function NewPassengerFlights() {
 
     try {
       const response = await Axios.post(
-        `http://${import.meta.env.VITE_HOST_NAME}:55767/passengerFlights`,
+        `http://flip3.engr.oregonstate.edu:55767/passengerFlights`,
         formData
       );
 

@@ -42,7 +42,7 @@ export default function UpdatePlaneForm() {
         // Get request to grab the current plane using plane id
         // https://axios-http.com/docs/api_intro
         async function getPlane() {
-            const response = await Axios.get(`http://${import.meta.env.VITE_HOST_NAME}:55767/planes/${id}`)
+            const response = await Axios.get(`http://flip3.engr.oregonstate.edu:55767/planes/${id}`)
             const data = response.data[0] 
 
             setFormData({
@@ -54,14 +54,14 @@ export default function UpdatePlaneForm() {
         // Get request to grab plane types data
         // https://axios-http.com/docs/api_intro
         async function getPlaneTypes() {
-            const response = await Axios.get(`http://${import.meta.env.VITE_HOST_NAME}:55767/plane-types`)
+            const response = await Axios.get(`http://flip3.engr.oregonstate.edu:55767/plane-types`)
             setPlaneTypes(response.data)
         }
 
         // Get request to grab airports data
         // https://axios-http.com/docs/api_intro
         async function getAirports() {
-            const response = await Axios.get(`http://${import.meta.env.VITE_HOST_NAME}:55767/airports`)
+            const response = await Axios.get(`http://flip3.engr.oregonstate.edu:55767/airports`)
             response.data.push({ airport_id: "", airport_name: "Currently Unavailable" })
             setAirports(response.data)
         }
@@ -91,7 +91,7 @@ export default function UpdatePlaneForm() {
         event.preventDefault()
 
         try {
-            const response = await Axios.put(`http://${import.meta.env.VITE_HOST_NAME}:55767/planes/${id}`, formData)
+            const response = await Axios.put(`http://flip3.engr.oregonstate.edu:55767/planes/${id}`, formData)
             console.log(response)
             navigate("/Planes")
         } catch(error) {

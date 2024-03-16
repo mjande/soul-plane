@@ -64,6 +64,6 @@ app.use("/passengerFlights", passengerFlightsRouter)
 // Date: 2/27/2024
 app.listen(port, () => {
   console.log(
-    `Express started on http://${process.env.DBHOST}:${port}; press Ctrl-C to terminate.`
+    `Express started on http://${flip3.engr.oregonstate.edu}:${port}; press Ctrl-C to terminate.`
   );
 });
