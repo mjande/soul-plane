@@ -1,3 +1,4 @@
+// Preloader is entirely our own work
 import "./Preloader.scss";
 
 const Preloader = () => {
