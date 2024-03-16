@@ -20,7 +20,7 @@ A few small changes to the frontend were also adapted from the following sources
 
 ## Usage
 
-To use the application, you must use a VPN to connect to OSU's flip servers. To access the front end (UI) of the application, connect to the Flip 2 server and navigate to `flip2.engr.oregonstate.edu:2275`. The home page contains links to each of the entities in the database, where a user can create, read, update, or delete any entity record. 
+To use the application, you must use a VPN to connect to OSU's flip servers. To access the front end (UI) of the application, connect to the Flip 2 server and navigate to `flip3.engr.oregonstate.edu:2275`. The home page contains links to each of the entities in the database, where a user can create, read, update, or delete any entity record. 
 
 ## Local Installation
 
