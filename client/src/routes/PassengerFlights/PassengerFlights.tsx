@@ -33,7 +33,7 @@ function PassengerFlights() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await Axios.get(`http://flip3.engr.oregonstate.edu:55767/passengerFlights`);
+        const response = await Axios.get(`http://${import.meta.env.VITE_HOST_NAME}:55767/passengerFlights`);
         console.log(response)
         setPassengerFlights(response.data);
       } catch (error) {
@@ -50,7 +50,7 @@ function PassengerFlights() {
   // Source URL: https://axios-http.com/docs/api_intro
   // Date: 3/16/24
   useEffect(() => {
-    Axios.get(`http://flip3.engr.oregonstate.edu:55767/passengers`).then((response) => {
+    Axios.get(`http://${import.meta.env.VITE_HOST_NAME}:55767/passengers`).then((response) => {
       setPassengers(response.data);
     });
   }, []);
@@ -61,7 +61,7 @@ function PassengerFlights() {
   // Source URL: https://axios-http.com/docs/api_intro
   // Date: 3/16/24
   useEffect(() => {
-    Axios.get(`http://flip3.engr.oregonstate.edu:55767/flights`).then((response) => {
+    Axios.get(`http://${import.meta.env.VITE_HOST_NAME}:55767/flights`).then((response) => {
       setFlights(response.data);
     });
   }, []);
@@ -72,7 +72,7 @@ function PassengerFlights() {
   // Source URL: https://axios-http.com/docs/api_intro
   // Date: 3/16/24
   useEffect(() => {
-    Axios.get(`http://flip3.engr.oregonstate.edu:55767/airports`).then((response) => {
+    Axios.get(`http://${import.meta.env.VITE_HOST_NAME}:55767/airports`).then((response) => {
       setAirports(response.data);
     });
   }, []);

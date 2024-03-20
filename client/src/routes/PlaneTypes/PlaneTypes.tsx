@@ -20,7 +20,7 @@ function PlaneTypes() {
   // Source URL: https://axios-http.com/docs/api_intro
   // Date: 3/16/24
     useEffect(() => {
-      Axios.get(`http://flip3.engr.oregonstate.edu:55767/plane-types`).then((response) => {
+      Axios.get(`http://${import.meta.env.VITE_HOST_NAME}:55767/plane-types`).then((response) => {
         setPlaneTypes(response.data)
       });
   }, []);

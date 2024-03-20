@@ -12,10 +12,10 @@ import mysql from "mysql2/promise"
 // database credentials
 const pool = mysql.createPool({
     connectionLimit: 10,
-    host: 'classmysql.engr.oregonstate.edu',
-    user: 'YOUR_USERNAME',
-    password: 'YOUR_PASSWORD',
-    database: 'YOUR_DATABASE_NAME'
+    host: process.env.DB_HOST,
+    user: process.env.DB_USER,
+    password: process.env.DB_PASSWORD,
+    database: process.env.DB_NAME
 })
 
 export default { pool }
