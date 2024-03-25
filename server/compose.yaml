@@ -1,13 +1,13 @@
-name: soul-plane
+name: soul-plane-server
 services:
-  mysqldb:
+  mysql-database:
     image: mysql
     restart: always
     environment: 
       - MYSQL_DATABASE=${DB_NAME}
       - MYSQL_ROOT_PASSWORD=${DB_PASSWORD}
     ports:
-      - '3006:3006'
+      - 3000:3000
     volumes:
       - db:/var/lib/mysql
       - ./src/database/ddl.sql:/docker-entrypoint-initdb.d/init.sql
@@ -15,7 +15,11 @@ services:
     build:
       context: .
     environment:
-      NODE_ENV: production
+      - NODE_ENV=production
+      - DB_HOST=${DB_HOST}
+      - DB_USER=${DB_USER}
+      - DB_PASSWORD=${DB_PASSWORD}
+      - DB_NAME=${DB_NAME}
     ports:
       - 55767:55767
 volumes:

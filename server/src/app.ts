@@ -2,6 +2,8 @@
 // Source URL: https://sidorares.github.io/node-mysql2/docs
 // Date: 2/27/2024
 
+console.log("LOG MESSAGE!!!!")
+
 /* SETUP */
 
 // Express code adapted from
