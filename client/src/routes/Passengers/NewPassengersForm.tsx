@@ -49,7 +49,7 @@ export default function NewPassengersForm() {
         event.preventDefault()
 
         try {
-            const response = await Axios.post(`http://${import.meta.env.VITE_HOST_NAME}:55767/passengers`, formData)
+            const response = await Axios.post(`http://flip3.engr.oregonstate.edu:55767/passengers`, formData)
             console.log(response)
             navigate("/Passengers")
         } catch(error) {

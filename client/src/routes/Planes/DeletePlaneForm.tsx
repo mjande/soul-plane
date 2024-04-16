@@ -26,7 +26,7 @@ export default function DeletePlaneForm() {
     // Date: 3/16/24
     useEffect(() => {
         async function getPlane() {
-            const response = await Axios.get(`http://${import.meta.env.VITE_HOST_NAME}:55767/planes/${id}`)
+            const response = await Axios.get(`http://flip3.engr.oregonstate.edu:55767/planes/${id}`)
             const data = response.data[0]
 
             setPlane({
@@ -50,7 +50,7 @@ export default function DeletePlaneForm() {
         event.preventDefault()
 
         try {
-          const response = await Axios.delete(`http://${import.meta.env.VITE_HOST_NAME}:55767/planes/${id}`)
+          const response = await Axios.delete(`http://flip3.engr.oregonstate.edu:55767/planes/${id}`)
           console.log(response)
           navigate("/Planes")
         } catch(error) {

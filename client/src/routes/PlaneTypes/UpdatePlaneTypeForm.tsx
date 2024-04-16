@@ -26,7 +26,7 @@ export default function UpdatePlaneTypeForm() {
     // Date: 3/16/24
     useEffect(() => {
         async function getPlaneType() {
-            const response = await Axios.get(`http://${import.meta.env.VITE_HOST_NAME}:55767/plane-types/${id}`)
+            const response = await Axios.get(`http://flip3.engr.oregonstate.edu:55767/plane-types/${id}`)
             const data = response.data[0]
 
             setFormData({
@@ -59,7 +59,7 @@ export default function UpdatePlaneTypeForm() {
         event.preventDefault()
 
         try {
-            const response = await Axios.put(`http://${import.meta.env.VITE_HOST_NAME}:55767/plane-types/${id}`, formData)
+            const response = await Axios.put(`http://flip3.engr.oregonstate.edu:55767/plane-types/${id}`, formData)
             console.log(response)
             navigate("/PlaneTypes")
         } catch(error) {
