@@ -47,7 +47,7 @@ export function UpdateFlightForm() {
     // Date: 3/16/24
     useEffect(() => {        
         async function getFlight() {
-            const response = await Axios.get(`http://flip3.engr.oregonstate.edu:55767/flights/${id}`)
+            const response = await Axios.get(`http://${import.meta.env.VITE_HOST_NAME}:55767/flights/${id}`)
             const flight = response.data[0]
 
             setFormData({
@@ -61,12 +61,12 @@ export function UpdateFlightForm() {
         }
 
         async function getAirports() {
-            const response = await Axios.get(`http://flip3.engr.oregonstate.edu:55767/Airports`)
+            const response = await Axios.get(`http://${import.meta.env.VITE_HOST_NAME}:55767/Airports`)
             setAirports(response.data)
         }
 
         async function getPlanes() {
-            const response = await Axios.get(`http://flip3.engr.oregonstate.edu:55767/Planes`)
+            const response = await Axios.get(`http://${import.meta.env.VITE_HOST_NAME}:55767/Planes`)
             setPlanes(response.data)
         }
 
@@ -95,7 +95,7 @@ export function UpdateFlightForm() {
         event.preventDefault()
 
         try {                        
-            const response = await Axios.put(`http://flip3.engr.oregonstate.edu:55767/flights/${formData.flight_id}`, formData)
+            const response = await Axios.put(`http://${import.meta.env.VITE_HOST_NAME}:55767/flights/${formData.flight_id}`, formData)
             console.log(response)
             navigate("/flights")
         } catch(error) {
