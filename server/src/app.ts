@@ -11,7 +11,6 @@ import 'dotenv/config'
 import express, { Express } from "express";
 
 const app: Express = express();
-const port = 55767;
 
 app.use(express.json())
 app.use(express.urlencoded({extended: true}))
@@ -62,8 +61,8 @@ app.use("/passengerFlights", passengerFlightsRouter)
 // Express code adapted from
 // Source URL: https://github.com/osu-cs340-ecampus/nodejs-starter-app
 // Date: 2/27/2024
-app.listen(port, () => {
+app.listen(process.env.PORT, () => {
   console.log(
-    `Express started on ${process.env.DB_HOST}:${port}; press Ctrl-C to terminate.`
+    `Express started on ${process.env.HOST}:${process.env.PORT}; press Ctrl-C to terminate.`
   );
 });
