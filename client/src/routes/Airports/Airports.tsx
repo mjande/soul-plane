@@ -20,7 +20,7 @@ function Airports() {
     // Source URL: https://axios-http.com/docs/api_intro
     // Date: 3/16/24
     useEffect(() => {
-        Axios.get(`https://${import.meta.env.VITE_BACKEND_HOST}/Airports`).then((response) => {
+        Axios.get(`${import.meta.env.VITE_BACKEND_HOST}/Airports`).then((response) => {
           setAirports(response.data);
         });
       }, [airports]);
