@@ -21,11 +21,12 @@ function Airports() {
     // Date: 3/16/24
     useEffect(() => {
         Axios.get(`http://${import.meta.env.VITE_BACKEND_HOST}/Airports`).then((response) => {
-          console.log("Response received for /Airports: ", response.data);
           setAirports(response.data);
         });
       }, [airports]);
-  
+
+    const url = `http://${import.meta.env.VITE_BACKEND_HOST}/Airports`;
+
   return (
     <div>
       <h1>Airports</h1>
@@ -33,6 +34,8 @@ function Airports() {
         <p>
           <strong>Browse Airports</strong>
         </p>
+        <p>URL: {url}</p>
+
         <table>
           <thead>
             <tr>
@@ -44,23 +47,23 @@ function Airports() {
             </tr>
           </thead>
           <tbody>
-            {airports.map((airport) => (
-              <tr key={airport.airport_id}>
-                <td>
-                  <Link to={`/airports/update/${airport.airport_id}`}>Edit</Link>
-                </td>
-                <td>
-                  <Link to={`/airports/delete/${airport.airport_id}`}>Delete</Link>
-                </td>
-                <td>{airport.airport_id}</td>
-                
-                <td>{airport.airport_name}</td>
-                <td>{airport.airport_code}</td>
-                <td>{airport.location}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+              {airports.map((airport) => (
+                <tr key={airport.airport_id}>
+                  <td>
+                    <Link to={`/airports/update/${airport.airport_id}`}>Edit</Link>
+                  </td>
+                  <td>
+                    <Link to={`/airports/delete/${airport.airport_id}`}>Delete</Link>
+                  </td>
+                  <td>{airport.airport_id}</td>
+                  
+                  <td>{airport.airport_name}</td>
+                  <td>{airport.airport_code}</td>
+                  <td>{airport.location}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         <Link to="/airports/new">Add Airport Type</Link>
         <p>&nbsp;</p>
       </div>
