@@ -21,6 +21,7 @@ function Airports() {
     // Date: 3/16/24
     useEffect(() => {
         Axios.get(`http://${import.meta.env.VITE_BACKEND_HOST}/Airports`).then((response) => {
+          console.log("Response received for /Airports: ", response.data);
           setAirports(response.data);
         });
       }, [airports]);
