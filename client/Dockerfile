@@ -3,7 +3,8 @@ WORKDIR /app
 COPY package*.json ./
 RUN npm install
 COPY . .
-RUN npm run build
+ARG VITE_BACKEND_HOST
+RUN VITE_BACKEND_HOST=$VITE_BACKEND_HOST npm run build
 
 FROM caddy:alpine
 COPY --from=build app/dist/ /srv/
