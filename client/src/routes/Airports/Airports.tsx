@@ -25,8 +25,6 @@ function Airports() {
         });
       }, [airports]);
 
-    const url = `http://${import.meta.env.VITE_BACKEND_HOST}/Airports`;
-
   return (
     <div>
       <h1>Airports</h1>
@@ -34,8 +32,6 @@ function Airports() {
         <p>
           <strong>Browse Airports</strong>
         </p>
-        <p>URL: {url}</p>
-
         <table>
           <thead>
             <tr>

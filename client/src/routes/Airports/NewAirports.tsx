@@ -38,7 +38,7 @@ export default function NewAirports() {
         event.preventDefault()
 
         try {
-            const response = await Axios.post(`http://${import.meta.env.VITE_BACKEND_HOST}/airports`, formData)
+            const response = await Axios.post(`${import.meta.env.VITE_BACKEND_HOST}/airports`, formData)
             console.log(response)
             navigate("/Airports")
         } catch(error) {

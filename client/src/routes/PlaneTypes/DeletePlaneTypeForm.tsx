@@ -25,7 +25,7 @@ export default function DeletePlaneTypeForm() {
     // Date: 3/16/24
     useEffect(() => {
         async function getPlaneType() {
-            const response = await Axios.get(`http://${import.meta.env.VITE_BACKEND_HOST}/plane-types/${id}`)
+            const response = await Axios.get(`${import.meta.env.VITE_BACKEND_HOST}/plane-types/${id}`)
             const data = response.data[0]
 
             setPlaneType({
@@ -49,7 +49,7 @@ export default function DeletePlaneTypeForm() {
         event.preventDefault()
 
         try {
-            const response = await Axios.delete(`http://${import.meta.env.VITE_BACKEND_HOST}/plane-types/${id}`)
+            const response = await Axios.delete(`${import.meta.env.VITE_BACKEND_HOST}/plane-types/${id}`)
             console.log(response)
             navigate("/PlaneTypes")
         } catch(error) {

@@ -34,19 +34,19 @@ export default function NewPassengerFlights() {
   // Source URL: https://axios-http.com/docs/api_intro
   // Date: 3/16/24
   useEffect(() => {
-    Axios.get(`http://${import.meta.env.VITE_BACKEND_HOST}/passengers`).then((response) => {
+    Axios.get(`${import.meta.env.VITE_BACKEND_HOST}/passengers`).then((response) => {
       setPassengers(response.data);
     });
   }, []);
 
   useEffect(() => {
-    Axios.get(`http://${import.meta.env.VITE_BACKEND_HOST}/flights`).then((response) => {
+    Axios.get(`${import.meta.env.VITE_BACKEND_HOST}/flights`).then((response) => {
       setFlights(response.data);
     });
   }, []);
 
   useEffect(() => {
-    Axios.get(`http://${import.meta.env.VITE_BACKEND_HOST}/airports`).then((response) => {
+    Axios.get(`${import.meta.env.VITE_BACKEND_HOST}/airports`).then((response) => {
       setAirports(response.data);
     });
   }, []);
@@ -72,7 +72,7 @@ export default function NewPassengerFlights() {
 
     try {
       const response = await Axios.post(
-        `http://${import.meta.env.VITE_BACKEND_HOST}/passengerFlights`,
+        `${import.meta.env.VITE_BACKEND_HOST}/passengerFlights`,
         formData
       );
 

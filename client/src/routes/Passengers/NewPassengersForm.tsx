@@ -49,7 +49,7 @@ export default function NewPassengersForm() {
         event.preventDefault()
 
         try {
-            const response = await Axios.post(`http://${import.meta.env.VITE_BACKEND_HOST}/passengers`, formData)
+            const response = await Axios.post(`${import.meta.env.VITE_BACKEND_HOST}/passengers`, formData)
             console.log(response)
             navigate("/Passengers")
         } catch(error) {

@@ -45,7 +45,7 @@ export default function UpdatePlaneForm() {
         // Source URL: https://axios-http.com/docs/api_intro
         // Date: 3/16/24
         async function getPlane() {
-            const response = await Axios.get(`http://${import.meta.env.VITE_BACKEND_HOST}/planes/${id}`)
+            const response = await Axios.get(`${import.meta.env.VITE_BACKEND_HOST}/planes/${id}`)
             const data = response.data[0] 
 
             setFormData({
@@ -60,7 +60,7 @@ export default function UpdatePlaneForm() {
         // Source URL: https://axios-http.com/docs/api_intro
         // Date: 3/16/24
         async function getPlaneTypes() {
-            const response = await Axios.get(`http://${import.meta.env.VITE_BACKEND_HOST}/plane-types`)
+            const response = await Axios.get(`${import.meta.env.VITE_BACKEND_HOST}/plane-types`)
             setPlaneTypes(response.data)
         }
 
@@ -70,7 +70,7 @@ export default function UpdatePlaneForm() {
         // Source URL: https://axios-http.com/docs/api_intro
         // Date: 3/16/24
         async function getAirports() {
-            const response = await Axios.get(`http://${import.meta.env.VITE_BACKEND_HOST}/airports`)
+            const response = await Axios.get(`${import.meta.env.VITE_BACKEND_HOST}/airports`)
             response.data.push({ airport_id: "", airport_name: "Currently Unavailable" })
             setAirports(response.data)
         }
@@ -103,7 +103,7 @@ export default function UpdatePlaneForm() {
         event.preventDefault()
 
         try {
-            const response = await Axios.put(`http://${import.meta.env.VITE_BACKEND_HOST}/planes/${id}`, formData)
+            const response = await Axios.put(`${import.meta.env.VITE_BACKEND_HOST}/planes/${id}`, formData)
             console.log(response)
             navigate("/Planes")
         } catch(error) {

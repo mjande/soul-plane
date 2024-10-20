@@ -28,7 +28,7 @@ export default function DeleteAirports() {
     // Date: 3/16/24
     useEffect(() => {
         async function getAirports() {
-            const response = await Axios.get(`http://${import.meta.env.VITE_BACKEND_HOST}/airports/${id}`)
+            const response = await Axios.get(`${import.meta.env.VITE_BACKEND_HOST}/airports/${id}`)
             const data = response.data[0]
             setFormData({
                 airport_id: data.airport_id,
@@ -51,7 +51,7 @@ export default function DeleteAirports() {
         event.preventDefault()
 
         try {
-            const response = await Axios.delete(`http://${import.meta.env.VITE_BACKEND_HOST}/airports/${id}`)
+            const response = await Axios.delete(`${import.meta.env.VITE_BACKEND_HOST}/airports/${id}`)
             console.log(response)
             navigate("/Airports")
         } catch(error) {

@@ -38,7 +38,7 @@ export default function UpdatePassengersForm() {
     // Date: 3/16/24
     useEffect(() => {
         async function getPassengers() {
-            const response = await Axios.get(`http://${import.meta.env.VITE_BACKEND_HOST}/passengers/${id}`)
+            const response = await Axios.get(`${import.meta.env.VITE_BACKEND_HOST}/passengers/${id}`)
             const data = response.data[0]
             setFormData({
                 first_name: data.first_name,
@@ -75,7 +75,7 @@ export default function UpdatePassengersForm() {
         event.preventDefault()
 
         try {
-            const response = await Axios.put(`http://${import.meta.env.VITE_BACKEND_HOST}/passengers/${id}`, formData)
+            const response = await Axios.put(`${import.meta.env.VITE_BACKEND_HOST}/passengers/${id}`, formData)
             console.log(response)
             navigate("/Passengers")
         } catch(error) {

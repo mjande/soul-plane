@@ -34,7 +34,7 @@ export default function NewPlaneForm() {
         // Source URL: https://axios-http.com/docs/api_intro
         // Date: 3/16/24
         async function getPlaneTypes() {
-            const response = await Axios.get(`http://${import.meta.env.VITE_BACKEND_HOST}/plane-types`);
+            const response = await Axios.get(`${import.meta.env.VITE_BACKEND_HOST}/plane-types`);
             setPlaneTypes(response.data)
         }
         
@@ -44,7 +44,7 @@ export default function NewPlaneForm() {
         // Source URL: https://axios-http.com/docs/api_intro
         // Date: 3/16/24
         async function getAirports() {
-            const response = await Axios.get(`http://${import.meta.env.VITE_BACKEND_HOST}/Airports`);
+            const response = await Axios.get(`${import.meta.env.VITE_BACKEND_HOST}/Airports`);
             setAirports(response.data)
         }
 
@@ -78,7 +78,7 @@ export default function NewPlaneForm() {
         event.preventDefault()
 
         try {                        
-            const response = await Axios.post(`http://${import.meta.env.VITE_BACKEND_HOST}/planes`, formData)
+            const response = await Axios.post(`${import.meta.env.VITE_BACKEND_HOST}/planes`, formData)
             console.log(response)
             navigate("/Planes")
         } catch(error) {
