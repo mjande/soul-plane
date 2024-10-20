@@ -21,13 +21,8 @@ app.use(express.urlencoded({extended: true}))
 import cors from 'cors'
 app.use(cors());
 
-const allowedOrigins = [
-  'http://flip3.engr.oregonstate.edu',
-  'http://flip2.engr.oregonstate.edu'
-];
-
 const options: cors.CorsOptions = {
-  origin: allowedOrigins
+  origin: process.env.ALLOWED_ORIGINS, 
 };
 
 app.use(cors(options))
