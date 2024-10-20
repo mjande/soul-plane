@@ -21,7 +21,7 @@ function Planes() {
   // Date: 3/16/24
   useEffect(() => {
     async function getPlanes() {
-      const response = await Axios.get(`http://${import.meta.env.VITE_HOST_NAME}:55767/planes`)
+      const response = await Axios.get(`http://${import.meta.env.VITE_BACKEND_HOST}/planes`)
       const planesArray = response.data
       planesArray.sort((a: Plane, b: Plane) => a.plane_id - b.plane_id)
 

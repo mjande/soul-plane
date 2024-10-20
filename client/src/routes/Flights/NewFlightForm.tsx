@@ -43,12 +43,12 @@ export default function NewFlightForm() {
     // Date: 3/16/24
     useEffect(() => {
         async function getAirports() {
-            const response = await Axios.get(`http://${import.meta.env.VITE_HOST_NAME}:55767/Airports`)
+            const response = await Axios.get(`http://${import.meta.env.VITE_BACKEND_HOST}/Airports`)
             setAirports(response.data)
         }
 
         async function getPlanes() {
-            const response = await Axios.get(`http://${import.meta.env.VITE_HOST_NAME}:55767/Planes`)
+            const response = await Axios.get(`http://${import.meta.env.VITE_BACKEND_HOST}/Planes`)
             setPlanes(response.data)
         }
 
@@ -76,7 +76,7 @@ export default function NewFlightForm() {
         event.preventDefault()
 
         try {                        
-            const response = await Axios.post(`http://${import.meta.env.VITE_HOST_NAME}:55767/flights`, formData)
+            const response = await Axios.post(`http://${import.meta.env.VITE_BACKEND_HOST}/flights`, formData)
             console.log(response)
             navigate("/flights")
         } catch(error) {

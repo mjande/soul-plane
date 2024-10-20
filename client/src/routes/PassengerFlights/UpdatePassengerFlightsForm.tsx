@@ -36,7 +36,7 @@ export default function UpdatePassengerForm() {
   // Source URL: https://axios-http.com/docs/api_intro
   // Date: 3/16/24
   useEffect(() => {
-    Axios.get(`http://${import.meta.env.VITE_HOST_NAME}:55767/airports`).then((response) => {
+    Axios.get(`http://${import.meta.env.VITE_BACKEND_HOST}/airports`).then((response) => {
       setAirports(response.data);
     });
   }, []);
@@ -50,7 +50,7 @@ export default function UpdatePassengerForm() {
     async function getPassengers() {
       try {
         const response = await Axios.get(
-          `http://${import.meta.env.VITE_HOST_NAME}:55767/passengers`
+          `http://${import.meta.env.VITE_BACKEND_HOST}/passengers`
         );
         setPassengers(response.data);
       } catch (error) {
@@ -64,7 +64,7 @@ export default function UpdatePassengerForm() {
     async function getFlights() {
       try {
         const response = await Axios.get(
-          `http://${import.meta.env.VITE_HOST_NAME}:55767/flights`
+          `http://${import.meta.env.VITE_BACKEND_HOST}/flights`
         );
         setFlights(response.data);
       } catch (error) {
@@ -91,7 +91,7 @@ export default function UpdatePassengerForm() {
     event.preventDefault();
     try {
       const response = await Axios.put(
-        `http://${import.meta.env.VITE_HOST_NAME}:55767/passengerFlights/${originalFid}/${originalPid}`,
+        `http://${import.meta.env.VITE_BACKEND_HOST}/passengerFlights/${originalFid}/${originalPid}`,
         formData
       );
 

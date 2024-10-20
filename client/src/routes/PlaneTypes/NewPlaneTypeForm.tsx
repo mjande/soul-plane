@@ -36,7 +36,7 @@ export default function NewPlaneTypeForm() {
         event.preventDefault()
 
         try {
-            const response = await Axios.post(`http://${import.meta.env.VITE_HOST_NAME}:55767/plane-types`, formData)
+            const response = await Axios.post(`http://${import.meta.env.VITE_BACKEND_HOST}/plane-types`, formData)
             console.log(response)
             navigate("/PlaneTypes")
         } catch(error) {
