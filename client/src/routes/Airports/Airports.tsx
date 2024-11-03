@@ -19,6 +19,7 @@ function Airports() {
         Axios.get(`${import.meta.env.VITE_BACKEND_HOST}/Airports`).then((response) => {
           setAirports(response.data);
         });
+        console.log(import.meta.env.VITE_BACKEND_HOST);
       }, [airports]);
 
   return (
