@@ -41,10 +41,6 @@ export default function NewPassengersForm() {
     }
     
     // Handle adding new passengers using a post request
-
-    // Request adapted from Axios docs
-    // Source URL: https://axios-http.com/docs/api_intro
-    // Date: 3/16/24
     async function handleSubmit(event: FormEvent<HTMLFormElement>) {
         event.preventDefault()
 
@@ -72,11 +68,6 @@ export default function NewPassengersForm() {
                     <label>Last Name</label>
                     <input type="text" name="last_name" onChange={handleInputChange} required />
                     <label>Phone</label>
-                    {/* 
-                        Pattern for validating phone numbers from MDN Web Docs
-                        Source URL: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/tel
-                        Date: 3/13/24 
-                    */}
                     <input type="tel" name="phone" onChange={handleInputChange} required pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" placeholder="123-456-7890"/>
                     <label>Email</label>
                     <input type="email" name="email" onChange={handleInputChange} required placeholder="username@email.com"/>

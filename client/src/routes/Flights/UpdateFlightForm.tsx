@@ -41,10 +41,6 @@ export function UpdateFlightForm() {
     const [planes, setPlanes] = useState<Plane[]>([])
 
     // Get request for current flight, airports, and planes 
-
-    // Request adapted from Axios docs
-    // Source URL: https://axios-http.com/docs/api_intro
-    // Date: 3/16/24
     useEffect(() => {        
         async function getFlight() {
             const response = await Axios.get(`${import.meta.env.VITE_BACKEND_HOST}/flights/${id}`)
@@ -87,10 +83,6 @@ export function UpdateFlightForm() {
     }
 
     // Handle form submission for flight updates based on flight id 
-
-    // Request adapted from Axios docs
-    // Source URL: https://axios-http.com/docs/api_intro
-    // Date: 3/16/24
     async function handleSubmit(event: FormEvent<HTMLFormElement>) {
         event.preventDefault()
 

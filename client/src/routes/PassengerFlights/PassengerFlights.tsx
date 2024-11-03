@@ -26,10 +26,6 @@ function PassengerFlights() {
 
 
   // Get request to grab passenger flights data
-
-  // Request adapted from Axios docs
-  // Source URL: https://axios-http.com/docs/api_intro
-  // Date: 3/16/24
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -45,10 +41,6 @@ function PassengerFlights() {
   }, []);
 
   // Get request to grab passengers data 
-
-  // Request adapted from Axios docs
-  // Source URL: https://axios-http.com/docs/api_intro
-  // Date: 3/16/24
   useEffect(() => {
     Axios.get(`${import.meta.env.VITE_BACKEND_HOST}/passengers`).then((response) => {
       setPassengers(response.data);
@@ -56,10 +48,6 @@ function PassengerFlights() {
   }, []);
 
   // Get request to grab flights data
-
-  // Request adapted from Axios docs
-  // Source URL: https://axios-http.com/docs/api_intro
-  // Date: 3/16/24
   useEffect(() => {
     Axios.get(`${import.meta.env.VITE_BACKEND_HOST}/flights`).then((response) => {
       setFlights(response.data);
@@ -67,10 +55,6 @@ function PassengerFlights() {
   }, []);
 
   // Get request to grab airports data
-
-  // Request adapted from Axios docs
-  // Source URL: https://axios-http.com/docs/api_intro
-  // Date: 3/16/24
   useEffect(() => {
     Axios.get(`${import.meta.env.VITE_BACKEND_HOST}/airports`).then((response) => {
       setAirports(response.data);

@@ -30,10 +30,6 @@ export default function DeleteFlightForm() {
     })
 
     // Get current flight form 
-
-    // Request adapted from Axios docs
-    // Source URL: https://axios-http.com/docs/api_intro
-    // Date: 3/16/24
     useEffect(() => {
         async function getFlight() {
             const response = await Axios.get(`${import.meta.env.VITE_BACKEND_HOST}/flights/${id}`)

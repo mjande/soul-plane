@@ -29,10 +29,6 @@ export default function NewPassengerFlights() {
   });
 
   // Get request to get data for passengers, flights, airports
-
-  // Request adapted from Axios docs
-  // Source URL: https://axios-http.com/docs/api_intro
-  // Date: 3/16/24
   useEffect(() => {
     Axios.get(`${import.meta.env.VITE_BACKEND_HOST}/passengers`).then((response) => {
       setPassengers(response.data);
@@ -63,10 +59,6 @@ export default function NewPassengerFlights() {
   }
 
   // Send a post request for adding new passenger flights
-
-  // Request adapted from Axios docs
-  // Source URL: https://axios-http.com/docs/api_intro
-  // Date: 3/16/24
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
@@ -80,9 +72,6 @@ export default function NewPassengerFlights() {
 
       navigate("/PassengerFlights");
     } catch (error) {
-      // Type checking adapted from StackOverflow post
-      // Source URL: https://stackoverflow.com/questions/69264472/axios-error-typescript-annotation-must-be-any-or-unknown-if
-      // Date: 3/13/24
       if (Axios.isAxiosError(error) && error.response?.data.message == "Duplicate Entry Error") {
           alert("Error: This passenger is already booked on this flight! Please select a different passenger or a different flight.")
           console.log("Error: This passenger is already booked on this flight! Please select a different passenger or a different flight.")

@@ -29,20 +29,12 @@ export default function NewPlaneForm() {
     
     useEffect(() => {
         // Get planeTypes for planeTypes dropdown
-
-        // Request adapted from Axios docs
-        // Source URL: https://axios-http.com/docs/api_intro
-        // Date: 3/16/24
         async function getPlaneTypes() {
             const response = await Axios.get(`${import.meta.env.VITE_BACKEND_HOST}/plane-types`);
             setPlaneTypes(response.data)
         }
         
         // Get airports for airports dropdown
-
-        // Request adapted from Axios docs
-        // Source URL: https://axios-http.com/docs/api_intro
-        // Date: 3/16/24
         async function getAirports() {
             const response = await Axios.get(`${import.meta.env.VITE_BACKEND_HOST}/Airports`);
             setAirports(response.data)
@@ -70,10 +62,6 @@ export default function NewPlaneForm() {
     }
     
     // Handle submission to backend using post request for plane form
-
-    // Request adapted from Axios docs
-    // Source URL: https://axios-http.com/docs/api_intro
-    // Date: 3/16/24
     async function handleSubmit(event: FormEvent<HTMLFormElement>) {
         event.preventDefault()
 

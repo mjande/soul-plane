@@ -21,10 +21,6 @@ function Passengers() {
   const [passengers, setPassengers] = useState<Passenger[]>([]);  
 
   // Get request to get all passengers
-
-  // Request adapted from Axios docs
-  // Source URL: https://axios-http.com/docs/api_intro
-  // Date: 3/16/24
   useEffect(() => {
     Axios.get(`${import.meta.env.VITE_BACKEND_HOST}/passengers`).then((response) => {
       setPassengers(response.data)
