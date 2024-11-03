@@ -2,11 +2,17 @@ import express, { Request, Response } from "express"
 const router = express.Router()
 
 import db from "../database/db-connector"
+import { RowDataPacket } from "mysql2"
+
+interface User extends RowDataPacket {
+    user_id: number;
+}
 
 // Get all passengers
 router.get("/", async (req: Request, res: Response) => {
     try {
-        const selectQuery = 'SELECT * FROM Passengers'
+        const selectQuery = `SELECT Passengers.user_id, passenger_id, Users.username, first_name, last_name, address, city, state, zipcode, passport_number FROM Passengers 
+            LEFT JOIN Users ON Users.user_id = Passengers.user_id;`
         const [results] = await db.pool.query(selectQuery)
         res.json(results)
     } catch (error) {
@@ -18,7 +24,10 @@ router.get("/", async (req: Request, res: Response) => {
 // Get passenger by ID
 router.get("/:id", async (req: Request, res: Response) => {
     try {
-        const selectQuery = `SELECT * FROM Passengers WHERE passenger_id = ${req.params.id}`
+        const selectQuery = `SELECT Passengers.user_id, passenger_id, username, first_name, last_name, address, city, state, zipcode, passport_number FROM Passengers
+            LEFT JOIN Users ON Users.user_id = Passengers.user_id;
+            WHERE passenger_id = ${req.params.id};`
+
         const [results] = await db.pool.query(selectQuery)
         res.json(results)
     } catch (error) {
@@ -31,45 +40,46 @@ router.get("/:id", async (req: Request, res: Response) => {
 router.post("/", async (req: Request, res: Response) => {
     try {
         const data = req.body;
+        const username = data.username;
         const first_name = data.first_name;
         const last_name = data.last_name;
-        const phone = data.phone;
-        const email = data.email;
         const address = data.address;
         const city = data.city;
         const state_abbr = data.state_abbr;
         const zip_code = data.zip_code;
         const passport_number = data.passport_number;
+
+        // Get user
+        const userQuery = `SELECT user_id FROM Users WHERE username = ? LIMIT(1)`;
+        const userId = (await db.pool.query<User[]>(userQuery, [username]))[0][0].user_id;
   
         const insertQuery = `
             INSERT INTO Passengers (
+                user_id
                 first_name, 
                 last_name, 
-                phone, 
-                email, 
                 address, 
                 city, 
                 state_abbr, 
                 zip_code, 
                 passport_number
-            ) VALUES ("${first_name}", "${last_name}", "${phone}", "${email}","${address}", "${city}","${state_abbr}","${zip_code}","${passport_number}");
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?);
         `;
   
         const [results] = await db.pool.query(
-        insertQuery,
-        [
-            first_name,
-            last_name,
-            phone,
-            email,
-            address,
-            city,
-            state_abbr,
-            zip_code,
-            passport_number,
-        ])
+            insertQuery,
+            [
+                userId,
+                first_name,
+                last_name,
+                address,
+                city,
+                state_abbr,
+                zip_code,
+                passport_number,
+            ]);
   
-        res.json({ success: true, message: 'Passenger added successfully', data });
+        res.json({ success: true, message: 'Passenger added successfully', results });
     } catch (error) {
         console.error(error);
         res.status(500).json({ success: false, message: 'Internal Server Error' });
@@ -84,8 +94,6 @@ router.put("/:id", async (req: Request, res: Response) => {
         
         const first_name = data.first_name;
         const last_name = data.last_name;
-        const phone = data.phone;
-        const email = data.email;
         const address = data.address;
         const city = data.city;
         const state_abbr = data.state_abbr;
@@ -96,8 +104,6 @@ router.put("/:id", async (req: Request, res: Response) => {
             UPDATE Passengers
                 SET first_name = "${first_name}",
                 last_name = "${last_name}",
-                phone = "${phone}",
-                email = "${email}",
                 address = "${address}",
                 city = "${city}",
                 state_abbr = "${state_abbr}",

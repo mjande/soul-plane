@@ -5,10 +5,10 @@ import { useNavigate, useParams } from "react-router-dom"
 
 // Define passenger properties
 interface FormData {
+    username: string,
     first_name: string,
     last_name: string,
     phone: string,
-    email: string,
     address: string,
     city: string,
     state_abbr: string,
@@ -20,10 +20,10 @@ export default function UpdatePassengersForm() {
     const { id } = useParams();
     // Initialize passenger form data
     const [formData, setFormData] = useState<FormData>({
+        username: '',
         first_name: '',
         last_name: '',
         phone: '',
-        email: '',
         address: '',
         city: '',
         state_abbr: '',
@@ -37,10 +37,10 @@ export default function UpdatePassengersForm() {
             const response = await Axios.get(`${import.meta.env.VITE_BACKEND_HOST}/passengers/${id}`)
             const data = response.data[0]
             setFormData({
+                username: data.username,
                 first_name: data.first_name,
                 last_name: data.last_name,
                 phone: data.phone,
-                email: data.email,
                 address: data.address,
                 city: data.city,
                 state_abbr: data.state_abbr,
@@ -85,19 +85,12 @@ export default function UpdatePassengersForm() {
                 <strong>Update Passenger</strong>
                 </legend>
                 <fieldset className="fields">
+                    <label>Username</label>
+                    <input type="text" value={formData.username} disabled />
                     <label>First Name</label>
                     <input type="text" name="first_name" onChange={handleInputChange} value={formData.first_name} required/>
                     <label>Last Name</label>
                     <input type="text" name="last_name" onChange={handleInputChange} value={formData.last_name} required />
-                    <label>Phone</label>
-                    {/* 
-                        Pattern for validating phone numbers from MDN Web Docs
-                        Source URL: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/tel
-                        Date: 3/13/24 
-                    */}
-                    <input type="tel" name="phone" onChange={handleInputChange} value={formData.phone} required pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" placeholder="123-456-7890"/>
-                    <label>Email</label>
-                    <input type="email" name="email" onChange={handleInputChange} value={formData.email} required placeholder="username@email.com"/>
                     <label>Address</label>
                     <input type="text" name="address" onChange={handleInputChange} value={formData.address} required />
                     <label>City</label>

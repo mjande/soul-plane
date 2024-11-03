@@ -78,7 +78,6 @@ export default function DeletePassengersForm() {
             <span>First Name: {formData.first_name}</span>
             <span>Last Name: {formData.last_name}</span>
             <span>Phone: {formData.phone}</span>
-            <span>Email: {formData.email}</span>
             <span>Address: {formData.address}</span>
             <span>City: {formData.city}</span>
             <span>State Abbreviation: {formData.state_abbr}</span>

@@ -4,15 +4,15 @@ import Axios from 'axios';
 
 // Define Passengers Property
 export interface Passenger {
+  user_id: number,
+  username: string,
   passenger_id: string,
   first_name: string,
   last_name: string,
-  phone: string,
-  email: string,
   address: string,
   city: string,
-  state_abbr: string,
-  zip_code: string,
+  state: string,
+  zipcode: string,
   passport_number: string
 }
 
@@ -39,10 +39,10 @@ function Passengers() {
             <tr>
               <th colSpan={2}>Actions</th>
               <th>Passenger ID</th>
+              <th>User ID</th>
+              <th>Username</th>
               <th>First Name</th>
               <th>Last Name</th>
-              <th>Phone</th>
-              <th>Email</th>
               <th>Address</th>
               <th>City</th>
               <th>State</th>
@@ -60,14 +60,14 @@ function Passengers() {
                   <Link to={`/passengers/delete/${passenger.passenger_id}`}>Delete</Link>
                 </td>
                 <td>{passenger.passenger_id}</td>
+                <td>{passenger.user_id}</td>
+                <td>{passenger.username}</td>
                 <td>{passenger.first_name}</td>
                 <td>{passenger.last_name}</td>
-                <td>{passenger.phone}</td>
-                <td>{passenger.email}</td>
                 <td>{passenger.address}</td>
                 <td>{passenger.city}</td>
-                <td>{passenger.state_abbr}</td>
-                <td>{passenger.zip_code}</td>
+                <td>{passenger.state}</td>
+                <td>{passenger.zipcode}</td>
                 <td>{passenger.passport_number}</td>
               </tr>
             ))}
