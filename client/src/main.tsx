@@ -33,7 +33,7 @@ import DeleteAirports from './routes/Airports/DeleteAirports.tsx';
 // Utilize Browser Router from React Router to set up Pages
 const router = createBrowserRouter([
   {
-    path: "*",
+    path: "/",
     element: <Root />,
     errorElement: <ErrorPage />,
     children: [
