@@ -4,5 +4,5 @@ root * /srv
 file_server { 
     browse 
 
-    try_files {path} srv/index.html
+    try_files {path} /srv/index.html
 }
