@@ -30,10 +30,6 @@ export default function NewAirports() {
     }
 
     // Handle submitting data for new airports 
-
-    // Request adapted from Axios docs
-    // Source URL: https://axios-http.com/docs/api_intro
-    // Date: 3/16/24
     async function handleSubmit(event: FormEvent<HTMLFormElement>) {
         event.preventDefault()
 

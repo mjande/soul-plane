@@ -40,10 +40,6 @@ export default function UpdatePlaneForm() {
 
     useEffect(() => {
         // Get request to grab the current plane using plane id
-
-        // Request adapted from Axios docs
-        // Source URL: https://axios-http.com/docs/api_intro
-        // Date: 3/16/24
         async function getPlane() {
             const response = await Axios.get(`${import.meta.env.VITE_BACKEND_HOST}/planes/${id}`)
             const data = response.data[0] 
@@ -55,20 +51,12 @@ export default function UpdatePlaneForm() {
         }
 
         // Get request to grab plane types data
-
-        // Request adapted from Axios docs
-        // Source URL: https://axios-http.com/docs/api_intro
-        // Date: 3/16/24
         async function getPlaneTypes() {
             const response = await Axios.get(`${import.meta.env.VITE_BACKEND_HOST}/plane-types`)
             setPlaneTypes(response.data)
         }
 
         // Get request to grab airports data
-
-        // Request adapted from Axios docs
-        // Source URL: https://axios-http.com/docs/api_intro
-        // Date: 3/16/24
         async function getAirports() {
             const response = await Axios.get(`${import.meta.env.VITE_BACKEND_HOST}/airports`)
             response.data.push({ airport_id: "", airport_name: "Currently Unavailable" })
@@ -95,10 +83,6 @@ export default function UpdatePlaneForm() {
     }
 
     // Handle submitting updated plane form using put request
-
-    // Request adapted from Axios docs
-    // Source URL: https://axios-http.com/docs/api_intro
-    // Date: 3/16/24
     async function handleSubmit(event: FormEvent<HTMLFormElement>) {
         event.preventDefault()
 

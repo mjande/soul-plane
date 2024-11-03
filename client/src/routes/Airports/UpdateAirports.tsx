@@ -20,10 +20,6 @@ export function UpdateAirports() {
     location: "",
   });
 
-  // Get request to get the current airport
-  // Request adapted from Axios docs
-  // Source URL: https://axios-http.com/docs/api_intro
-  // Date: 3/16/24
   useEffect(() => {
     async function getAirports() {
       const response = await Axios.get(
@@ -54,10 +50,6 @@ export function UpdateAirports() {
   }
 
   // Submit updated airport data into backend 
-
-  // Request adapted from Axios docs
-  // Source URL: https://axios-http.com/docs/api_intro
-  // Date: 3/16/24
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
 

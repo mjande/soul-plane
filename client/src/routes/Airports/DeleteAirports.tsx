@@ -22,10 +22,6 @@ export default function DeleteAirports() {
     })
 
     // Get request for airports by id 
-
-    // Request adapted from Axios docs
-    // Source URL: https://axios-http.com/docs/api_intro
-    // Date: 3/16/24
     useEffect(() => {
         async function getAirports() {
             const response = await Axios.get(`${import.meta.env.VITE_BACKEND_HOST}/airports/${id}`)

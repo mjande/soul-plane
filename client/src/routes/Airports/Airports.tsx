@@ -15,10 +15,6 @@ function Airports() {
     const [airports, setAirports] = useState<Airport[]>([]);
 
     // Get request for airport data
-    
-    // Request adapted from Axios docs
-    // Source URL: https://axios-http.com/docs/api_intro
-    // Date: 3/16/24
     useEffect(() => {
         Axios.get(`${import.meta.env.VITE_BACKEND_HOST}/Airports`).then((response) => {
           setAirports(response.data);
@@ -60,7 +56,7 @@ function Airports() {
               ))}
             </tbody>
           </table>
-        <Link to="/airports/new">Add Airport Type</Link>
+        <Link to="/airports/new">Add Airport</Link>
         <p>&nbsp;</p>
       </div>
     </div>

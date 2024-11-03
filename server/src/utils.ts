@@ -1,6 +1,3 @@
-// Function below copied with small changes from dev.to post:
-// Source URL: https://dev.to/kevinluo201/set-value-of-datetime-local-input-field-3435
-// Date: 3/8/24
 export function convertToSQLDateTime(dateString: string) {
     const date = new Date(dateString)
     const year = date.getFullYear();

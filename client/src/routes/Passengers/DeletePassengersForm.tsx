@@ -32,10 +32,6 @@ export default function DeletePassengersForm() {
     })
 
     // Get request for current passengers using its id
-
-    // Request adapted from Axios docs
-    // Source URL: https://axios-http.com/docs/api_intro
-    // Date: 3/16/24
     useEffect(() => {
         async function getPassengers() {
             const response = await Axios.get(`${import.meta.env.VITE_BACKEND_HOST}/passengers/${id}`)
@@ -58,10 +54,6 @@ export default function DeletePassengersForm() {
     const navigate = useNavigate();
     
     // Handle deleting passenger form using delete request
-
-    // Request adapted from Axios docs
-    // Source URL: https://axios-http.com/docs/api_intro
-    // Date: 3/16/24
     async function handleSubmit(event: FormEvent<HTMLFormElement>) {
         event.preventDefault()
 

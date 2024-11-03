@@ -15,10 +15,6 @@ function PlaneTypes() {
   const [planeTypes, setPlaneTypes] = useState<PlaneType[]>([]);  
   
   // Get request to retrieve all plane type data
-
-  // Request adapted from Axios docs
-  // Source URL: https://axios-http.com/docs/api_intro
-  // Date: 3/16/24
     useEffect(() => {
       Axios.get(`${import.meta.env.VITE_BACKEND_HOST}/plane-types`).then((response) => {
         setPlaneTypes(response.data)
