@@ -1,7 +1,12 @@
 :{$PORT}
 
-root * /srv
-file_server { 
-    browse 
+:80 {
+    root * /srv
+    file_server { 
+        browse 
+    }
+    try_files {path} {path}/ /index.html
 }
-try_files {path} {path}/ /srv/index.html
+
+
+
