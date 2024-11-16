@@ -1,20 +1,12 @@
 import { FormEvent, useState, useEffect } from "react"
 import Axios from "axios"
 import { useNavigate, useParams } from "react-router-dom"
+import { Airport } from "../../models";
 
-
-// Define Airport properties in FormData
-interface FormData {
-    airport_id: number;
-    airport_name: string;
-    airport_code: string;
-    location: string;
-}
-
-export default function DeleteAirports() {
+export function DeleteAirportForm() {
     // Grab airport id from url and initialize airport form data
     const { id } = useParams();
-    const [formData, setFormData] = useState<FormData>({
+    const [formData, setFormData] = useState<Airport>({
         airport_id: 0,
         airport_name: "",
         airport_code: "",
@@ -39,10 +31,6 @@ export default function DeleteAirports() {
     const navigate = useNavigate();
     
     // Submit airport data into the backend to delete airport by id
-
-    // Request adapted from Axios docs
-    // Source URL: https://axios-http.com/docs/api_intro
-    // Date: 3/16/24
     async function handleSubmit(event: FormEvent<HTMLFormElement>) {
         event.preventDefault()
 

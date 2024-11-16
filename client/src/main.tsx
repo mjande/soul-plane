@@ -26,9 +26,8 @@ import UpdatePlaneForm from './routes/Planes/UpdatePlaneForm.tsx';
 import NewFlightForm from './routes/Flights/NewFlightForm.tsx';
 import DeleteFlightForm from './routes/Flights/DeleteFlightForm.tsx';
 import { UpdateFlightForm } from './routes/Flights/UpdateFlightForm.tsx';
-import NewAirports from './routes/Airports/NewAirports.tsx';
-import { UpdateAirports } from './routes/Airports/UpdateAirports.tsx';
-import DeleteAirports from './routes/Airports/DeleteAirports.tsx';
+import { AirportForm } from './routes/Airports/AirportForm.tsx';
+import { DeleteAirportForm } from './routes/Airports/DeleteAirportForm.tsx';
 
 // Utilize Browser Router from React Router to set up Pages
 const router = createBrowserRouter([
@@ -44,19 +43,19 @@ const router = createBrowserRouter([
       },
       {
         path: "/airports",
-        element: <Airports />,
+        element: <Airports/>,
       },
       {
-        path: "/Airports/new",
-        element: <NewAirports />
+        path: '/airports/new',
+        element: <AirportForm />
       },
       {
-        path: "/Airports/update/:id",
-        element: <UpdateAirports />
+        path: "/airports/edit/:id",
+        element: <AirportForm />,
       },
       {
-        path: "Airports/delete/:id",
-        element: <DeleteAirports />
+        path: "/airports/delete/:id",
+        element: <DeleteAirportForm />
       },
       {
         path: "/Flights",

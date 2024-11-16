@@ -10,7 +10,7 @@ function Nav() {
                 <img src={logo} alt="logo" />
             </Link> */}
            <div className='miscNavButtons'>
-                <Link to='/Airports'>Airports</Link>
+                <Link to='/airports'>Airports</Link>
                 <Link to='/Flights'>Flights</Link>
                 <Link to='/PassengerFlights'>Passenger Flights</Link>
                 <Link to='/Passengers'>Passengers</Link>
