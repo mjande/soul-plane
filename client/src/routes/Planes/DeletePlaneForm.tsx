@@ -1,19 +1,12 @@
 import { FormEvent, useState, useEffect } from "react"
 import Axios from "axios"
 import { useNavigate, useParams } from "react-router-dom"
+import { PlaneView } from "../../models"
 
-
-// Define plane property
-interface Plane {
-  plane_id: number,
-  plane_type: string,
-  current_airport: string
-}
-
-export default function DeletePlaneForm() {
+export function DeletePlaneForm() {
     const { id } = useParams() 
     // Initialize plane form into client
-    const [plane, setPlane] = useState<Plane>({
+    const [plane, setPlane] = useState<PlaneView>({
         plane_id: 0,
         plane_type: "",
         current_airport: ""

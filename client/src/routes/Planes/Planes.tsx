@@ -1,25 +1,18 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom"
 import Axios from "axios"
-
-
-// Define Plane property
-interface Plane {
-  plane_id: number,
-  plane_type: string,
-  current_airport: string
-}
+import { PlaneView } from "../../models";
 
 function Planes() {
   // Initialize plane data into client side
-  const [planes, setPlanes] = useState<Plane[]>([])
+  const [planes, setPlanes] = useState<PlaneView[]>([])
 
   // Get request to grab all plane data from backend
   useEffect(() => {
     async function getPlanes() {
       const response = await Axios.get(`${import.meta.env.VITE_BACKEND_HOST}/planes`)
       const planesArray = response.data
-      planesArray.sort((a: Plane, b: Plane) => a.plane_id - b.plane_id)
+      planesArray.sort((a: PlaneView, b: PlaneView) => a.plane_id - b.plane_id)
 
       setPlanes(planesArray)
     }
@@ -48,7 +41,7 @@ function Planes() {
             {planes.map((plane) => (
               <tr key={plane.plane_id}>
                 <td>
-                  <Link to={`/planes/update/${plane.plane_id}`}>Edit</Link>
+                  <Link to={`/planes/edit/${plane.plane_id}`}>Edit</Link>
                 </td>
                 <td>
                   <Link to={`/planes/delete/${plane.plane_id}`}>Delete</Link>
