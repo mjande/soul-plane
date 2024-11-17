@@ -15,7 +15,7 @@ function Nav() {
                 <Link to='/PassengerFlights'>Passenger Flights</Link>
                 <Link to='/Passengers'>Passengers</Link>
                 <Link to='/Planes'>Planes</Link>
-                <Link to='/PlaneTypes'>Plane Types</Link>
+                <Link to='/plane-types'>Plane Types</Link>
             </div>
         </div>
     )

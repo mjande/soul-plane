@@ -1,37 +1,26 @@
 import { FormEvent, ChangeEvent, useState, useEffect } from "react"
-import Axios from "axios"
+import Axios, { AxiosResponse } from "axios"
 import { useNavigate, useParams } from "react-router-dom"
+import { PlaneType } from "../../models";
 
-
-// Define Plane Type property
-interface FormData {
-    type_name: string,
-    capacity: number,
-    range_in_hrs: number
-}
-
-export default function UpdatePlaneTypeForm() {
+export function PlaneTypeForm() {
+    // Initialize plane type form data
     const { id } = useParams();
-    // Initialize formData of plane type for client
-    const [formData, setFormData] = useState<FormData>({
-        type_name: '',
-        capacity: 0,   
-        range_in_hrs: 0,
-    })
+    const [formData, setFormData] = useState<Partial<PlaneType>>({});
 
-    // Get request for current plane type using plane type id
     useEffect(() => {
         async function getPlaneType() {
-            const response = await Axios.get(`${import.meta.env.VITE_BACKEND_HOST}/plane-types/${id}`)
-            const data = response.data[0]
+            if (id) {
+                const response = await Axios.get(`${import.meta.env.VITE_BACKEND_HOST}/plane-types/${id}`)
+                const data = response.data[0]
 
-            setFormData({
-                type_name: data.type_name,
-                capacity: data.capacity,
-                range_in_hrs: data.range_in_hrs
-            })
+                setFormData({
+                    type_name: data.type_name,
+                    capacity: data.capacity,
+                    range_in_hrs: data.range_in_hrs
+                })
+            }
         }
-
         getPlaneType()
     }, [id])
 
@@ -51,9 +40,15 @@ export default function UpdatePlaneTypeForm() {
         event.preventDefault()
 
         try {
-            const response = await Axios.put(`${import.meta.env.VITE_BACKEND_HOST}/plane-types/${id}`, formData)
-            console.log(response)
-            navigate("/PlaneTypes")
+            let response: AxiosResponse;
+            if (id) {
+                response = await Axios.put(`${import.meta.env.VITE_BACKEND_HOST}/plane-types/${id}`, formData)
+            } else {
+                response = await Axios.post(`${import.meta.env.VITE_BACKEND_HOST}/plane-types`, formData)
+            }
+
+            console.log(response);
+            navigate("/plane-types")
         } catch(error) {
             console.log(error)
         }
@@ -64,12 +59,14 @@ export default function UpdatePlaneTypeForm() {
             <h1>Plane Types</h1>
         
             <div id="update">
-            <form id="updatePlaneType" method="put" onSubmit={handleSubmit}>
+            <form id="updatePlaneType" onSubmit={handleSubmit}>
                 <legend>
-                <strong>Update Plane Type</strong>
+                <strong>{ id ? 'Update Plane Type' : 'Create Plane Type' }</strong>
                 </legend>
-            <fieldset className="fields">
-            <span>Plane Type ID: {id}</span>
+
+                <fieldset className="fields">
+                { id && <span>Plane Type ID: {id}</span> }
+
                 <label>Type Name</label>
                 <input type="text" name="type_name" value={formData.type_name} onChange={handleInputChange} required/>
                 <label>Capacity</label>
@@ -78,7 +75,7 @@ export default function UpdatePlaneTypeForm() {
                 <input type="number" name="range_in_hrs" value={formData.range_in_hrs} onChange={handleInputChange} required />
                 </fieldset>
                 <div className="buttons-container">
-                <input className="btn" type="submit" value="Update Plane Type" />
+                <input className="btn" type="submit" value={ id ? "Update Plane Type" : "Create Plane Type" }/>
                 <input className="btn" type="button" value="Cancel" onClick={() => navigate(-1)}/>
                 </div>
             </form>
