@@ -103,25 +103,52 @@ INSERT INTO Passenger_flights (passenger_id, flight_id) VALUES
 (14, 11),
 (15, 12);
 
--- Insert values into Passengers table
+-- Insert values into Users table
+DELETE FROM Users;
+ALTER TABLE Users AUTO_INCREMENT = 1;
+INSERT INTO Users (username, password) VALUES
+('admin', 'hashed_password1'),
+('john.doe@example.com', 'hashed_password2'),
+('jane.smith@example.com', 'hashed_password3'),
+('michael.j@example.com', 'hashed_password4'),
+('emily.d@example.com', 'hashed_password5'),
+('daniel.b@example.com', 'hashed_password6'),
+('sarah.m@example.com', 'hashed_password7'),
+('david.w@example.com', 'hashed_password8'),
+('laura.m@example.com', 'hashed_password9'),
+('james.t@example.com', 'hashed_password10'),
+('emma.a@example.com', 'hashed_password11');
+
+-- Insert values into Roles Table
+DELETE FROM Roles;
+INSERT INTO Roles (user_id, role) VALUES
+(1, 'admin'),
+(2, 'user'),
+(3, 'user'),
+(4, 'user'),
+(5, 'user'),
+(6, 'user'),
+(7, 'user'),
+(8, 'user'),
+(9, 'user'),
+(10, 'user'), 
+(11, 'user');
+
+
+-- Insert values into Passengers Table
 DELETE FROM Passengers;
 ALTER TABLE Passengers AUTO_INCREMENT = 1;
-INSERT INTO Passengers (first_name, last_name, phone, email, address, city, state_abbr, zip_code, passport_number) VALUES 
-('John', 'Doe', '555-123-4567', 'john.doe@example.com', '123 Elm St', 'Springfield', 'IL', '62704', 'P123456789'),
-('Jane', 'Smith', '555-987-6543', 'jane.smith@example.com', '456 Oak Ave', 'Chicago', 'IL', '60616', 'P987654321'),
-('Alice', 'Johnson', '555-654-1234', 'alice.johnson@example.com', '789 Maple Dr', 'New York', 'NY', '10001', 'P234567891'),
-('Bob', 'Williams', '555-321-4567', 'bob.williams@example.com', '101 Pine Ln', 'Los Angeles', 'CA', '90001', 'P345678912'),
-('Mary', 'Brown', '555-432-1765', 'mary.brown@example.com', '202 Cedar Ct', 'Miami', 'FL', '33101', 'P456789123'),
-('Mike', 'Davis', '555-213-5476', 'mike.davis@example.com', '303 Birch Rd', 'Seattle', 'WA', '98101', 'P567891234'),
-('Emily', 'Miller', '555-567-1243', 'emily.miller@example.com', '404 Spruce St', 'Denver', 'CO', '80201', 'P678912345'),
-('David', 'Wilson', '555-789-2134', 'david.wilson@example.com', '505 Aspen Blvd', 'Boston', 'MA', '02101', 'P789123456'),
-('Sarah', 'Moore', '555-432-1987', 'sarah.moore@example.com', '606 Redwood Ave', 'Orlando', 'FL', '32801', 'P891234567'),
-('James', 'Taylor', '555-321-7894', 'james.taylor@example.com', '707 Palm Way', 'Phoenix', 'AZ', '85001', 'P912345678'),
-('Patricia', 'Anderson', '555-876-5432', 'patricia.anderson@example.com', '808 Fir Ln', 'Houston', 'TX', '77001', 'P123789456'),
-('Chris', 'Thomas', '555-213-8765', 'chris.thomas@example.com', '909 Willow Dr', 'Dallas', 'TX', '75201', 'P234891567'),
-('Laura', 'Jackson', '555-564-7382', 'laura.jackson@example.com', '1010 Cypress St', 'San Diego', 'CA', '92101', 'P345912678'),
-('Paul', 'White', '555-897-6345', 'paul.white@example.com', '1111 Sequoia Pl', 'Atlanta', 'GA', '30301', 'P456123789'),
-('Linda', 'Harris', '555-214-3658', 'linda.harris@example.com', '1212 Magnolia Blvd', 'San Francisco', 'CA', '94101', 'P567234891');
+INSERT INTO Passengers (user_id, first_name, last_name, address, city, state, zipcode, passport_number) VALUES
+(2, 'John', 'Doe', '123 Elm St', 'Springfield', 'IL', '62704', 'A12345678'),
+(3, 'Jane', 'Smith', '456 Oak St', 'Hometown', 'TX', '77001', 'B23456789'),
+(4, 'Michael', 'Johnson', '789 Pine St', 'Austin', 'TX', '73301', NULL),     
+(5, 'Emily', 'Davis', '321 Maple St', 'Seattle', 'WA', '98101', 'D45678901'),
+(6, 'Daniel', 'Brown', '654 Birch St', 'Denver', 'CO', '80201', 'E56789012'),
+(7, 'Sarah', 'Miller', '987 Cedar St', 'Miami', 'FL', '33101', NULL),          
+(8, 'David', 'Wilson', '147 Redwood St', 'Boston', 'MA', '02101', 'G78901234'),
+(9, 'Laura', 'Moore', '258 Fir St', 'Phoenix', 'AZ', '85001', 'H89012345'),
+(10, 'James', 'Taylor', '369 Walnut St', 'San Francisco', 'CA', '94101', 'I90123456'),
+(11, 'Emma', 'Anderson', '147 Spruce St', 'Las Vegas', 'NV', '89101', 'J01234567');
 
 SET FOREIGN_KEY_CHECKS=1;
 COMMIT;
@@ -131,4 +158,6 @@ SELECT * FROM Plane_Types;
 SELECT * FROM Planes;
 SELECT * FROM Flights;
 SELECT * FROM Passenger_flights;
+SELECT * FROM Users;
+SELECT * FROM Roles;
 SELECT * FROM Passengers;

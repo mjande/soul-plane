@@ -9,7 +9,7 @@ interface PlaneType {
     range_in_hrs: 0
 }
 
-export default function DeletePlaneTypeForm() {
+export function DeletePlaneTypeForm() {
     const { id } = useParams() 
     // Initialize plane type data into client
     const [planeType, setPlaneType] = useState<PlaneType>({
@@ -43,7 +43,7 @@ export default function DeletePlaneTypeForm() {
         try {
             const response = await Axios.delete(`${import.meta.env.VITE_BACKEND_HOST}/plane-types/${id}`)
             console.log(response)
-            navigate("/PlaneTypes")
+            navigate("/plane-types")
         } catch(error) {
             console.log(error)
         }

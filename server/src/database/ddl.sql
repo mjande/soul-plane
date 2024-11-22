@@ -58,19 +58,37 @@ CREATE TABLE Passenger_flights (
         ON DELETE CASCADE
 );
 
+-- Create Users Table
+DROP TABLE IF EXISTS Users;
+CREATE TABLE Users (
+    user_id INT PRIMARY KEY AUTO_INCREMENT,
+    username VARCHAR(255) NOT NULL,
+    password VARCHAR(255) NOT NULL
+);
+
+-- Create Roles Table
+DROP TABLE IF EXISTS Roles;
+CREATE TABLE Roles (
+    user_id INT NOT NUll,
+    role VARCHAR(255) NOT NULL,
+    FOREIGN KEY (user_id) REFERENCES Users(user_id)
+        ON DELETE CASCADE
+);
+
 -- Create Passengers Table
 DROP TABLE IF EXISTS Passengers;
 CREATE TABLE Passengers (
     passenger_id INT PRIMARY KEY AUTO_INCREMENT,
+    user_id INT NOT NULL,
     first_name VARCHAR(255) NOT NULL,
     last_name VARCHAR(255) NOT NULL,
-    phone VARCHAR(12) NOT NULL,
-    email VARCHAR(255) NOT NULL,
     address VARCHAR(255) NOT NULL,
     city VARCHAR(255) NOT NULL,
-    state_abbr VARCHAR(2) NOT NULL,
-    zip_code VARCHAR(9) NOT NULL,
-    passport_number VARCHAR(20) UNIQUE NOT NULL
+    state VARCHAR(255) NOT NULL,
+    zipcode VARCHAR(9) NOT NULL,
+    passport_number VARCHAR(20) UNIQUE,
+    FOREIGN KEY (user_id) REFERENCES Users(user_id) 
+        ON DELETE CASCADE    
 );
 
 SET FOREIGN_KEY_CHECKS=1;

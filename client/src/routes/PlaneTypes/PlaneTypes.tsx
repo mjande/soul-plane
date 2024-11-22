@@ -1,16 +1,9 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Axios from 'axios';
+import { PlaneType } from "../../models";
 
-// Define plane type property
-interface PlaneType {
-  plane_type_id: number,
-  type_name: string,
-  capacity: number,
-  range_in_hrs: number
-}
-
-function PlaneTypes() {
+export function PlaneTypes() {
   // Initialize plane type data for client
   const [planeTypes, setPlaneTypes] = useState<PlaneType[]>([]);  
   
@@ -42,10 +35,10 @@ function PlaneTypes() {
             {planeTypes.map((planeType) => (
               <tr key={planeType.plane_type_id}>
                 <td>
-                  <Link to={`/PlaneTypes/update/${planeType.plane_type_id}`}>Edit</Link>
+                  <Link to={`/plane-types/edit/${planeType.plane_type_id}`}>Edit</Link>
                 </td>
                 <td>
-                  <Link to={`/PlaneTypes/delete/${planeType.plane_type_id}`}>Delete</Link>
+                  <Link to={`/plane-types/delete/${planeType.plane_type_id}`}>Delete</Link>
                 </td>
                 <td>{planeType.plane_type_id}</td>
                 <td>{planeType.type_name}</td>
@@ -55,11 +48,9 @@ function PlaneTypes() {
             ))}
           </tbody>
         </table>
-        <Link to="/PlaneTypes/new">Add Plane Type</Link>
+        <Link to="/plane-types/new">Add Plane Type</Link>
         <p>&nbsp;</p>
       </div>
     </div>
   );
 }
-
-export default PlaneTypes;

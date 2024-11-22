@@ -1,8 +1,7 @@
 import { FormEvent, useState, useEffect } from "react";
 import Axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
-import { Airport } from "../Airports/Airports";
-
+import { Airport } from "../../models";
 
 // Define flights properties
 interface Flights {
@@ -17,7 +16,7 @@ interface Passenger {
   last_name: string;
 }
 
-export default function DeletePassengerFlightsForm() {
+export function DeletePassengerFlightsForm() {
   const { fid, pid } = useParams<{ fid?: string; pid?: string }>();
 
   // Initialize airport, passenger, and flights data for client

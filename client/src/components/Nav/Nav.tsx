@@ -10,12 +10,12 @@ function Nav() {
                 <img src={logo} alt="logo" />
             </Link> */}
            <div className='miscNavButtons'>
-                <Link to='/Airports'>Airports</Link>
-                <Link to='/Flights'>Flights</Link>
-                <Link to='/PassengerFlights'>Passenger Flights</Link>
-                <Link to='/Passengers'>Passengers</Link>
-                <Link to='/Planes'>Planes</Link>
-                <Link to='/PlaneTypes'>Plane Types</Link>
+                <Link to='/airports'>Airports</Link>
+                <Link to='/flights'>Flights</Link>
+                <Link to='/passenger-flights'>Passenger Flights</Link>
+                <Link to='/passengers'>Passengers</Link>
+                <Link to='/planes'>Planes</Link>
+                <Link to='/plane-types'>Plane Types</Link>
             </div>
         </div>
     )

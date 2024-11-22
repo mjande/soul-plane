@@ -1,42 +1,26 @@
 import { FormEvent, ChangeEvent, useState, useEffect } from "react";
-import Axios from "axios";
+import Axios, { AxiosResponse } from "axios";
 import { useNavigate, useParams } from "react-router-dom";
+import { Airport } from "../../models";
 
-// Initialize Airport properties in FormData
-interface FormData {
-  airport_id: number;
-  airport_name: string;
-  airport_code: string;
-  location: string;
-}
-
-export function UpdateAirports() {
+export function AirportForm() {
   // Grab airport id from url and initialize airport form data
   const { id } = useParams();
-  const [formData, setFormData] = useState<FormData>({
-    airport_id: 0,
-    airport_name: "",
-    airport_code: "",
-    location: "",
-  });
+  const [formData, setFormData] = useState<Partial<Airport>>({});
 
   useEffect(() => {
-    async function getAirports() {
-      const response = await Axios.get(
-        `${import.meta.env.VITE_BACKEND_HOST}/airports/${id}`);
-        const airport = response.data[0]
-        setFormData({
-            airport_id: airport.airport_id,
-            airport_name: airport.airport_name,
-            airport_code: airport.airport_code,
-            location: airport.location,
-        })
+    async function getAirport() {
+      if (id) {
+        const response = await Axios.get(
+          `${import.meta.env.VITE_BACKEND_HOST}/airports/${id}`);
+        const airport = response.data[0];
+        setFormData(airport);
+      }
     }
-    getAirports();
+    getAirport();
   }, [id]);
 
   const navigate = useNavigate();
-
 
   // Track input changes in form
   async function handleInputChange(
@@ -54,10 +38,19 @@ export function UpdateAirports() {
     event.preventDefault();
 
     try {
-      const response = await Axios.put(
-        `${import.meta.env.VITE_BACKEND_HOST}/airports/${id}`,
-        formData
-      );
+      let response: AxiosResponse;
+      if (id) {
+        response = await Axios.put(
+          `${import.meta.env.VITE_BACKEND_HOST}/airports/${id}`, 
+          formData
+        );
+      } else {
+        response = await Axios.post(
+          `${import.meta.env.VITE_BACKEND_HOST}/airports`,
+          formData
+        );
+      }
+
       console.log(response);
       navigate("/airports");
     } catch (error) {
@@ -66,21 +59,24 @@ export function UpdateAirports() {
   }
 
   return (
-    <div id="update">
-      <form id="updateFlight" method="put" onSubmit={handleSubmit}>
+    <div>
+      <form onSubmit={handleSubmit}>
         <legend>
-          <strong>Update Airport</strong>
+          <strong>{id ? 'Update Airport' : 'Create Airport'}</strong>
         </legend>
-        <fieldset className="fields">
-          <span>Airport ID: {id}</span>
-          <label>Airport Name</label>
-          <input
-            type="text"
-            name="airport_name"
-            value={formData.airport_name}
-            onChange={handleInputChange}
-            required
-          />
+
+          <fieldset className="fields">
+            { id && <span>Airport ID: {id}</span> }
+
+            <label>Airport Name</label>
+            <input
+              type="text"
+              name="airport_name"
+              value={formData.airport_name}
+              onChange={handleInputChange}
+              required
+            />
+        
           <label>Airport Code</label>
           <input
             type="text"
@@ -99,7 +95,7 @@ export function UpdateAirports() {
           />
         </fieldset>
         <div className="buttons-container">
-          <input className="btn" type="submit" value="Update Airport" />
+          <input className="btn" type="submit" value={id ? "Update Airport" : "Create Airport"} />
           <input
             className="btn"
             type="button"

@@ -77,10 +77,13 @@ DELETE FROM Airports WHERE airport_id = :airport_id_selected_from_browse_airport
 /* Passengers */
 
 -- Get all passengers
-SELECT * FROM Passengers;
+SELECT Passengers.user_id, passenger_id, username, first_name, last_name, email, address, city, state, zipcode, passport_number FROM Passengers 
+    LEFT JOIN Users ON Users.user_id = Passengers.user_id;
 
 -- Get passenger by ID
-SELECT * FROM Passengers WHERE passenger_id = :id_from_url;
+SELECT Passengers.user_id, passenger_id, username, first_name, last_name, email, address, city, state, zipcode, passport_number FROM Passengers 
+    LEFT JOIN Users ON Users.user_id = Passengers.user_id;
+    WHERE passenger_id = :id_from_url;
 
 -- Create a passenger
 INSERT INTO Passengers (first_name, last_name, phone, email, address, city, state_abbr, zip_code, passport_number)

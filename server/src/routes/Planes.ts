@@ -45,9 +45,9 @@ router.post("/", async (req: Request, res: Response) => {
     try {
         const data = req.body
         const planeTypeID = parseInt(data.plane_type_id)
-        let currentAirportID: number | string = parseInt(data.current_airport_id)
+        let currentAirportID: string = data.current_airport_id.toString();
     
-        if (isNaN(currentAirportID)) {
+        if (currentAirportID == '-1') {
             // Convert currentAirportID to NULL for NULL-able relationship
             currentAirportID = "NULL" 
         }

@@ -1,32 +1,14 @@
 import { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import Axios from 'axios';
-import { Passenger } from "../Passengers/Passengers";
-import { Airport } from "../Airports/Airports";
 import { useNavigate } from "react-router-dom";
+import { Airport, Flight, Passenger, PassengerFlight } from "../../models";
 
-
-// Define Flights Properties
-interface Flights {
-  flight_id: string;
-  arrive_airport_id: string;
-  depart_airport_id: string;
-}
-
-// Define PassengerFlights FormData properties
-interface FormData {
-  flight_id: string;
-  passenger_id: string;
-}
-
-export default function NewPassengerFlights() {
+export function PassengerFlightsForm() {
   // Initialize data for client for passengers, flights, airports, and passenger flights
   const [passengers, setPassengers] = useState<Passenger[]>([]);
-  const [flights, setFlights] = useState<Flights[]>([]);
+  const [flights, setFlights] = useState<Flight[]>([]);
   const [airports, setAirports] = useState<Airport[]>([]);
-  const [formData, setFormData] = useState<FormData>({
-    flight_id: '',
-    passenger_id: '',
-  });
+  const [formData, setFormData] = useState<Partial<PassengerFlight>>();
 
   // Get request to get data for passengers, flights, airports
   useEffect(() => {
@@ -95,7 +77,7 @@ export default function NewPassengerFlights() {
             <select
               name="flight_id"
               onChange={handleInputChange}
-              value={formData.flight_id}
+              value={formData?.flight_id}
               required
             >
               <option value="" disabled>Select Flight</option>
@@ -111,7 +93,7 @@ export default function NewPassengerFlights() {
             <select
               name="passenger_id"
               onChange={handleInputChange}
-              value={formData.passenger_id}
+              value={formData?.passenger_id}
               required
             >
               <option value="" disabled>Select Passenger</option>

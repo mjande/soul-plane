@@ -5,30 +5,24 @@ import Root from "./routes/Root.tsx";
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import Home from './routes/Home.tsx';
 import ErrorPage from './static/ErrorPage.tsx';
-import Airports from './routes/Airports/Airports.tsx';
-import Flights from './routes/Flights/Flights.tsx';
-import PassengerFlights from './routes/PassengerFlights/PassengerFlights.tsx';
-import Passengers from './routes/Passengers/Passengers.tsx';
-import Planes from './routes/Planes/Planes.tsx';
-import PlaneTypes from './routes/PlaneTypes/PlaneTypes.tsx';
-import NewPlaneTypeForm from './routes/PlaneTypes/NewPlaneTypeForm.tsx'
-import UpdatePlaneTypeForm from './routes/PlaneTypes/UpdatePlaneTypeForm.tsx';
-import DeletePlaneTypeForm from './routes/PlaneTypes/DeletePlaneTypeForm.tsx';
-import NewPassengersForm from './routes/Passengers/NewPassengersForm.tsx';
-import UpdatePassengersForm from './routes/Passengers/UpdatePassengersForm.tsx';
-import DeletePassengersForm from './routes/Passengers/DeletePassengersForm.tsx';
-import NewPassengerFlights from './routes/PassengerFlights/NewPassengerFlightsForm.tsx';
-import DeletePassengerFlightsForm from './routes/PassengerFlights/DeletePassengerFlightsForm.tsx';
-import UpdatePassengerFlightsForm from './routes/PassengerFlights/UpdatePassengerFlightsForm.tsx';
-import NewPlaneForm from './routes/Planes/NewPlaneForm.tsx';
-import DeletePlaneForm from './routes/Planes/DeletePlaneForm.tsx';
-import UpdatePlaneForm from './routes/Planes/UpdatePlaneForm.tsx';
-import NewFlightForm from './routes/Flights/NewFlightForm.tsx';
-import DeleteFlightForm from './routes/Flights/DeleteFlightForm.tsx';
-import { UpdateFlightForm } from './routes/Flights/UpdateFlightForm.tsx';
-import NewAirports from './routes/Airports/NewAirports.tsx';
-import { UpdateAirports } from './routes/Airports/UpdateAirports.tsx';
-import DeleteAirports from './routes/Airports/DeleteAirports.tsx';
+import { Airports} from './routes/Airports/Airports.tsx';
+import { Flights }from './routes/Flights/Flights.tsx';
+import { PassengerFlights } from './routes/PassengerFlights/PassengerFlights.tsx';
+import { Passengers } from './routes/Passengers/Passengers.tsx';
+import { Planes } from './routes/Planes/Planes.tsx';
+import { PlaneTypes } from './routes/PlaneTypes/PlaneTypes.tsx';
+import { PlaneTypeForm } from './routes/PlaneTypes/PlaneTypeForm.tsx'
+import { DeletePlaneTypeForm }from './routes/PlaneTypes/DeletePlaneTypeForm.tsx';
+import { PassengerForm } from './routes/Passengers/PassengerForm.tsx';
+import { DeletePassengerForm } from './routes/Passengers/DeletePassengerForm.tsx';
+import { PassengerFlightsForm } from './routes/PassengerFlights/PassengerFlightsForm.tsx';
+import { DeletePassengerFlightsForm } from './routes/PassengerFlights/DeletePassengerFlightsForm.tsx';
+import { DeletePlaneForm } from './routes/Planes/DeletePlaneForm.tsx';
+import { PlaneForm } from './routes/Planes/PlaneForm.tsx';
+import { DeleteFlightForm } from './routes/Flights/DeleteFlightForm.tsx';
+import { FlightForm } from './routes/Flights/FlightForm.tsx';
+import { AirportForm } from './routes/Airports/AirportForm.tsx';
+import { DeleteAirportForm } from './routes/Airports/DeleteAirportForm.tsx';
 
 // Utilize Browser Router from React Router to set up Pages
 const router = createBrowserRouter([
@@ -44,98 +38,94 @@ const router = createBrowserRouter([
       },
       {
         path: "/airports",
-        element: <Airports />,
+        element: <Airports/>,
       },
       {
-        path: "/Airports/new",
-        element: <NewAirports />
+        path: '/airports/new',
+        element: <AirportForm />
       },
       {
-        path: "/Airports/update/:id",
-        element: <UpdateAirports />
+        path: "/airports/edit/:id",
+        element: <AirportForm />,
       },
       {
-        path: "Airports/delete/:id",
-        element: <DeleteAirports />
+        path: "/airports/delete/:id",
+        element: <DeleteAirportForm />
       },
       {
-        path: "/Flights",
+        path: "/flights",
         element: <Flights/>,
       },
       {
-        path: "/Flights/new",
-        element: <NewFlightForm />
+        path: "/flights/new",
+        element: <FlightForm />
       },
       {
-        path: "/Flights/update/:id",
-        element: <UpdateFlightForm />
+        path: "/flights/edit/:id",
+        element: <FlightForm />
       },
       {
-        path: "Flights/delete/:id",
+        path: "/flights/delete/:id",
         element: <DeleteFlightForm />
       },
       {
-        path: "/PassengerFlights",
+        path: "/passenger-flights",
         element: <PassengerFlights />,
       },
       {
-        path: "/PassengerFlights/new",
-        element: <NewPassengerFlights />,
+        path: "/passenger-flights/new",
+        element: <PassengerFlightsForm />,
       },
       {
-        path:"/PassengerFlights/update/:fid/:pid",
-        element: <UpdatePassengerFlightsForm />,
-      },
-      {
-        path:"/PassengerFlights/delete/:fid/:pid",
+        path:"/passenger-flights/delete/:fid/:pid",
         element: <DeletePassengerFlightsForm />,
       },
       {
-        path: "/Passengers",
+        path: "/passengers",
         element: <Passengers />,
       },
       {
-        path: "/Passengers/new",
-        element: <NewPassengersForm />,
+        path: "/passengers/new",
+        element: <PassengerForm />,
       },
       {
-        path: "/Passengers/update/:id",
-        element: <UpdatePassengersForm />,
+        path: "/passengers/edit/:id",
+        element: <PassengerForm />,
       },
       {
-        path:"/Passengers/delete/:id",
-        element: <DeletePassengersForm />,
+        path:"/passengers/delete/:id",
+        element: <DeletePassengerForm />,
       },
       {
-        path: "/Planes",
+        path: "/planes",
         element: <Planes />,
       },
       {
-        path: "/Planes/new",
-        element: <NewPlaneForm />
+        path: "/planes/new",
+        element: <PlaneForm />
       },
       {
-        path: "/Planes/update/:id",
-        element: <UpdatePlaneForm />
+        path: "/planes/edit/:id",
+        element: <PlaneForm />
       },
       {
-        path: "/Planes/delete/:id",
+        path: "/planes/delete/:id",
         element: <DeletePlaneForm />
       },
       {
-        path: "/PlaneTypes",
+        path: "/plane-types",
         element: <PlaneTypes />,
       },
       {
-        path: "/PlaneTypes/new",
-        element: <NewPlaneTypeForm />
+        path: "/plane-types/new",
+        element: <PlaneTypeForm />
       },
       {
-        path: "/PlaneTypes/update/:id",
-        element: <UpdatePlaneTypeForm />
+        path: "/plane-types/edit/:id",
+        element: <PlaneTypeForm />
       },
       {
-        path: "/PlaneTypes/delete/:id",
+        path: "/plane-types/delete/:id",
         element: <DeletePlaneTypeForm />
       }
     ],

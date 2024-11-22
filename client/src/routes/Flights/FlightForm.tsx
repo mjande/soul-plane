@@ -1,48 +1,21 @@
 import { FormEvent, ChangeEvent, useState, useEffect } from "react"
-import Axios from "axios"
+import Axios, { AxiosResponse } from "axios"
 import { useNavigate, useParams } from "react-router-dom"
 import { convertToDateTimeLocalString } from "../../utils/utils"
+import { Flight, Airport, PlaneView } from "../../models"
 
-// Define Airport Property
-interface Airport {
-    airport_id: number,
-    airport_name: string
-}
-
-// Define Plane Property
-interface Plane {
-    plane_id: number,
-    plane_type: string
-}
-
-// Define Flight Property
-interface FormData {
-    flight_id: number,
-    depart_airport_id: number,
-    arrive_airport_id: number,
-    plane_id: number,
-    depart_time: string,
-    arrive_time: string
-}
-
-export function UpdateFlightForm() {
+export function FlightForm() {
     const { id } = useParams()
     
     // Initialize Flight Form Data
-    const [formData, setFormData] = useState<FormData>({
-        flight_id: 0,
-        depart_airport_id: 1,
-        arrive_airport_id: 2, 
-        plane_id: 1,
-        depart_time: convertToDateTimeLocalString(new Date()),
-        arrive_time: convertToDateTimeLocalString(new Date())
-    })
+    const [formData, setFormData] = useState<Partial<Flight>>({})
     const [airports, setAirports] = useState<Airport[]>([])
-    const [planes, setPlanes] = useState<Plane[]>([])
+    const [planes, setPlanes] = useState<PlaneView[]>([])
 
     // Get request for current flight, airports, and planes 
     useEffect(() => {        
         async function getFlight() {
+          if (id) {
             const response = await Axios.get(`${import.meta.env.VITE_BACKEND_HOST}/flights/${id}`)
             const flight = response.data[0]
 
@@ -54,6 +27,12 @@ export function UpdateFlightForm() {
                 depart_time: convertToDateTimeLocalString(new Date(flight.depart_time)),
                 arrive_time: convertToDateTimeLocalString(new Date(flight.arrive_time))
             })
+          } else {
+            setFormData({
+              depart_time: convertToDateTimeLocalString(new Date()),
+              arrive_time: convertToDateTimeLocalString(new Date()),
+            })
+          }
         }
 
         async function getAirports() {
@@ -86,25 +65,34 @@ export function UpdateFlightForm() {
     async function handleSubmit(event: FormEvent<HTMLFormElement>) {
         event.preventDefault()
 
-        try {                        
-            const response = await Axios.put(`${import.meta.env.VITE_BACKEND_HOST}/flights/${formData.flight_id}`, formData)
-            console.log(response)
-            navigate("/flights")
+        try {      
+          let response: AxiosResponse;
+          if (id) {
+            response = await Axios.put(`${import.meta.env.VITE_BACKEND_HOST}/flights/${formData.flight_id}`, formData)
+          } else {
+            response = await Axios.post(`${import.meta.env.VITE_BACKEND_HOST}/flights`, formData)
+          }
+
+          console.log(response)
+          navigate("/flights")
         } catch(error) {
-            console.log(error)
+          console.log(error)
         }
     }
 
     return (
-        <div id="update">
-        <form id="updateFlight" method="put" onSubmit={handleSubmit}>
+        <div>
+        <form onSubmit={handleSubmit}>
           <legend>
-            <strong>Update Flight</strong>
+            <strong>{ id ? 'Update Flight' : 'Create Flight' }</strong>
           </legend>
+
           <fieldset className="fields">
-            <span>Flight ID: {id}</span>
+            { id && <span>Flight ID: {id}</span> }
+
             <label>Departure Airport</label>
             <select name="depart_airport_id" value={formData.depart_airport_id} onChange={handleInputChange} required>
+              <option value="">Select Departure Airport</option>
               {airports.map(airport => (
                 <option 
                   key={airport.airport_id} 
@@ -116,6 +104,7 @@ export function UpdateFlightForm() {
             </select>
             <label>Arrival Airport</label>
             <select name="arrive_airport_id" value={formData.arrive_airport_id} onChange={handleInputChange} required>
+              <option value="">Select Arrival Airport</option>
               {airports.map(airport => (
                 <option 
                   key={airport.airport_id} 
@@ -127,6 +116,7 @@ export function UpdateFlightForm() {
             </select>
             <label>Plane ID</label>
             <select name="plane_id" value={formData.plane_id} onChange={handleInputChange} required>
+              <option value="">Select Plane</option>
               {planes.map(plane => (
                 <option key={plane.plane_id} value={plane.plane_id}>{plane.plane_id} ({plane.plane_type})</option>
               ))}
@@ -134,8 +124,9 @@ export function UpdateFlightForm() {
             <label>Departure Time</label> <input type="datetime-local" name="depart_time" value={formData.depart_time} onChange={handleInputChange} required/>
             <label>Arrival Time</label> <input type="datetime-local" name="arrive_time" value={formData.arrive_time} onChange={handleInputChange} required/>
           </fieldset>
+
           <div className="buttons-container">
-            <input className="btn" type="submit" value="Save Update Flight" />
+            <input className="btn" type="submit" value={ id ? "Update Flight" : "Create Flight" } />
             <input className="btn" type="button" value="Cancel" onClick={() => navigate(-1)}/>
           </div>
         </form>
