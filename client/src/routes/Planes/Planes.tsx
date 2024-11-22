@@ -3,7 +3,7 @@ import { Link } from "react-router-dom"
 import Axios from "axios"
 import { PlaneView } from "../../models";
 
-function Planes() {
+export function Planes() {
   // Initialize plane data into client side
   const [planes, setPlanes] = useState<PlaneView[]>([])
 
@@ -59,5 +59,3 @@ function Planes() {
     </div>
   );
 }
-
-export default Planes;

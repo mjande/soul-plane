@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import Axios from 'axios';
 import { Passenger } from "../../models";
 
-function Passengers() {
+export function Passengers() {
   // Initialize passengers into clientside
   const [passengers, setPassengers] = useState<Passenger[]>([]);  
 
@@ -66,5 +66,3 @@ function Passengers() {
     </div>
   );
 }
-
-export default Passengers;

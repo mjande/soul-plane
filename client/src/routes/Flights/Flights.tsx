@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import Axios from "axios";
 import { FlightView } from "../../models";
 
-function Flights() {
+export function Flights() {
   // Initialize flight for clientside
   const [flights, setFlights] = useState<FlightView[]>([])
 
@@ -65,5 +65,3 @@ function Flights() {
     </div>
   );
 }
-
-export default Flights;

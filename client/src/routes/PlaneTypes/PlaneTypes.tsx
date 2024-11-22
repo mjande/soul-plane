@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import Axios from 'axios';
 import { PlaneType } from "../../models";
 
-function PlaneTypes() {
+export function PlaneTypes() {
   // Initialize plane type data for client
   const [planeTypes, setPlaneTypes] = useState<PlaneType[]>([]);  
   
@@ -54,5 +54,3 @@ function PlaneTypes() {
     </div>
   );
 }
-
-export default PlaneTypes;

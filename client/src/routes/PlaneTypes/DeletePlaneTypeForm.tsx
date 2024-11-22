@@ -9,7 +9,7 @@ interface PlaneType {
     range_in_hrs: 0
 }
 
-export default function DeletePlaneTypeForm() {
+export function DeletePlaneTypeForm() {
     const { id } = useParams() 
     // Initialize plane type data into client
     const [planeType, setPlaneType] = useState<PlaneType>({

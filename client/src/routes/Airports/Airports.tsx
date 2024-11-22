@@ -3,7 +3,7 @@ import { Link } from "react-router-dom"
 import { Airport } from "../../models";
 import Axios from "axios"
 
-function Airports() {
+export function Airports() {
     // Initialize airport data
     const [airports, setAirports] = useState<Airport[]>([]);
 
@@ -55,5 +55,3 @@ function Airports() {
     </div>
   );
 }
-
-export default Airports;

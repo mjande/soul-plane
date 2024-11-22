@@ -13,7 +13,7 @@ export function AirportForm() {
       if (id) {
         const response = await Axios.get(
           `${import.meta.env.VITE_BACKEND_HOST}/airports/${id}`);
-        const airport = response.data[0] as Airport;
+        const airport = response.data[0];
         setFormData(airport);
       }
     }
