@@ -1,30 +1,18 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Axios from "axios";
-
-
-// Define Flight property
-interface Flight {
-  flight_id: number,
-  plane_id: number, 
-  plane_type: string,
-  depart_airport_name: string,
-  arrive_airport_name: string,
-  depart_time: Date,
-  arrive_time: Date
-}
+import { FlightView } from "../../models";
 
 function Flights() {
   // Initialize flight for clientside
-  const [flights, setFlights] = useState<Flight[]>([])
-
+  const [flights, setFlights] = useState<FlightView[]>([])
 
   // Get request for flights in the database 
   useEffect(() => {
     async function getFlights() {
       const response = await Axios.get(`${import.meta.env.VITE_BACKEND_HOST}/flights`)
       const flightsArray = response.data
-      flightsArray.sort((a: Flight, b: Flight) => a.flight_id - b.flight_id)
+      flightsArray.sort((a: FlightView, b: FlightView) => a.flight_id - b.flight_id)
 
       setFlights(flightsArray)
     }
@@ -56,7 +44,7 @@ function Flights() {
             {flights.map(flight => (
               <tr>
                 <td>
-                  <Link to={`/flights/update/${flight.flight_id}`}>Edit</Link>
+                  <Link to={`/flights/edit/${flight.flight_id}`}>Edit</Link>
                 </td>
                 <td>
                   <Link to={`/flights/delete/${flight.flight_id}`}>Delete</Link>

@@ -1,25 +1,14 @@
 import Axios from "axios";
 import { FormEvent, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom"
+import { FlightView } from "../../models";
 
-
-// Define flight properties
-interface Flight {
-    flight_id: number,
-    plane_id: number,
-    plane_type: string,
-    depart_airport_name: string,
-    arrive_airport_name: string,
-    depart_time: Date,
-    arrive_time: Date
-}
-
-export default function DeleteFlightForm() {
+export function DeleteFlightForm() {
     const { id } = useParams();
 
     const navigate = useNavigate()
     // initialize flight data for client
-    const [flight, setFlight] = useState<Flight>({
+    const [flight, setFlight] = useState<FlightView>({
         flight_id: 0,
         plane_id: 0,
         plane_type: '',
@@ -49,12 +38,7 @@ export default function DeleteFlightForm() {
         getFlight()
     }, [id])
 
-
     // Handle delete request for current flight based on id 
-
-    // Request adapted from Axios docs
-    // Source URL: https://axios-http.com/docs/api_intro
-    // Date: 3/16/24
     async function handleSubmit(event: FormEvent<HTMLFormElement>) {
         event.preventDefault()
 
