@@ -25,7 +25,7 @@ router.get("/", async (req: Request, res: Response) => {
 router.get("/:id", async (req: Request, res: Response) => {
     try {
         const selectQuery = `SELECT Passengers.user_id, passenger_id, username, first_name, last_name, address, city, state, zipcode, passport_number FROM Passengers
-            LEFT JOIN Users ON Users.user_id = Passengers.user_id;
+            LEFT JOIN Users ON Users.user_id = Passengers.user_id
             WHERE passenger_id = ${req.params.id};`
 
         const [results] = await db.pool.query(selectQuery)
@@ -45,8 +45,8 @@ router.post("/", async (req: Request, res: Response) => {
         const last_name = data.last_name;
         const address = data.address;
         const city = data.city;
-        const state_abbr = data.state_abbr;
-        const zip_code = data.zip_code;
+        const state = data.state;
+        const zipcode = data.zipcode;
         const passport_number = data.passport_number;
 
         // Get user
@@ -60,8 +60,8 @@ router.post("/", async (req: Request, res: Response) => {
                 last_name, 
                 address, 
                 city, 
-                state_abbr, 
-                zip_code, 
+                state, 
+                zipcode, 
                 passport_number
             ) VALUES (?, ?, ?, ?, ?, ?, ?, ?);
         `;
@@ -74,8 +74,8 @@ router.post("/", async (req: Request, res: Response) => {
                 last_name,
                 address,
                 city,
-                state_abbr,
-                zip_code,
+                state,
+                zipcode,
                 passport_number,
             ]);
   
@@ -96,8 +96,8 @@ router.put("/:id", async (req: Request, res: Response) => {
         const last_name = data.last_name;
         const address = data.address;
         const city = data.city;
-        const state_abbr = data.state_abbr;
-        const zip_code = data.zip_code;
+        const state = data.state;
+        const zipcode = data.zipcode;
         const passport_number = data.passport_number;
   
         const updateQuery = `
@@ -106,8 +106,8 @@ router.put("/:id", async (req: Request, res: Response) => {
                 last_name = "${last_name}",
                 address = "${address}",
                 city = "${city}",
-                state_abbr = "${state_abbr}",
-                zip_code = "${zip_code}",
+                state = "${state}",
+                zipcode = "${zipcode}",
                 passport_number = "${passport_number}"
                 WHERE passenger_id = ${passenger_id}
         `  

@@ -1,54 +1,23 @@
 import { FormEvent, ChangeEvent, useState, useEffect } from "react"
-import Axios from "axios"
+import Axios, { AxiosResponse } from "axios"
 import { useNavigate, useParams } from "react-router-dom"
+import { Passenger } from "../../models";
 
-
-// Define passenger properties
-interface FormData {
-    username: string,
-    first_name: string,
-    last_name: string,
-    phone: string,
-    address: string,
-    city: string,
-    state_abbr: string,
-    zip_code: number,
-    passport_number: string,
-}
-
-export default function UpdatePassengersForm() {
+export function PassengerForm() {
     const { id } = useParams();
     // Initialize passenger form data
-    const [formData, setFormData] = useState<FormData>({
-        username: '',
-        first_name: '',
-        last_name: '',
-        phone: '',
-        address: '',
-        city: '',
-        state_abbr: '',
-        zip_code: 0,
-        passport_number: '',
-    })
+    const [formData, setFormData] = useState<Partial<Passenger>>({})
 
     // Get request for current passenger
     useEffect(() => {
-        async function getPassengers() {
-            const response = await Axios.get(`${import.meta.env.VITE_BACKEND_HOST}/passengers/${id}`)
-            const data = response.data[0]
-            setFormData({
-                username: data.username,
-                first_name: data.first_name,
-                last_name: data.last_name,
-                phone: data.phone,
-                address: data.address,
-                city: data.city,
-                state_abbr: data.state_abbr,
-                zip_code: data.zip_code,
-                passport_number: data.passport_number,
-            })
+        async function getPassenger() {
+            if (id) {
+                const response = await Axios.get(`${import.meta.env.VITE_BACKEND_HOST}/passengers/${id}`)
+                const passenger = response.data[0]
+                setFormData(passenger)
+            }
         }
-        getPassengers()
+        getPassenger()
     }, [id])
 
     const navigate = useNavigate();
@@ -67,7 +36,13 @@ export default function UpdatePassengersForm() {
         event.preventDefault()
 
         try {
-            const response = await Axios.put(`${import.meta.env.VITE_BACKEND_HOST}/passengers/${id}`, formData)
+            let response: AxiosResponse;
+
+            if (id) {
+                response = await Axios.put(`${import.meta.env.VITE_BACKEND_HOST}/passengers/${id}`, formData)
+            } else {
+                response = await Axios.post(`${import.meta.env.VITE_BACKEND_HOST}/passengers`, formData)
+            }
             console.log(response)
             navigate("/Passengers")
         } catch(error) {
@@ -79,10 +54,10 @@ export default function UpdatePassengersForm() {
         <div>
             <h1>Passengers</h1>
         
-            <div id="update">
-            <form id="updatePassengers" method="put" onSubmit={handleSubmit}>
+            <div>
+            <form onSubmit={handleSubmit}>
                 <legend>
-                <strong>Update Passenger</strong>
+                <strong>{ id ? 'Update Passenger' : 'Create Passenger' }</strong>
                 </legend>
                 <fieldset className="fields">
                     <label>Username</label>
@@ -96,14 +71,14 @@ export default function UpdatePassengersForm() {
                     <label>City</label>
                     <input type="text" name="city" onChange={handleInputChange} value={formData.city} required/>
                     <label>State</label>
-                    <input type="text" name="state_abbr" onChange={handleInputChange} value={formData.state_abbr} required placeholder="OR" maxLength={2} pattern="[A-Z]{2}"/>
+                    <input type="text" name="state" onChange={handleInputChange} value={formData.state} required placeholder="OR" maxLength={2} pattern="[A-Z]{2}"/>
                     <label>Zip Code</label>
-                    <input type="text" pattern="[0-9]{5}" name="zip_code" onChange={handleInputChange} value={formData.zip_code} required placeholder="99999" maxLength={5}/>
+                    <input type="text" pattern="[0-9]{5}" name="zipcode" onChange={handleInputChange} value={formData.zipcode} required placeholder="99999" maxLength={5}/>
                     <label>Passport Number</label>
                     <input type="text" name="passport_number" onChange={handleInputChange} value={formData.passport_number} required maxLength={20}/>
                 </fieldset>
                 <div className="buttons-container">
-                    <input className="btn" type="submit" value="Update Passenger" />
+                    <input className="btn" type="submit" value={ id ? "Update Passenger" : "Create Passenger" } />
                     <input className="btn" type="button" value="Cancel" onClick={() => navigate(-1)}/>
                 </div>
             </form>

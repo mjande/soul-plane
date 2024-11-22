@@ -1,20 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Axios from 'axios';
-
-// Define Passengers Property
-export interface Passenger {
-  user_id: number,
-  username: string,
-  passenger_id: string,
-  first_name: string,
-  last_name: string,
-  address: string,
-  city: string,
-  state: string,
-  zipcode: string,
-  passport_number: string
-}
+import { Passenger } from "../../models";
 
 function Passengers() {
   // Initialize passengers into clientside
@@ -54,7 +41,7 @@ function Passengers() {
             {passengers.map((passenger) => (
               <tr key={passenger.passenger_id}>
                 <td>
-                  <Link to={`/passengers/update/${passenger.passenger_id}`}>Edit</Link>
+                  <Link to={`/passengers/edit/${passenger.passenger_id}`}>Edit</Link>
                 </td>
                 <td>
                   <Link to={`/passengers/delete/${passenger.passenger_id}`}>Delete</Link>
