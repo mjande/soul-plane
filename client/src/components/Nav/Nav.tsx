@@ -12,7 +12,7 @@ function Nav() {
            <div className='miscNavButtons'>
                 <Link to='/airports'>Airports</Link>
                 <Link to='/flights'>Flights</Link>
-                <Link to='/PassengerFlights'>Passenger Flights</Link>
+                <Link to='/passenger-flights'>Passenger Flights</Link>
                 <Link to='/passengers'>Passengers</Link>
                 <Link to='/planes'>Planes</Link>
                 <Link to='/plane-types'>Plane Types</Link>

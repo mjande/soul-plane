@@ -57,35 +57,6 @@ router.post("/", async (req: Request, res: Response) => {
     }
 })
 
-// Update passengerFlight by ID
-router.put("/:fid/:pid", async (req: Request, res: Response) => {
-    try {
-        const fid = req.params.fid;
-        const pid = req.params.pid;
-        const data = req.body;
-        const flight_id = data.flight_id
-        const passenger_id = data.passenger_id  
-    
-        let updateQuery = `
-            UPDATE Passenger_flights 
-                SET flight_id='${flight_id}', passenger_id ='${passenger_id}' 
-                WHERE flight_id = '${fid}' AND passenger_id = '${pid}'
-        `;
-  
-        const [results, error] = await db.pool.query(updateQuery)
-        console.log(results)
-        res.json({ success: true, message: 'Passenger Flights updated successfully', data });
-    } catch (error) {
-        console.error(error);
-
-        // Checks error number for duplicate entry code
-        if (isMySQLError(error) && error.errno == 1062) {
-            return res.status(409).json({ success: false, message: "Duplicate Entry Error"})
-        }
-        res.status(500).json({ success: false, message: 'Internal Server Error' });
-    }
-});
-  
 // Delete passengerFlight by ID
 router.delete("/:fid/:pid", async (req: Request, res: Response) => {
     try {

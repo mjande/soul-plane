@@ -15,9 +15,8 @@ import { PlaneTypeForm } from './routes/PlaneTypes/PlaneTypeForm.tsx'
 import DeletePlaneTypeForm from './routes/PlaneTypes/DeletePlaneTypeForm.tsx';
 import { PassengerForm } from './routes/Passengers/PassengerForm.tsx';
 import { DeletePassengerForm } from './routes/Passengers/DeletePassengerForm.tsx';
-import NewPassengerFlights from './routes/PassengerFlights/NewPassengerFlightsForm.tsx';
-import DeletePassengerFlightsForm from './routes/PassengerFlights/DeletePassengerFlightsForm.tsx';
-import UpdatePassengerFlightsForm from './routes/PassengerFlights/UpdatePassengerFlightsForm.tsx';
+import { PassengerFlightsForm } from './routes/PassengerFlights/PassengerFlightsForm.tsx';
+import { DeletePassengerFlightsForm } from './routes/PassengerFlights/DeletePassengerFlightsForm.tsx';
 import { DeletePlaneForm } from './routes/Planes/DeletePlaneForm.tsx';
 import { PlaneForm } from './routes/Planes/PlaneForm.tsx';
 import { DeleteFlightForm } from './routes/Flights/DeleteFlightForm.tsx';
@@ -66,39 +65,35 @@ const router = createBrowserRouter([
         element: <FlightForm />
       },
       {
-        path: "Flights/delete/:id",
+        path: "/flights/delete/:id",
         element: <DeleteFlightForm />
       },
       {
-        path: "/PassengerFlights",
+        path: "/passenger-flights",
         element: <PassengerFlights />,
       },
       {
-        path: "/PassengerFlights/new",
-        element: <NewPassengerFlights />,
+        path: "/passenger-flights/new",
+        element: <PassengerFlightsForm />,
       },
       {
-        path:"/PassengerFlights/update/:fid/:pid",
-        element: <UpdatePassengerFlightsForm />,
-      },
-      {
-        path:"/PassengerFlights/delete/:fid/:pid",
+        path:"/passenger-flights/delete/:fid/:pid",
         element: <DeletePassengerFlightsForm />,
       },
       {
-        path: "/Passengers",
+        path: "/passengers",
         element: <Passengers />,
       },
       {
-        path: "/Passengers/new",
+        path: "/passengers/new",
         element: <PassengerForm />,
       },
       {
-        path: "/Passengers/edit/:id",
+        path: "/passengers/edit/:id",
         element: <PassengerForm />,
       },
       {
-        path:"/Passengers/delete/:id",
+        path:"/passengers/delete/:id",
         element: <DeletePassengerForm />,
       },
       {
